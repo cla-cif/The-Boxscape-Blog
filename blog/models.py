@@ -12,7 +12,7 @@ class Post(models.Model):
     )
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=200,
-                            unique_for_date='publish', blank=True)
+                            unique_for_date='published', blank=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="blog_posts"
     )
@@ -21,13 +21,13 @@ class Post(models.Model):
     body = models.TextField()
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    publish = models.DateTimeField(default=timezone.now)
+    published = models.DateTimeField(default=timezone.now)
     status = models.CharField(max_length=10, choices=STATUS, default='dft')
     likes = models.ManyToManyField(User,
                                    related_name='blogpost_like', blank=True)
 
     class Meta:
-        ordering = ["-publish"]
+        ordering = ["-published"]
 
     def __str__(self):
         return self.title
@@ -37,9 +37,9 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('blog:post_detail',
-                       args=[self.publish.year,
-                             self.publish.month,
-                             self.publish.day, self.slug])
+                       args=[self.published.year,
+                             self.published.month,
+                             self.published.day, self.slug])
 
 
 class Comment(models.Model):
