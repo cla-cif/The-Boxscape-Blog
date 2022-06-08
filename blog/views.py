@@ -22,7 +22,7 @@ from .models import Post
 
 class PostList(generic.ListView):
     model = Post
-    # queryset = Post.objects.filter(status='published')
+    # queryset = Post.objects.filter(status='published') not working!!
     queryset = Post.objects.all()
     template_name = "list.html"
     paginate_by = 6
@@ -31,7 +31,7 @@ class PostList(generic.ListView):
 class PostDetail(View):
 
     def get(self, request, slug, *args, **kwargs):
-        queryset = Post.objects.filter(status=1)
+        queryset = Post.objects.all()
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by("created")
         liked = False
