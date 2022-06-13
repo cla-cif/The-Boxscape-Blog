@@ -51,11 +51,6 @@
                             {% endif %}
                             <span class="text-secondary">{{ post.number_of_likes }}</span>
                             <!--share post-->
-                            <p>
-                                <a href="{% url 'post_share' post.slug %}">
-                                  Share this post
-                                </a>
-                              </p>
                         </strong>
                         <!-- The number of likes goes before the closing strong tag -->
                     </div>
@@ -65,6 +60,14 @@
                             <!-- Our total_comments variable goes before the closing strong tag -->
                             {{ total_comments }}</strong>
                         {% endwith %}
+                    </div>
+                    <div class="col-1">
+
+                        <strong class="text-secondary">
+                            <a href="{% url 'post_share' post.slug %}">
+                                <i class="fas fa-share"></i>
+                            </a>
+                        </strong>
                     </div>
                 </div>
             </div>
