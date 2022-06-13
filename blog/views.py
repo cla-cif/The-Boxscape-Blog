@@ -3,7 +3,7 @@ from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import Post
 from .forms import CommentForm, EmailPostForm
-
+from django.core.mail import send_mail
 
 # def post_list(request):
 #     posts = Post.objects.all()
@@ -97,18 +97,27 @@ class PostLike(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-def post_share(request, post_id):
-    # retrieve post by id
-    post = get_object_or_404(Post, id=post_id, status='Published')
-    if request.method == 'POST':
-        # form was submitted
-        form = EmailPostForm(request.POST)
-        if form.is_valid():
-            # form fields passed validation
-            cd = form.cleaned_data
-            # send email
-    else:
-        form = EmailPostForm()
-    return render(request, 'blog/post/share.html', {'post': post, 'form': form})
+class PostShare(View):
+
+    def get(self, request, slug, *args, **kwargs):
+        queryset = Post.objects.all()
+        post = get_object_or_404(queryset, slug=slug)
+        sent = False
+
+        if request.method == 'POST':
+            form = EmailPostForm(request.POST)
+            if form.is_valid():
+                # form fields passed validation
+                cd = form.cleaned_data
+                post_url = request.build_absolute_uri(post.get_absolute_url())
+                subject = f"{cd['name']} recommends you read "\
+                          f"{post.title}"
+                message = f"Read {post.title} at {post_url}\n\n" \
+                          f"{cd['name']}\'s comments: {cd['comments']}"
+                send_mail(subject, message, 'the.boxscape.blog@gmail.com', [cd['to']])
+                sent = True
+        else:
+            form = EmailPostForm()
+        return render(request, "share.html", {'post': post, 'form': form, 'sent': sent})
 
 
