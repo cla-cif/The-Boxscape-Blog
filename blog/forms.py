@@ -7,3 +7,10 @@ class CommentForm(forms.ModelForm):
         model = Comment
         # fields = '__all__'
         fields = ('body',)
+
+
+class EmailPostForm(forms.Form):
+    name = forms.CharField(max_length=25)
+    email = forms.EmailField()
+    to = forms.EmailField()
+    comments = forms.CharField(required=False, widget=forms.Textarea)
