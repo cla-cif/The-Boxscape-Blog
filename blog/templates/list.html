@@ -29,6 +29,8 @@
                             <hr />
                             <p class="card-text text-muted h6">{{ post.created}} <i
                                     class="far fa-heart"></i>{{post.number_of_likes}}</p>
+                        
+                            <p class="tags card-text text-muted h6">Tags: {{ post.tags.all | join:", "}}</p>
                         </div>
                     </div>
                 </div>

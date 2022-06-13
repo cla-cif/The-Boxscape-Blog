@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
+from django.core.mail import send_mail
+from taggit.models import Tag
 from .models import Post
 from .forms import CommentForm, EmailPostForm
-from django.core.mail import send_mail
 
 # def post_list(request):
 #     posts = Post.objects.all()
@@ -118,6 +119,5 @@ class PostShare(View):
                 sent = True
         else:
             form = EmailPostForm()
-        return render(request, "share.html", {'post': post, 'form': form, 'sent': sent})
-
-
+        return render(request, "share.html",
+                      {'post': post, 'form': form, 'sent': sent})

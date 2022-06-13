@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
 from cloudinary.models import CloudinaryField
+from taggit.managers import TaggableManager
 
 
 class Post(models.Model):
@@ -16,6 +17,7 @@ class Post(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="blog_posts"
     )
+    tags = TaggableManager()
     featured_image = CloudinaryField('image', default='placeholder')
     excerpt = models.TextField(blank=True)
     body = models.TextField()

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'cloudinary_storage',
     'crispy_forms',
+    'taggit',
     'crispy_bootstrap5',
     'django.contrib.staticfiles',
     'blog',
@@ -72,9 +73,9 @@ MESSAGE_TAGS = {
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-EMAIL_HOST: 'smtp.gmail.com'
+EMAIL_HOST: os.environ.get('EMAIL_HOST')
 EMAIL_PORT: 587
-EMAIL_HOST_USER: 'the.boxscape.blog@gmail.com'
+EMAIL_HOST_USER: os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD: os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS: True
 
