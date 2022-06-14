@@ -1,29 +1,53 @@
-body {
-    background-color: #F9FAFC;
-    font-family: 'Mukta', sans-serif;
+:root {
+    --orange: #ef6d23;
+    --lilac-light: #f2effe;
+    --yellow-light: #f5eec2;
+    --very-peri:#6667ab;
+    --green-dark: #416a59;
+    --white-pure: #fff;
+    --text-default: #212529;
+    --font-title: 'IBM Plex Sans';
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
 
-.thin {
-    font-weight: 300;
+body {
+    font-family: var(--font-title), sans-serif;;
 }
 
 .light-bg {
-    background-color: #fff;
+    background-color: #f2effe;
 }
-
-.dark-bg {
-    background-color: #445261;
+.card-bg {
+    background-color: var(--white-pure);
 }
-
+.footer-bg {
+    background-color: var(--orange);
+} 
 
 .main-bg {
-    background-color: #F9FAFC;
+    background-color: #f2effe;
+}
+
+.nav-bg {
+    background-color: #f2effe;
 }
 
 .card {
     border: none;
     background-color: transparent;
+}
+
+.card-title {
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: 1.875rem;
+    margin-top: 5px;
+    line-height: 110%;
+    color: var(--text-default);
 }
 
 .image-container {
