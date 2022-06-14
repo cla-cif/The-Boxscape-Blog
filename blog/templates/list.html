@@ -1,42 +1,41 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 
 <div class="container-fluid">
     <div class="row">
 
         <!-- Blog Entries Column -->
-        <div class="col-12 mt-3 left">
-            <div class="row">
+        <div class="container"> <!--class="col-12 mt-3 left"-->
+            <div class="row" data-masonry='{"percentPosition": true }' style="position: relative; height:690px;">
                 {% for post in post_list %}
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body card-bg">
                             <div class="image-container">
                                 {% if "placeholder" in post.featured_image.url %}
-                                <img class="card-img-top" src="#">
+                                <img class="card-img-top" src="{% static 'placeholder.jpg' %}">
                                 {% else %}
                                 <img class="card-img-top" src=" {{ post.featured_image.url }}">
                                 {% endif %}
                             </div>
                             <div class="tags pt-2 pb-2">
-                                <p class="tags card-text text-muted h6">Tags: {{ post.tags.all | join:", "}}</p>
+                                <p class="tags card-text text-details h6">Tags: {{ post.tags.all | join:", "}}</p>
                             </div>
-                            <a href="{% url 'post_detail' post.slug %}" class="post-link">
-                                <h2 class="card-title">{{ post.title }}</h2>
+                            <a href="{% url 'post_detail' post.slug %}">
+                                <h2 class="card-title post-title">{{ post.title }}</h2>
                                 <p class="card-text">{{ post.excerpt }}</p>
                             </a>
                             <hr />
-                            <p class="card-text text-muted h6"> by {{ post.author }} | {{ post.created}} | <i
-                                    class="far fa-heart fa-fw"></i>{{ post.number_of_likes }} | <i
-                                    class="fas fa-heart-broken fa-fw"></i></p>
-                            <p class="card-text text-muted h6">
+                            <p class="card-text text-details h6"> by {{ post.author }} | {{ post.created}} | 
+                                <i class="far fa-heart fa-fw"></i>{{ post.number_of_likes }} | 
+                                <i class="fas fa-heart-broken fa-fw"></i> |
                                 {% with comments.count as total_comments %}
-                                <strong class="text-secondary"><i class="far fa-comments"></i>
+                                <strong class="text-details"><i class="far fa-comments"></i>
                                     {{ total_comments }}</strong>
-                                {% endwith %}</p>
-
-
+                                {% endwith %}
+                            </p>
+                            
                         </div>
                     </div>
                 </div>
@@ -64,3 +63,4 @@
 </div>
 
 {%endblock%}
+
