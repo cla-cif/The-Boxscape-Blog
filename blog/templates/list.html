@@ -15,7 +15,7 @@
                             <div class="image-container">
                                 {% if "placeholder" in post.featured_image.url %}
                                 <img class="card-img-top" src="{% static 'placeholder.jpg' %}">
-                                {% else %}
+                                {% else %}  
                                 <img class="card-img-top" src=" {{ post.featured_image.url }}">
                                 {% endif %}
                             </div>
@@ -30,10 +30,10 @@
                             <p class="card-text text-details h6"> by {{ post.author }} | {{ post.created}} | 
                                 <i class="far fa-heart fa-fw"></i>{{ post.number_of_likes }} | 
                                 <i class="fas fa-heart-broken fa-fw"></i> |
-                                {% with comments.count as total_comments %}
+                                <!-- {% with comments.count as total_comments %} -->
                                 <strong class="text-details"><i class="far fa-comments"></i>
-                                    {{ total_comments }}</strong>
-                                {% endwith %}
+                                    {{ post.comments.count }}</strong>
+                                <!-- {% endwith %} -->
                             </p>
                             
                         </div>

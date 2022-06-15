@@ -47,11 +47,11 @@
                         <!-- The number of likes goes before the closing strong tag -->
                     </div>
                     <div class="col-1">
-                        {% with comments.count as total_comments %}
+                        <!-- {% with comments.count as total_comments %} -->
                         <strong class="text-secondary"><i class="far fa-comments"></i>
                             <!-- Our total_comments variable goes before the closing strong tag -->
-                            {{ total_comments }}</strong>
-                        {% endwith %}
+                            {{ post.comments.count }}</strong>
+                        <!-- {% endwith %} -->
                     </div>
                     <div class="col-1">
 
