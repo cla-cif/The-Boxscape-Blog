@@ -68,8 +68,13 @@ body {
     color: var(--text-default)
 }
 
+.pipe {
+    padding: 0 8px;
+}
+
 .text-details {
-    color: var(--very-peri)
+    color: var(--very-peri); 
+
 }
 .nav-link {
     font-family: var(--font-title);
@@ -100,8 +105,6 @@ body {
     text-transform: uppercase;
 }
 
-
-
 .post-title {
     text-decoration: none;
     color: var(--text-default);
@@ -118,10 +121,10 @@ body {
     margin-left: 5%;
 } */
 
-.post-subtitle {
+/* .post-subtitle {
     margin-left: 5%;
     color: lightgray;
-}
+} */
 
 .btn {
     background-color: var(--very-peri);

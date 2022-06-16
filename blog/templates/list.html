@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+{% load humanize %}
 
 <div class="container-fluid">
     <div class="row">
@@ -20,16 +21,16 @@
                                 {% endif %}
                             </div>
                             <div class="tags pt-2 pb-2">
-                                <p class="tags card-text text-details h6">Tags: {{ post.tags.all | join:", "}}</p>
+                                <p class="tags card-text text-details h6">{{ post.tags.all | join:", "|upper}}</p>
                             </div>
                             <a href="{% url 'post_detail' post.slug %}">
                                 <h2 class="card-title post-title">{{ post.title }}</h2>
                                 <p class="card-text">{{ post.excerpt }}</p>
                             </a>
                             <hr />
-                            <p class="card-text text-details h6"> by {{ post.author }} | {{ post.created}} | 
-                                <i class="far fa-heart fa-fw"></i>{{ post.number_of_likes }} | 
-                                <i class="fas fa-heart-broken fa-fw"></i> |
+                            <p class="card-text text-details h6"> BY {{ post.author|upper}}<span class="pipe"> | </span>{{ post.created|naturaltime|upper }}<span class="pipe"> | </span> 
+                                <!-- <i class="far fa-heart fa-fw"></i>{{ post.number_of_likes }} | 
+                                <i class="fas fa-heart-broken fa-fw"></i> | -->
                                 <!-- {% with comments.count as total_comments %} -->
                                 <strong class="text-details"><i class="far fa-comments"></i>
                                     {{ post.comments.count }}</strong>

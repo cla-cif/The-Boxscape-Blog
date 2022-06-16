@@ -22,7 +22,7 @@ class Post(models.Model):
     excerpt = models.TextField(blank=True)
     body = models.TextField()
     updated = models.DateTimeField(auto_now=True)
-    created = models.DateField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
     published = models.DateTimeField(default=timezone.now)
     status = models.CharField(max_length=10, choices=STATUS, default='dft')
     likes = models.ManyToManyField(User,
@@ -50,7 +50,7 @@ class Comment(models.Model):
     name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()
-    created = models.DateField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     approved = models.BooleanField(default=False)
     active = models.BooleanField(default=True)

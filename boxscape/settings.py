@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'crispy_forms',
     'taggit',
+    'django.contrib.humanize',
     'crispy_bootstrap5',
     'django.contrib.staticfiles',
     'blog',
