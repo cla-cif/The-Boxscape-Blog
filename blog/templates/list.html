@@ -9,10 +9,10 @@
 
         <!-- Blog Entries Column -->
         <div class="container"> <!--class="col-12 mt-3 left"-->
-            <div class="row" data-masonry='{"percentPosition": true }' style="position: relative; height:690px;">
+            <div class="row">
                 {% for post in post_list %}
-                <div class="col-md-4">
-                    <div class="card mb-4">
+                <div class="col-md-3">
+                    <div class="card mb-3">
                         <div class="card-body card-bg">
                             <div class="image-container">
                                 {% if "placeholder" in post.featured_image.url %}
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-                {% if forloop.counter|divisibleby:3 %}
+                {% if forloop.counter|divisibleby:4 %}
             </div>
             <div class="row">
                 {% endif %}
