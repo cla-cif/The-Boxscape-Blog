@@ -32,7 +32,7 @@ body {
     background-color: var(--white-pure);
 }
 .footer-bg {
-    background-color: var(--orange);
+    background-color: var(--very-peri);
 } 
 
 .main-bg {
@@ -157,7 +157,7 @@ body {
 
 .btn-like:hover,
 .btn-like:active {
-    color: blue;
+    color: #E84610;
     background: transparent;
     border: none;
 }
