@@ -38,9 +38,12 @@ class PostDetail(View):
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by("created")
         liked = False
+        disliked = False
         if post.likes.filter(id=self.request.user.id).exists():
             liked = True
-
+        if post.dislikes.filter(id=self.request.user.id).exists():
+            disliked = True
+        
         return render(
             request,
             "detail.html",
@@ -49,6 +52,7 @@ class PostDetail(View):
                 "comments": comments,
                 "commented": False,
                 "liked": liked,
+                "disliked": disliked,
                 "comment_form": CommentForm()
             },
         )
@@ -59,8 +63,11 @@ class PostDetail(View):
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by("created")
         liked = False
+        disliked = False
         if post.likes.filter(id=self.request.user.id).exists():
             liked = True
+        if post.dislikes.filter(id=self.request.user.id).exists():
+            disliked = True
 
         comment_form = CommentForm(data=request.POST)
 
@@ -81,7 +88,8 @@ class PostDetail(View):
                 "comments": comments,
                 "commented": True,
                 "comment_form": comment_form,
-                "liked": liked
+                "liked": liked, 
+                "disliked": disliked
             },
         )
 
@@ -94,6 +102,18 @@ class PostLike(View):
             post.likes.remove(request.user)
         else:
             post.likes.add(request.user)
+
+        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+class PostDislike(View):
+
+    def post(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
+        if post.dislikes.filter(id=request.user.id).exists():
+            post.dislikes.remove(request.user)
+        else:
+            post.dislikes.add(request.user)
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 

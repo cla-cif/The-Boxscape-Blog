@@ -27,6 +27,8 @@ class Post(models.Model):
     status = models.CharField(max_length=10, choices=STATUS, default='dft')
     likes = models.ManyToManyField(User,
                                    related_name='blogpost_like', blank=True)
+    dislikes = models.ManyToManyField(User,
+                                      related_name='blogpost_dislike', blank=True)
 
     class Meta:
         ordering = ["-published"]
@@ -36,6 +38,9 @@ class Post(models.Model):
 
     def number_of_likes(self):
         return self.likes.count()
+
+    def number_of_dislikes(self):
+        return self.dislikes.count()
 
     def get_absolute_url(self):
         return reverse('blog:post_detail',

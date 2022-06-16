@@ -40,23 +40,44 @@
                                 {% endif %}
                             </form>
                             {% else %}
-                            <span class="text-secondary"><i class="far fa-heart"></i></span>
+                            <span class="text-details"><i class="far fa-heart"></i></span>
                             {% endif %}
-                            <span class="text-secondary">{{ post.number_of_likes }}</span>
+                            <span class="text-details">{{ post.number_of_likes }}</span>
+                            <!--share post-->
+                        </strong>
+                        <!-- The number of likes goes before the closing strong tag -->
+                    </div>
+                    <!--DISLIKE DIV-->
+                    <div class="col-1">
+                        <strong>
+                            {% if user.is_authenticated %}
+                            <form class="d-inline" action="{% url 'post_dislike' post.slug%}" method="POST">
+                                {% csrf_token %}
+                                {% if disliked %}
+                                <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-dislike"><i
+                                        class="fas fa-heart-broken"></i></button>
+                                {% else %}
+                                <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-dislike"><i
+                                        class="fas fa-heart-broken"></i></button>
+                                {% endif %}
+                            </form>
+                            {% else %}
+                            <span class="text-details"><i class="far fa-heart-broken"></i></span>
+                            {% endif %}
+                            <span class="text-details">{{ post.number_of_dislikes }}</span>
                             <!--share post-->
                         </strong>
                         <!-- The number of likes goes before the closing strong tag -->
                     </div>
                     <div class="col-1">
                         <!-- {% with comments.count as total_comments %} -->
-                        <strong class="text-secondary"><i class="far fa-comments"></i>
+                        <strong class="text-details"><i class="far fa-comments"></i>
                             <!-- Our total_comments variable goes before the closing strong tag -->
                             {{ post.comments.count }}</strong>
                         <!-- {% endwith %} -->
                     </div>
                     <div class="col-1">
-
-                        <strong class="text-secondary">
+                        <strong class="text-details">
                             <a href="{% url 'post_share' post.slug %}">
                                 <i class="fas fa-share"></i>
                             </a>
@@ -81,13 +102,13 @@
                     <p class="font-weight-bold">
                         <!-- The commenter's name goes here. Check the model if you're not sure what that is -->
                         {{ comment.name }}
-                        <span class=" text-muted font-weight-normal">
+                        <span class=" text-details font-weight-normal">
                             <!-- The comment's created date goes here -->
                             {{ comment.created }}
                         </span> wrote:
                     </p>
                     <!-- The body of the comment goes before the | -->
-                    {{ comment.body | linebreaks }}
+                    <div class="comments-bg">{{ comment.body | linebreaks }}</div>
                 </div>
                 <!-- Our for loop ends here -->
                 {% endfor %}

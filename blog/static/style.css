@@ -27,7 +27,8 @@ body {
     background-color: var(--lilac-light);
 }
 .card-bg,
-.title-detail-bg {
+.title-detail-bg,
+.comments-bg {
     background-color: var(--white-pure);
 }
 .footer-bg {
@@ -156,7 +157,20 @@ body {
 
 .btn-like:hover,
 .btn-like:active {
-    color: #E84610;
+    color: blue;
+    background: transparent;
+    border: none;
+}
+
+.btn-dislike {
+    color: blue;
+    border: none;
+    background: transparent;
+}
+
+.btn-dislike:hover,
+.btn-dislike:active {
+    color: blue;
     background: transparent;
     border: none;
 }
