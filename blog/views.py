@@ -6,30 +6,44 @@ from taggit.models import Tag
 from .models import Post
 from .forms import CommentForm, EmailPostForm
 
-# def post_list(request):
-#     posts = Post.objects.all()
-#     return render(request,
-#                   'list.html',
-#                   {'posts': posts})
-
-
-# def post_detail(request, year, month, day, post):
-#     post = get_object_or_404(Post, slug=post,
-#                              status='Published',
-#                              publish__year=year,
-#                              publish__month=month,
-#                              publish__day=day)
-#     return render(request,
-#                   'detail.html',
-#                   {'post': post})
 
 class PostList(generic.ListView):
     model = Post
-    # queryset = Post.objects.filter(status='published') not working!!
     queryset = Post.objects.all()
     template_name = "list.html"
-    paginate_by = 6
+    paginate_by = 8
 
+
+# PLAYGROUND #
+
+# class PostList(generic.ListView):
+#     model = Post
+#     queryset = Post.objects.all()
+#     template_name = "list.html"
+#     paginate_by = 8
+#     queryset = object_list.filter(tags__in=[tag])
+#     def get_queryset(self):
+#         return Book.objects.filter(title__icontains='war')[:5]+
+# https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Generic_views
+        
+
+# # TAG FUNCIONALITY #
+# def post_list(request, tag_slug=None):
+#     object_list = Post.objects.all()
+#     tag = None
+#     if tag_slug:
+#         tag = get_object_or_404(Tag, slug=tag_slug)
+#         object_list = object_list.filter(tags__in=[tag])
+#     return render(
+#         request,
+#         "list.html",
+#         {
+#          'post': post, 
+#          'tag': tag
+#         }
+#     )
+
+# END PLAYGROUND #
 
 class PostDetail(View):
 
@@ -88,7 +102,7 @@ class PostDetail(View):
                 "comments": comments,
                 "commented": True,
                 "comment_form": comment_form,
-                "liked": liked, 
+                "liked": liked,
                 "disliked": disliked
             },
         )
