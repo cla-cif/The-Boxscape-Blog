@@ -21,7 +21,7 @@ class PostList(generic.ListView):
     model = Post
     queryset = Post.objects.all()
     template_name = "list.html"
-    paginate_by = 8
+    paginate_by = 9
 
 
 def tag(request, slug):
