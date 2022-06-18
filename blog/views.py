@@ -8,15 +8,6 @@ from .models import Post
 from .forms import CommentForm, EmailPostForm
 
 
-# class PostList(generic.ListView):
-#     model = Post
-#     queryset = Post.objects.all()
-#     template_name = "list.html"
-#     paginate_by = 8
-
-
-# PLAYGROUND #
-
 class PostList(generic.ListView):
     model = Post
     queryset = Post.objects.all()
