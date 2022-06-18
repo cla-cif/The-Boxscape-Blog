@@ -153,7 +153,7 @@
             <h3>Similar posts</h3>
             {% for post in similar_posts %}
             <p>
-                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                <a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a>
             </p>
             {% empty %}
             <h2>There are no similar posts yet</h2>
