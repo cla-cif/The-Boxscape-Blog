@@ -7,14 +7,26 @@ from .models import Post
 from .forms import CommentForm, EmailPostForm
 
 
+# class PostList(generic.ListView):
+#     model = Post
+#     queryset = Post.objects.all()
+#     template_name = "list.html"
+#     paginate_by = 8
+
+
+# PLAYGROUND #
+
 class PostList(generic.ListView):
     model = Post
     queryset = Post.objects.all()
     template_name = "list.html"
     paginate_by = 8
 
+    
+def tag(request, slug):
+    post = Post.objects.filter(tags__slug=slug)
+    return render(request, 'list.html', {"post_list": post, "tag": slug})
 
-# PLAYGROUND #
 
 # class PostList(generic.ListView):
 #     model = Post
@@ -24,10 +36,11 @@ class PostList(generic.ListView):
 #     queryset = object_list.filter(tags__in=[tag])
 #     def get_queryset(self):
 #         return Book.objects.filter(title__icontains='war')[:5]+
-# https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Generic_views
+# 
         
 
 # # TAG FUNCIONALITY #
+
 # def post_list(request, tag_slug=None):
 #     object_list = Post.objects.all()
 #     tag = None

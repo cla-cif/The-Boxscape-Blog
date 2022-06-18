@@ -1,4 +1,4 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% load static %}
 {% load humanize %}
 
@@ -8,7 +8,8 @@
     <div class="row">
 
         <!-- Blog Entries Column -->
-        <div class="container"> <!--class="col-12 mt-3 left"-->
+        <div class="container">
+            <!--class="col-12 mt-3 left"-->
             <div class="row">
                 {% for post in post_list %}
                 <div class="col-md-3">
@@ -17,19 +18,26 @@
                             <div class="image-container">
                                 {% if "placeholder" in post.featured_image.url %}
                                 <img class="card-img-top" src="{% static 'placeholder.jpg' %}">
-                                {% else %}  
+                                {% else %}
                                 <img class="card-img-top" src=" {{ post.featured_image.url }}">
                                 {% endif %}
                             </div>
                             <div class="tags pt-2 pb-2">
-                                <p class="tags card-text text-details h6">{{ post.tags.all | join:", "|upper}}</p>
+                                <!-- <p class="tags card-text text-details h6">{{ post.tags.all | join:", "|upper}}</p> -->
+                                <p class="tags card-text text-details h6">
+                                    {% for tag in post.tags.all %}
+                                    <a class="card-text" href="{% url 'tag' tag.slug %}">{{ tag.name }}</a>
+                                    {% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </p>
                             </div>
                             <a href="{% url 'post_detail' post.slug %}">
                                 <h2 class="card-title post-title">{{ post.title }}</h2>
                                 <p class="card-text">{{ post.excerpt }}</p>
                             </a>
                             <hr />
-                            <p class="card-text text-details h6"> BY {{ post.author|upper}}<span class="pipe"> | </span>{{ post.created|naturaltime|upper }}<span class="pipe"> | </span> 
+                            <p class="card-text text-details h6"> BY {{ post.author|upper}}<span class="pipe"> |
+                                </span>{{ post.created|naturaltime|upper }}<span class="pipe"> | </span>
                                 <!-- <i class="far fa-heart fa-fw"></i>{{ post.number_of_likes }} | 
                                 <i class="fas fa-heart-broken fa-fw"></i> | -->
                                 <!-- {% with comments.count as total_comments %} -->
@@ -37,7 +45,7 @@
                                     {{ post.comments.count }}</strong>
                                 <!-- {% endwith %} -->
                             </p>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -65,4 +73,3 @@
 </div>
 
 {%endblock%}
-
