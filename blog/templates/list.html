@@ -24,9 +24,9 @@
                             </div>
                             <div class="tags pt-2 pb-2">
                                 <!-- <p class="tags card-text text-details h6">{{ post.tags.all | join:", "|upper}}</p> -->
-                                <p class="tags card-text text-details h6">
+                                <p class="card-text">
                                     {% for tag in post.tags.all %}
-                                    <a class="card-text" href="{% url 'tag' tag.slug %}">{{ tag.name }}</a>
+                                    <a class="tags text-details" href="{% url 'tag' tag.slug %}">{{ tag.name|upper }}</a>
                                     {% if not forloop.last %}, {% endif %}
                                     {% endfor %}
                                 </p>

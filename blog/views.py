@@ -3,6 +3,7 @@ from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 from taggit.models import Tag
+from django.db.models import Count
 from .models import Post
 from .forms import CommentForm, EmailPostForm
 
@@ -22,41 +23,11 @@ class PostList(generic.ListView):
     template_name = "list.html"
     paginate_by = 8
 
-    
+
 def tag(request, slug):
     post = Post.objects.filter(tags__slug=slug)
     return render(request, 'list.html', {"post_list": post, "tag": slug})
 
-
-# class PostList(generic.ListView):
-#     model = Post
-#     queryset = Post.objects.all()
-#     template_name = "list.html"
-#     paginate_by = 8
-#     queryset = object_list.filter(tags__in=[tag])
-#     def get_queryset(self):
-#         return Book.objects.filter(title__icontains='war')[:5]+
-# 
-        
-
-# # TAG FUNCIONALITY #
-
-# def post_list(request, tag_slug=None):
-#     object_list = Post.objects.all()
-#     tag = None
-#     if tag_slug:
-#         tag = get_object_or_404(Tag, slug=tag_slug)
-#         object_list = object_list.filter(tags__in=[tag])
-#     return render(
-#         request,
-#         "list.html",
-#         {
-#          'post': post, 
-#          'tag': tag
-#         }
-#     )
-
-# END PLAYGROUND #
 
 class PostDetail(View):
 
@@ -64,13 +35,20 @@ class PostDetail(View):
         queryset = Post.objects.all()
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by("created")
+        # retrieving post by similarity
+        post_tags_ids = post.tags.values_list('id', flat=True)
+        similar_posts = Post.objects.filter(tags__in=post_tags_ids)\
+            .exclude(id=post.id)
+        similar_posts = similar_posts.annotate(same_tags=Count('tags'))\
+            .order_by('-same_tags')
+        # like and dislike functionality
         liked = False
         disliked = False
         if post.likes.filter(id=self.request.user.id).exists():
             liked = True
         if post.dislikes.filter(id=self.request.user.id).exists():
             disliked = True
-        
+
         return render(
             request,
             "detail.html",
@@ -80,7 +58,8 @@ class PostDetail(View):
                 "commented": False,
                 "liked": liked,
                 "disliked": disliked,
-                "comment_form": CommentForm()
+                "comment_form": CommentForm(),
+                "similar_posts": similar_posts  # new
             },
         )
 
@@ -89,6 +68,13 @@ class PostDetail(View):
         queryset = Post.objects.all()
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by("created")
+        # retrieving post by similarity
+        post_tags_ids = post.tags.values_list('id', flat=True)
+        similar_posts = Post.objects.filter(tags__in=post_tags_ids)\
+            .exclude(id=post.id)
+        similar_posts = similar_posts.annotate(same_tags=Count('tags'))\
+            .order_by('-same_tags')
+        #  like and dislike functionality
         liked = False
         disliked = False
         if post.likes.filter(id=self.request.user.id).exists():
@@ -116,7 +102,8 @@ class PostDetail(View):
                 "commented": True,
                 "comment_form": comment_form,
                 "liked": liked,
-                "disliked": disliked
+                "disliked": disliked,
+                "similar_posts": similar_posts # new
             },
         )
 
