@@ -2,7 +2,7 @@
     --orange: #ef6d23;
     --lilac-light: #f2effe;
     --yellow-light: #f5eec2;
-    --very-peri:#6667ab;
+    --very-peri: #6667ab;
     --green-dark: #416a59;
     --white-pure: #fff;
     --text-default: black;
@@ -10,37 +10,51 @@
     --font-default: 'Roboto';
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
+/* general settings */
+body {
+    font-family: var(--font-title), sans-serif;
+}
+
 body::-webkit-scrollbar {
     display: none;
 }
 
 a {
     text-decoration: none;
+    color: var(--very-peri)
 }
 
-body {
-    font-family: var(--font-title), sans-serif;;
+a:hover {
+    color: var(--orange);
 }
-
-.light-bg {
-    background-color: var(--lilac-light);
+ul {
+    list-style: none;
 }
-.card-bg,
-.title-detail,
-.comments {
-    background-color: var(--white-pure);
-}
-.footer-bg {
-    background-color: var(--very-peri);
-} 
-
 .main-bg {
     background-color: var(--lilac-light);
 }
 
-.nav-bg {
-    background-color: var(--lilac-light);
+.btn {
+    background-color: var(--orange);
+    color: #fff;
+}
+.btn:hover,
+.btn:active {
+    background-color: #fff;
+    color: var(--orange);
+}
+
+/* header/nav */
+.active {
+    color: var(--orange);
+    text-decoration: underline;
+}
+
+/* card elements */
+.card-bg,
+.title-detail,
+.comments {
+    background-color: var(--white-pure);
 }
 
 .card {
@@ -74,39 +88,10 @@ body {
 }
 
 .text-details {
-    color: var(--very-peri); 
-
-}
-
-.nav-link {
-    font-family: var(--font-title);
     color: var(--very-peri);
 }
-.nav-link:hover{
-    color:var(--orange)
-}
-.nav-link.active {
-    color: var(--text-default);
-}
 
-.image-container {
-    position: relative;
-}
-
-.image-flash {
-    position: absolute;
-    bottom: 5%;
-    min-width: 30%;
-    left: -2px;
-    background-color: #23BBBB;
-}
-
-.author {
-    color: white;
-    margin: 4px;
-    text-transform: uppercase;
-}
-
+/* detail.html */
 .post-title {
     text-decoration: none;
     color: var(--text-default);
@@ -115,39 +100,7 @@ body {
 .post-title:hover,
 .page-link {
     color: var(--orange);
-    text-decoration:none;
-}
-
-/* .post-title {
-    margin-top: 20%;
-    margin-left: 5%;
-} */
-
-/* .post-subtitle {
-    margin-left: 5%;
-    color: lightgray;
-} */
-
-.btn {
-    background-color: var(--orange);
-    color: #fff;
-}
-
-.btn:hover,
-.btn:active {
-    background-color: #fff;
-    color: var(--orange);
-}
-
-.link {
-    color: #23BBBB;
     text-decoration: none;
-}
-
-.link:hover,
-.link:active {
-    color: #445261;
-    text-decoration: underline;
 }
 
 .btn-like {
@@ -174,4 +127,9 @@ body {
     color: blue;
     background: transparent;
     border: none;
+}
+
+/* footer */
+.footer-bg {
+    background-color: var(--very-peri);
 }
