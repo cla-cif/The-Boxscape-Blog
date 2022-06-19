@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
+from django.http import HttpResponseRedirect
 from cloudinary.models import CloudinaryField
 from taggit.managers import TaggableManager
 
@@ -42,11 +43,13 @@ class Post(models.Model):
     def number_of_dislikes(self):
         return self.dislikes.count()
 
+    # def get_absolute_url(self):
+    #     return reverse('blog:post_detail',
+    #                    args=[self.published.year,
+    #                          self.published.month,
+    #                          self.published.day, self.slug])
     def get_absolute_url(self):
-        return reverse('blog:post_detail',
-                       args=[self.published.year,
-                             self.published.month,
-                             self.published.day, self.slug])
+        return HttpResponseRedirect(reverse('post_detail', args=[self.slug]))
 
 
 class Comment(models.Model):
