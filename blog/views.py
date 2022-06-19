@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 from taggit.models import Tag
 from django.db.models import Count
+from django.contrib.auth.models import User
 from .models import Post
 from .forms import CommentForm, EmailPostForm
 
@@ -18,6 +19,12 @@ class PostList(generic.ListView):
 def tag(request, slug):
     post = Post.objects.filter(tags__slug=slug)
     return render(request, 'list.html', {"post_list": post, "tag": slug})
+
+
+def author_posts(request, pk):
+    author = User.objects.get(pk=pk)
+    post = Post.objects.filter(author=author)
+    return render(request, 'list.html', {'post_list': post, "author": author})
 
 
 class PostDetail(View):
@@ -94,7 +101,7 @@ class PostDetail(View):
                 "comment_form": comment_form,
                 "liked": liked,
                 "disliked": disliked,
-                "similar_posts": similar_posts # new
+                "similar_posts": similar_posts 
             },
         )
 
