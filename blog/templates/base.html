@@ -27,8 +27,37 @@
 
 <body class="d-flex flex-column h-100 main-bg">
 
+    <div class="container-fluid p-4 d-flex">
+        <div class="row">
+            <div class="col-6à">
+                <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'logo.jpg' %}" width="auto"
+                        height="100"></a>
+            </div>
+            <div class="col-6">
+                <h5 class="text-details">
+                    a blog for independent thinkers
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <a class="active" aria-current="page" href="{% url 'home' %}">Home</a>
+            </div>
+            <div class="col-sm">
+                {% if user.is_authenticated %}
+                <a href="{% url 'account_logout' %}">Logout</a>
+                {% else %}
+                <a href="{% url 'account_signup' %}">Register</a>
+                <a href="{% url 'account_login' %}">Login</a>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
     <!-- Navigation -->
 
+    <!-- 
     <nav class="navbar navbar-expand-lg nav-bg p-4">
         <div class="container-fluid nav-bg ">
 
@@ -62,7 +91,7 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav> -->
 
     <div class="container">
         <div class="row">
