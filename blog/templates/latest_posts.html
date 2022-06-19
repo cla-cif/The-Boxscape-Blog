@@ -1,7 +1,11 @@
 <ul>
     {% for post in latest_posts %}
-      <li>
-        <a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a>
-      </li>
+    
+      <div class="sidebar-box mb-3">
+        <li>
+          <a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a>
+        </li>
+        <div class="d-flex"><p class=" text-details text-right">{{ post.author|upper}}</p></div>
+      </div>
     {% endfor %}
   </ul>

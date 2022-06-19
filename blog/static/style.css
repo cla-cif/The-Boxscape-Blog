@@ -11,8 +11,12 @@
 }
 
 /* general settings */
+*{
+    max-width: 100%;
+}
 body {
     font-family: var(--font-title), sans-serif;
+
 }
 
 body::-webkit-scrollbar {
@@ -44,10 +48,9 @@ ul {
     color: var(--orange);
 }
 
-/* header/nav */
-.active {
-    color: var(--orange);
-    text-decoration: underline;
+/* sidebar-box */
+.sidebar-box {
+    background-color: var(--white-pure);
 }
 
 /* card elements */
@@ -91,6 +94,10 @@ ul {
     color: var(--very-peri);
 }
 
+.tags, .author, .header-link{
+    text-decoration: underline;
+}
+
 /* detail.html */
 .post-title {
     text-decoration: none;
@@ -101,6 +108,10 @@ ul {
 .page-link {
     color: var(--orange);
     text-decoration: none;
+}
+
+.image-detail{
+    opacity: .6;
 }
 
 .btn-like {
@@ -133,3 +144,9 @@ ul {
 .footer-bg {
     background-color: var(--very-peri);
 }
+
+@media (max-width: 768px) {
+    .sidebar {
+      display: none;
+    }
+  }

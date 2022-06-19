@@ -7,10 +7,15 @@
 <div class="container">
     <div class="title-detail p-4">
         <div class="row">
-            <!-- Post title goes in these h1 tags -->
-            <h1 class="post-title">{{ post.title }}</h1>
-            <!-- Post author goes before the | the post's created date goes after -->
-            <p class="text-details">{{ post.author|upper }} | {{ post.created|naturaltime }}</p>
+            <div class="col-10">
+                <!-- Post title goes in these h1 tags -->
+                <h1 class="post-title">{{ post.title }}</h1>
+                <!-- Post author goes before the | the post's created date goes after -->
+                <p class="text-details">{{ post.author|upper }} | {{ post.created|naturaltime }}</p>
+            </div>
+            <div class="col-2">
+                <img class="image-detail" src="{% static 'detail.jpg' %}" width="150" alt="">
+            </div>
         </div>
     </div>
 </div>
