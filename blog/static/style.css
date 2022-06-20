@@ -27,6 +27,10 @@ a {
     text-decoration: none;
     color: var(--very-peri)
 }
+.rounded-circle {
+    height: 70px;
+    width: 70px;
+}
 
 a:hover {
     color: var(--orange);
@@ -49,9 +53,12 @@ ul {
 }
 
 /* sidebar-box */
-.sidebar-box {
+.sidebar-most-commented,
+.sidebar-latest {
     background-color: var(--white-pure);
 }
+
+
 
 /* card elements */
 .card-bg,
