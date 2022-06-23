@@ -6,28 +6,7 @@
 
 {% block content %}
 <div class="wrapper d-flex align-items-stretch">
-    <nav class="sidebar">
-        <div class="d-flex flex-column p-4">
-            <h4>Total posts: {% total_posts %}</h4>
-            <div class="sidebar-widget pb-3">
-                <h4>Latest</h4>
-                <div class="sidebar-latest p-3">{% show_latest_posts 3 %}</div>
-            </div>
-            <div class="sidebar-widget pb-3">
-                <h4>Most Commented</h4>
-                <div class="sidebar-most-commented p-3">
-                    {% get_most_commented_posts as most_commented_posts %}
-                    <ul>
-                        {% for post in most_commented_posts %}
-                        <li class="pb-3">
-                            <a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
+
     <!-- Blog Entries Column -->
     <div class="container-fluid pt-4">
         <!--class="col-12 mt-3 left"-->
@@ -74,6 +53,34 @@
             {% endfor %}
         </div>
     </div>
+    <!-- sidebar -->
+    <div class="container" style="width:25%">
+     
+            <div class="col pt-4">
+                <div class="row gx-2 gy-2">
+                    <h4>Total posts: {% total_posts %}</h4>
+                </div>
+                <div class="row gx-2 gy-2">
+                    <h4>Latest</h4>
+                    <div>{% show_latest_posts 3 %}</div>
+                </div>
+                <div class="row gx-2 gy-2">
+                    <h4>Most Commented</h4>
+                    <div class="sidebar-most-commented">
+                        {% get_most_commented_posts as most_commented_posts %}
+                        <ul class="pt-3">
+                            {% for post in most_commented_posts %}
+                            <li class="pb-3">
+                                <a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+  
+        </div>
+    <!-- end sidebar -->
 
 </div>
 {% if is_paginated %}
