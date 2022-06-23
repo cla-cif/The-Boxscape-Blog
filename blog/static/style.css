@@ -11,9 +11,10 @@
 }
 
 /* general settings */
-*{
+* {
     max-width: 100%;
 }
+
 body {
     font-family: var(--font-title), sans-serif;
 
@@ -27,6 +28,7 @@ a {
     text-decoration: none;
     color: var(--very-peri)
 }
+
 .rounded-circle {
     height: 70px;
     width: 70px;
@@ -35,9 +37,11 @@ a {
 a:hover {
     color: var(--orange);
 }
+
 ul {
     list-style: none;
 }
+
 .main-bg {
     background-color: var(--lilac-light);
 }
@@ -46,6 +50,7 @@ ul {
     background-color: var(--orange);
     color: #fff;
 }
+
 .btn:hover,
 .btn:active {
     background-color: #fff;
@@ -62,7 +67,6 @@ ul {
 
 /* card elements */
 .card-bg,
-.title-detail,
 .comments {
     background-color: var(--white-pure);
 }
@@ -101,7 +105,9 @@ ul {
     color: var(--very-peri);
 }
 
-.tags, .author, .header-link{
+.tags,
+.author,
+.header-link {
     text-decoration: underline;
 }
 
@@ -111,13 +117,17 @@ ul {
     color: var(--text-default);
 }
 
+.container-detail {
+    background-color: var(--white-pure);
+}
+
 .post-title:hover,
 .page-link {
     color: var(--orange);
     text-decoration: none;
 }
 
-.image-detail{
+.image-detail {
     opacity: .6;
 }
 
@@ -154,6 +164,6 @@ ul {
 
 @media (max-width: 768px) {
     .sidebar {
-      display: none;
+        display: none;
     }
-  }
+}
