@@ -5,17 +5,17 @@
 
 {% block content %}
 <!-- TITLE -->
-<div class="container container-detail mb-4 pt-4">
+<div class="container container-detail mb-4 p-4">
     <div class="row title-detail">
-        <div class="col-xl-10">
-            <h1 class="post-title pb-3">{{ post.title }}</h1>
+        <div class="col-xl-10 align-self-center">
+            <h1 class="post-title pb-3 m-0">{{ post.title }}</h1>
             <p class="card-text text-details h6 "> BY <a class="author"
                     href="{% url 'author_posts' post.author.id %}">{{ post.author|upper}}</a><span class="pipe">
                     |
                 </span>{{ post.created|naturaltime|upper }}
             </p>
         </div>
-        <div class="col-xl-2">
+        <div class="col-xl-2 align-self-center">
             <img class="image-detail" src="{% static 'detail.jpg' %}" width="130" alt="">
         </div>
     </div>
@@ -23,26 +23,26 @@
 
 <!-- POST BODY -->
 <div class="container container-detail mb-3">
-    <div class="row body-detail">
+    <div class="row body-detail m-0">
         <!-- POST-BODY -->
-        <div class="col-xl-12  mb-4  mt-3 left  top">
-            <p class="post-body">
+        <div class="col-xl-12">
+            <p class="post-body m-0">
                 {{ post.body | safe }}
             </p>
         </div>
         <!-- HORIZONTAL LINE -->
 
-        <div class="row">
+        <div class="row m-0">
             <div class="col-xl-12">
                 <hr>
             </div>
         </div>
 
         <!-- BUTTONS DIV -->
-        <div class="col-xl-12">
-            <div class="row">
+        <div class="col-xl-6">
+            <div class="row p-4 m-0">
                 <!-- LIKE -->
-                <strong class="col-xl-1">
+                <strong class="col-md-3 d-flex justify-content-center">
                     {% if user.is_authenticated %}
                     <form class="d-inline" action="{% url 'post_like' post.slug%}" method="POST">
                         {% csrf_token %}
@@ -62,7 +62,7 @@
                 </strong>
 
                 <!--DISLIKE DIV-->
-                <strong class="col-xl-1">
+                <strong class="col-md-3 d-flex justify-content-center">
                     {% if user.is_authenticated %}
                     <form class="d-inline" action="{% url 'post_dislike' post.slug%}" method="POST">
                         {% csrf_token %}
@@ -81,7 +81,7 @@
                 </strong>
 
                 <!-- COMMENT COUNT -->
-                <strong class="col-xl-1">
+                <strong class="col-md-3 d-flex justify-content-center">
                     <div class="text-details"><i class="far fa-comments"></i>
                         <!-- Our total_comments variable goes before the closing strong tag -->
                         {{ post.comments.count }}
@@ -89,7 +89,7 @@
                 </strong>
 
                 <!-- SHARE -->
-                <strong class="col-xl-1">
+                <strong class="col-md-3 d-flex justify-content-center">
                     <a href="{% url 'post_share' post.slug %}">
                         <i class="fas fa-share"></i>
                     </a>
@@ -99,28 +99,30 @@
     </div>
 </div>
 
-<!-- COMMENT TITLE -->
-<div class="comment-title">
-    {% if post.comments.count == 1 %}
-    <h3> {{ post.comments.count }} Comment</h3>
-    {% else %}
-    <h3> {{ post.comments.count }} Comments</h3>
-    {% endif %}
-</div>
 
 <!-- COMMENTS LIST -->
-<div class="container mb-3">
+<div class="container mb-4">
     <div class="row">
-        <div class="col-xl-8">
+        <!-- COMMENT TITLE -->
+        <div class="comment-title mb-4 mt-4">
+            {% if post.comments.count == 1 %}
+            <h3> {{ post.comments.count }} Comment</h3>
+            {% else %}
+            <h3> {{ post.comments.count }} Comments</h3>
+            {% endif %}
+        </div>
+        <div class="col-xl-8 container-detail">
             {% for comment in comments %}
             <div class="comments p-4 mb-3">
                 <p class="font-weight-bold">
                     <h2>{{ comment.name }}</h2>
                     <span class=" text-details font-weight-normal">
-                        {{ comment.created }}
+                        {{ comment.created|naturaltime|upper }}
                     </span>
                 </p>
                 <div>{{ comment.body | linebreaks }}</div>
+                <hr>
+                <p class="m-0 d-flex justify-content-end">EDIT | DELETE | STAR</p>
             </div>
             {% endfor %}
         </div>
@@ -128,7 +130,7 @@
 </div>
 
 <!-- COMMENT BOX -->
-<div class="container mb-3">
+<div class="container mt-4 mb-4">
     <div class="row">
         <div class="col-xl-8">
             {% if commented %}
@@ -139,12 +141,14 @@
 
             {% if user.is_authenticated %}
 
-            <h3>Contribute to the conversation:</h3>
+            <h3 class="mt-4">Contribute to the conversation:</h3>
             <p>Posting as: {{ user.username }}</p>
             <form method="post" class="uniForm" style="margin-top: 1.3em;">
                 {{ comment_form | crispy }}
                 {% csrf_token %}
-                <button type="submit" class="btn">Submit</button>
+                <div class="d-grid col-6 mx-auto">
+                    <button type="submit" class="btn btn-lg">Submit</button>
+                </div>
             </form>
 
             {% endif %}
@@ -154,11 +158,12 @@
 </div>
 
 
-<h3>Similar posts</h3>
-<div class="container mb-3">
+
+<div class="container mb-4 mt-4">
     <div class="row gx-5">
+        <h3 class="d-flex justify-content-center">Similar posts</h3>
         {% for post in similar_posts %}
-        <div class="col-xl-2 col-md-3 col-sm-4">
+        <div class="col-xl-2 col-md-3 col-sm-4 p-4 container-detail">
             <div class="image" style="width: 15rem;">
                 {% if "placeholder" in post.featured_image.url %}
                 <img src="{% static 'placeholder.jpg' %}">

@@ -17,7 +17,6 @@
 
 body {
     font-family: var(--font-title), sans-serif;
-
 }
 
 body::-webkit-scrollbar {
@@ -48,13 +47,13 @@ ul {
 
 .btn {
     background-color: var(--orange);
-    color: #fff;
+    color: var(--white-pure);
 }
 
 .btn:hover,
 .btn:active {
-    background-color: #fff;
-    color: var(--orange);
+    background-color: var(--very-peri);
+    color: var(--white-pure);
 }
 
 /* sidebar-box */
@@ -88,7 +87,7 @@ ul {
 }
 
 .card-text {
-    font-family: var(--font-default), sans-serif;
+    font-family: 'Roboto', sans-serif;
     padding: 0 30px;
     line-height: 180%;
     font-size: .9375rem;
@@ -98,7 +97,15 @@ ul {
 }
 
 .post-body {
-    
+    line-height: 1.875rem;
+    font-family: var(--font-default), sans-serif;
+    padding: 40px 120px;
+    word-wrap: break-word;
+    font-size:17px;
+}
+
+.title-detail {
+    padding: 0 60px;
 }
 
 .pipe {
@@ -166,8 +173,14 @@ ul {
     background-color: var(--very-peri);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .sidebar {
+        display: none;
+    }
+    .post-body {
+        padding: 40px;
+    }
+    .image-detail {
         display: none;
     }
 }
