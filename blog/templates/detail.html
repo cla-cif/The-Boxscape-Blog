@@ -5,7 +5,7 @@
 
 {% block content %}
 <!-- TITLE -->
-<div class="container container-detail mb-3">
+<div class="container container-detail mb-4 pt-4">
     <div class="row title-detail">
         <div class="col-xl-10">
             <h1 class="post-title pb-3">{{ post.title }}</h1>
@@ -111,7 +111,7 @@
 <!-- COMMENTS LIST -->
 <div class="container mb-3">
     <div class="row">
-        <div class="col-xl-8 container-detail">
+        <div class="col-xl-8">
             {% for comment in comments %}
             <div class="comments p-4 mb-3">
                 <p class="font-weight-bold">
@@ -144,13 +144,15 @@
             <form method="post" class="uniForm" style="margin-top: 1.3em;">
                 {{ comment_form | crispy }}
                 {% csrf_token %}
-                <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+                <button type="submit" class="btn">Submit</button>
             </form>
+
             {% endif %}
             {% endif %}
         </div>
     </div>
 </div>
+
 
 <h3>Similar posts</h3>
 <div class="container mb-3">

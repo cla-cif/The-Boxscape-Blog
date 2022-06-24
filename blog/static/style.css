@@ -97,6 +97,10 @@ ul {
     color: var(--text-default)
 }
 
+.post-body {
+    
+}
+
 .pipe {
     padding: 0 8px;
 }
