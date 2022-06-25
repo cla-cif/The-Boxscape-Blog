@@ -18,6 +18,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
+    <script src="https://code.jquery.com/jquery-2.2.4.js"
+        integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.pkgd.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"
         integrity="sha512-JRlcvSZAXT8+5SQQAvklXGJuxXTouyq8oIMaYERZQasB8SBDHZaUbeASsJWpk0UUrf89DP3/aefPPrlMR1h1yQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -26,7 +29,7 @@
 </head>
 
 <body class="d-flex flex-column h-100 main-bg">
-<!-- Navigation -->
+    <!-- Navigation -->
     <div class="container">
         <div class="row pt-4 pb-4">
             <div class="col-xl-4">
@@ -36,18 +39,21 @@
 
             <div class="col-xl-8 align-self-center">
                 <div class="row">
-                    <div class="col-4 d-flex justify-content-center">
+                    <div class="col-3 d-flex justify-content-center">
                         <a class="header-link" aria-current="page" href="{% url 'home' %}">HOME</a>
                     </div>
+                    <div class="col-3 d-flex justify-content-center">
+                        <a class="header-link" aria-current="page" href="{% url 'about' %}">ABOUT</a>
+                    </div>
                     {% if user.is_authenticated %}
-                    <div class="col-4 d-flex justify-content-center">
+                    <div class="col-3 d-flex justify-content-center">
                         <a class="header-link" href="{% url 'account_logout' %}">LOGOUT</a>
                     </div>
                     {% else %}
-                    <div class="col-4 d-flex justify-content-center">
+                    <div class="col-3 d-flex justify-content-center">
                         <a class="header-link" href="{% url 'account_signup' %}">REGISTER</a>
                     </div>
-                    <div class="col-4 d-flex justify-content-center">
+                    <div class="col-3 d-flex justify-content-center">
                         <a class="header-link" href="{% url 'account_login' %}">LOGIN</a>
                     </div>
                     {% endif %}
@@ -55,7 +61,7 @@
             </div>
         </div>
     </div>
-<!-- End Navigation -->
+    <!-- End Navigation -->
     <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
@@ -77,11 +83,14 @@
 
     <!-- Footer -->
     <footer class="footer mt-auto p-4 footer-bg">
-        <p class="m-0 text-center text-white"><a class="about-link" href="{% url 'about' %}">What is Boxscape?</a></p>
-        <p class="m-0 text-center text-white">More:
-            <i class="fab fa-twitter ms-3"><a href="https://twitter.com/?lang=en"></a></i>
-            <i class="fab fa-discord ms-3"><a href="https://discord.com/"></a></i></p>
+        <p class="m-0 text-center text-white"><a class="footer-link" href="{% url 'about' %}">About</a></p>
         <p class="m-0 text-center text-white">Reach out</p>
+        <p class="m-0 text-center text-white">More:
+            <a class="footer-link" target="_blank" href="https://twitter.com/?lang=en"><i
+                    class="fab fa-twitter fa-lg ms-3 footer-link"></i></a>
+            <a class="footer-link" target="_blank" href="https://discord.com/"><i
+                    class="fab fa-discord fa-lg ms-3 footer-link"></i>
+        </p>
         <p class="m-0 text-center text-white">© 2022 work in progress</p>
     </footer>
     <script>
@@ -90,6 +99,14 @@
             let alert = new bootstrap.Alert(messages);
             alert.close();
         }, 2500);
+
+        // $('.masonry-container').imagesLoaded(function () {
+        //     $('.masonry-container').masonry({
+        //         itemSelector: '.item',
+        //         isAnimated: true,
+        //         isFitWidth: true
+        //     });
+        // });
     </script>
 </body>
 

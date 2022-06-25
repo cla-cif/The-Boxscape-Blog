@@ -180,9 +180,11 @@ ul {
 .footer-bg {
     background-color: var(--very-peri);
 }
-.about-link {
+ 
+.footer-link {
     color: var(--white-pure) !important;
 }
+
 
 @media (max-width: 992px) {
     .sidebar {
