@@ -16,7 +16,15 @@
 }
 
 body {
-    font-family: var(--font-title), sans-serif;
+    font-family: var(--font-default), sans-serif;
+}
+
+.title {
+    font-family: var(--font-title);
+}
+
+img:hover {
+    opacity: .8;
 }
 
 body::-webkit-scrollbar {
@@ -171,6 +179,9 @@ ul {
 /* footer */
 .footer-bg {
     background-color: var(--very-peri);
+}
+.about-link {
+    color: var(--white-pure) !important;
 }
 
 @media (max-width: 992px) {

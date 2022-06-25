@@ -1,10 +1,16 @@
 {% load static%}
 
 
-<ul class="pt-3">
+<ul class="p-4 m-0">
   {% for post in latest_posts %}
   <li class="pb-3">
     <a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a>
   </li>
   {% endfor %}
 </ul>
+
+<style>
+  li:last-child {
+    padding-bottom:0 !important;
+  }
+</style>
