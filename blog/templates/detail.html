@@ -159,9 +159,11 @@
 
 
 
-<div class="container-fluid pt-4">
-    <div class="row flex-shrink-0">
-        <h3 class="d-flex justify-content-center">Similar posts</h3>
+<div class="container pt-4">
+    <div class="mt-4 mb-4">
+        <h2 class="d-flex justify-content-center">Similar posts</h2>
+    </div>
+    <div class="row pt-4 pb-4 m-0">
         {% for post in similar_posts %}
         <div class="col-xl-3 col-md-4">
             <div class="card mb-4">
@@ -198,7 +200,7 @@
 
         {% if forloop.counter|divisibleby:4 %}
     </div>
-    <div class="row flex-shrink-0">
+    <div class="row">
         {% endif %}
         {% endfor %}
     </div>

@@ -15,6 +15,7 @@
     max-width: 100%;
 }
 
+
 body {
     font-family: var(--font-default), sans-serif;
 }
@@ -109,7 +110,7 @@ ul {
     font-family: var(--font-default), sans-serif;
     padding: 40px 120px;
     word-wrap: break-word;
-    font-size:17px;
+    font-size: 17px;
 }
 
 .title-detail {
@@ -180,7 +181,7 @@ ul {
 .footer-bg {
     background-color: var(--very-peri);
 }
- 
+
 .footer-link {
     color: var(--white-pure) !important;
 }
@@ -190,9 +191,11 @@ ul {
     .sidebar {
         display: none;
     }
+
     .post-body {
         padding: 40px;
     }
+
     .image-detail {
         display: none;
     }
