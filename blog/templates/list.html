@@ -8,9 +8,9 @@
 <div class="wrapper d-flex align-items-stretch">
 
     <!-- Blog Entries Column -->
-    <div class="container-fluid pt-4">
+    <div class="container-fluid pt-4 pb-4">
         <!--class="col-12 mt-3 left"-->
-        <div class="row flex-shrink-0 masonry-container">
+        <div class="row flex-shrink-0 m-0">
             {% for post in post_list %}
             <div class="col-xl-4 col-md-12">
                 <div class="card mb-4">
@@ -34,7 +34,7 @@
                         </div>
                         <a href="{% url 'post_detail' post.slug %}">
                             <h2 class="card-title post-title">{{ post.title }}</h2>
-                            <p class="card-text">{{ post.excerpt }}</p>
+                            <p class="card-text">{{ post.excerpt|truncatechars:160 }}</p>
                         </a>
                         <hr />
                         <p class="card-text text-details h6"> BY <a class="author"
@@ -59,14 +59,17 @@
     <div class="container sidebar" style="width:25%">
 
         <div class="col pt-4">
-            <div class="row">
+            <div class="row m-0">
                 <h4 class="pb-4">Total posts: {% total_posts %}</h4>
+            </div>
+            <div class="row m-0 pb-4 pt-4">
+                <a href="{% url 'create_posts' %}"><button class="btn" type="submit">Create a post</button></a>
             </div>
             <div class="row gx-2 gy-2">
                 <h4 class="pb-4">Latest:</h4>
                 <div class="sidebar-latest m-0 p-0">{% show_latest_posts 3 %}</div>
             </div>
-            <div class="row">
+            <div class="row m-0">
                 <h4 class="pb-4 pt-4">Trending posts:</h4>
                 <div class="sidebar-most-commented p-0">
                     {% get_most_commented_posts as most_commented_posts %}
@@ -79,7 +82,7 @@
                     </ul>
                 </div>
             </div>
-            <div>
+            <div class="row m-0">
                 <h4 class="pb-4 pt-4">Our contributors:</h4>
             </div>
         </div>

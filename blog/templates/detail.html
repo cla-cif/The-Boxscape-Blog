@@ -6,7 +6,7 @@
 {% block content %}
 <!-- TITLE -->
 <div class="container container-detail mb-4 p-4">
-    <div class="row title-detail">
+    <div class="row m-0 title-detail">
         <div class="col-xl-10 align-self-center">
             <h1 class="post-title pb-3 m-0">{{ post.title }}</h1>
             <p class="card-text text-details h6 "> BY <a class="author"
@@ -102,7 +102,7 @@
 
 <!-- COMMENTS LIST -->
 <div class="container mb-4">
-    <div class="row">
+    <div class="row m-0">
         <!-- COMMENT TITLE -->
         <div class="comment-title mb-4 mt-4">
             {% if post.comments.count == 1 %}
@@ -131,7 +131,7 @@
 
 <!-- COMMENT BOX -->
 <div class="container mt-4 mb-4">
-    <div class="row">
+    <div class="row m-0">
         <div class="col-xl-8">
             {% if commented %}
             <div class="alert alert-success" role="alert">
@@ -161,7 +161,7 @@
 
 <div class="container pt-4">
     <div class="mt-4 mb-4">
-        <h2 class="d-flex justify-content-center">Similar posts</h2>
+        <h2 class="d-flex justify-content-center">You may also like...</h2>
     </div>
     <div class="row pt-4 pb-4 m-0">
         {% for post in similar_posts %}
@@ -200,7 +200,7 @@
 
         {% if forloop.counter|divisibleby:4 %}
     </div>
-    <div class="row">
+    <div class="row m-0">
         {% endif %}
         {% endfor %}
     </div>

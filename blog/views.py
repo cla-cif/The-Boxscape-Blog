@@ -1,13 +1,13 @@
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView
 from taggit.models import Tag
 from django.db.models import Count
 from django.contrib.auth.models import User
 from .models import Post
-from .forms import CommentForm, EmailPostForm
+from .forms import CommentForm, EmailPostForm, PostForm
 
 
 class AboutView(TemplateView):
@@ -109,10 +109,35 @@ class PostDetail(View):
                 "comment_form": comment_form,
                 "liked": liked,
                 "disliked": disliked,
-                "similar_posts": similar_posts 
+                "similar_posts": similar_posts
             },
         )
 
+
+class CreatePost(CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'create_posts.html'
+    # fields = '__all__'
+    # fields = ['title', 'tags', 'excerpt', 'body', ]
+    # can't add image field because not in Post model
+
+    def form_valid(self, form, request, *args, **kwargs):
+        form.instance.author = self.request.user
+        return render(request, "list.html",
+                      {'form': form})
+
+
+# def post(request):
+#     if request.method == "POST":
+#         form = PostForm(request.POST)
+#         if form.is_valid():
+#             post = form.save(commit=False)
+#             post.user = request.user.id
+#             post.save()
+#             return redirect("post:create_posts")
+#     form = PostForm()
+#     return render(request, "list.html", {"form": form})
 
 class PostLike(View):
 
