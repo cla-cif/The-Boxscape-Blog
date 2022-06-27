@@ -67,8 +67,7 @@ ul {
 }
 
 /* sidebar-box */
-.sidebar-most-commented,
-.sidebar-latest {
+.sidebar-box {
     background-color: var(--white-pure);
 }
 

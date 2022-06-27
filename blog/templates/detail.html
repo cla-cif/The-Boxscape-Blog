@@ -44,7 +44,7 @@
                 <!-- LIKE -->
                 <strong class="col-md-3 d-flex justify-content-center">
                     {% if user.is_authenticated %}
-                    <form class="d-inline" action="{% url 'post_like' post.slug%}" method="POST">
+                    <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
                         {% csrf_token %}
                         {% if liked %}
                         <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i
@@ -64,7 +64,7 @@
                 <!--DISLIKE DIV-->
                 <strong class="col-md-3 d-flex justify-content-center">
                     {% if user.is_authenticated %}
-                    <form class="d-inline" action="{% url 'post_dislike' post.slug%}" method="POST">
+                    <form class="d-inline" action="{% url 'post_dislike' post.slug %}" method="POST">
                         {% csrf_token %}
                         {% if disliked %}
                         <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-dislike"><i

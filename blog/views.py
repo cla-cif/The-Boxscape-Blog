@@ -13,9 +13,6 @@ from .forms import CommentForm, EmailPostForm, PostForm
 class AboutView(TemplateView):
     template_name = "./about.html"
 
-# def optout(request):
-#        return redirect("https://twitter.com/?lang=en")
-
 
 class PostList(generic.ListView):
     model = Post
