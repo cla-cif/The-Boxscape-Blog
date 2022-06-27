@@ -84,7 +84,8 @@ ul {
     background-color: transparent;
 }
 
-.card-title {
+.card-title, 
+.card-title-small {
     font-family: var(--font-title), sans-serif;
     font-weight: 700;
     font-size: 1.875rem;
@@ -93,6 +94,9 @@ ul {
     padding: 0 30px;
     line-height: 110%;
     color: var(--text-default);
+}
+.card-title-small {
+    font-size: 1.375rem !important;
 }
 
 .card-text {
