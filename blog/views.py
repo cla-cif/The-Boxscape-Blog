@@ -111,18 +111,45 @@ class PostDetail(View):
         )
 
 
-class CreatePost(CreateView):
-    model = Post
-    form_class = PostForm
-    template_name = 'create_posts.html'
-    # fields = '__all__'
-    # fields = ['title', 'tags', 'excerpt', 'body', ]
-    # can't add image field because not in Post model
+# class CreatePost(CreateView):
+#     model = Post
+#     form_class = PostForm
+#     form = PostForm()
+   
+#     template_name = 'create_posts.html'
+#     # fields = '__all__'
+#     # fields = ['title', 'tags', 'excerpt', 'body', ]
+#     # can't add image field because not in Post model
 
-    def form_valid(self, form, request, *args, **kwargs):
-        form.instance.author = self.request.user
-        return render(request, "list.html",
-                      {'form': form})
+#     def form_valid(self, form, request, *args, **kwargs):
+#         post = Post()
+#         post.author = self.request.user
+#         post.title = form.cleaned_data.get('title')
+#         post.tags = form.cleaned_data.get('tags')
+#         post.excerpt = form.cleaned_data.get('excerpt')
+#         post.body = form.cleaned_data.get('body')
+#         post.save()
+#         return render(request, "list.html",
+#                       {'form': form})
+
+def create(request):
+    form = PostForm()
+    # can't add image field because not in Post model
+    context = {'form': form}
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = Post()
+            post.author = request.user
+            post.slug = '-'.join(form.cleaned_data.get('title').split(' '))
+            post.title = form.cleaned_data.get('title')
+            post.tags = form.cleaned_data.get('tags')
+            post.excerpt = form.cleaned_data.get('excerpt')
+            post.body = form.cleaned_data.get('body')
+            post.save()
+            print('post is created')
+
+    return render(request, "create_posts.html", context)
 
 
 # def post(request):

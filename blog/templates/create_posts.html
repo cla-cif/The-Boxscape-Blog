@@ -20,7 +20,7 @@
             <h3 class="mt-4">Have your say:</h3>
             <p>Posting as: {{ user.username }}</p>
             <div class="form-group">
-                <form method="post" class="uniForm" style="margin-top: 1.3em;">
+                <form method="post" action="{% url 'create' %}" class="uniForm" style="margin-top: 1.3em;">
                     <!-- {{ post_form | crispy }} -->
                     {% csrf_token %}
                     {{form.as_p}}
