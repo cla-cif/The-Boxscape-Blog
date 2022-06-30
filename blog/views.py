@@ -152,17 +152,6 @@ def create(request):
     return render(request, "create_posts.html", context)
 
 
-# def post(request):
-#     if request.method == "POST":
-#         form = PostForm(request.POST)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             post.user = request.user.id
-#             post.save()
-#             return redirect("post:create_posts")
-#     form = PostForm()
-#     return render(request, "list.html", {"form": form})
-
 class PostLike(View):
 
     def post(self, request, slug, *args, **kwargs):

@@ -37,7 +37,7 @@
                             <p class="card-text">{{ post.excerpt|truncatechars:160 }}</p>
                         </a>
                         <hr />
-                        <p class="card-text text-details h6"> BY <a class="author"
+                        <p class="card-text text-details"> BY <a class="author"
                                 href="{% url 'author_posts' post.author.id %}">{{ post.author|upper}}</a><span
                                 class="pipe"> |
                             </span>{{ post.created|naturaltime|upper }}<span class="pipe"> | </span>
