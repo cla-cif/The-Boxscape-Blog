@@ -37,10 +37,9 @@
                             <p class="card-text">{{ post.excerpt|truncatechars:160 }}</p>
                         </a>
                         <hr />
-                        <p class="card-text text-details"> BY <a class="author"
-                                href="{% url 'author_posts' post.author.id %}">{{ post.author|upper}}</a><span
-                                class="pipe"> |
-                            </span>{{ post.created|naturaltime|upper }}<span class="pipe"> | </span>
+                        <p class="card-text text-details d-flex"> BY&nbsp; <a class="author"
+                                href="{% url 'author_posts' post.author.id %}">{{ post.author|upper}}</a> &nbsp;&nbsp;|&nbsp&nbsp;
+                            </span>{{ post.created|naturalday|upper }} &nbsp;&nbsp;|&nbsp;&nbsp; </span>
                             <strong class="text-details"><i class="far fa-comments"></i>
                                 {{ post.comments.count }}</strong>
                         </p>
@@ -87,7 +86,10 @@
                 </div>
             </div>
             <div class="row m-0">
-                <h4 class="pb-4 pt-4">Our contributors:</h4>
+                <h4 class="pb-4 pt-4">Archive:</h4>
+                <div class="sidebar-box p-0">
+
+                </div>
             </div>
         </div>
 

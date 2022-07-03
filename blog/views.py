@@ -5,7 +5,9 @@ from django.core.mail import send_mail
 from django.views.generic import TemplateView, CreateView
 from taggit.models import Tag
 from django.db.models import Count
-from cloudinary.forms import cl_init_js_callbacks    
+import cloudinary
+from cloudinary.models import CloudinaryField
+from cloudinary.forms import cl_init_js_callbacks
 from django.contrib.auth.models import User
 from .models import Post
 from .forms import CommentForm, EmailPostForm, PostForm
@@ -122,7 +124,6 @@ def create(request):
                 "form": form,
                 "created": False
             })
-    # https://cloudinary.com/documentation/django_image_and_video_upload
     # context = {'form': form, 'created':True}
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
@@ -132,7 +133,7 @@ def create(request):
             post.slug = '-'.join(form.cleaned_data.get('title').split(' '))
             post.title = form.cleaned_data.get('title')
             post.tags = form.cleaned_data.get('tags')
-            # post.image = form.get('featured_image')
+            # post.image = cloudinary.uploader.upload(request.FILES['file'])
             post.excerpt = form.cleaned_data.get('excerpt')
             post.body = form.cleaned_data.get('body')
             post.save()
@@ -167,26 +168,26 @@ class PostDislike(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-# class PostShare(View):
+class PostShare(View):
 
-#     def get(self, request, slug, *args, **kwargs):
-#         queryset = Post.objects.all()
-#         post = get_object_or_404(queryset, slug=slug)
-#         sent = False
+    def get(self, request, slug, *args, **kwargs):
+        queryset = Post.objects.all()
+        post = get_object_or_404(queryset, slug=slug)
+        sent = False
 
-#         if request.method == 'POST':
-#             form = EmailPostForm(request.POST)
-#             if form.is_valid():
-#                 # form fields passed validation
-#                 cd = form.cleaned_data
-#                 post_url = request.build_absolute_uri(post.get_absolute_url())
-#                 subject = f"{cd['name']} recommends you read "\
-#                           f"{post.title}"
-#                 message = f"Read {post.title} at {post_url}\n\n" \
-#                           f"{cd['name']}\'s comments: {cd['comments']}"
-#                 send_mail(subject, message, 'the.boxscape.blog@gmail.com', [cd['to']])
-#                 sent = True
-#         else:
-#             form = EmailPostForm()
-#         return render(request, "share.html",
-#                       {'post': post, 'form': form, 'sent': sent})
+        if request.method == 'POST':
+            form = EmailPostForm(request.POST)
+            if form.is_valid():
+                # form fields passed validation
+                cd = form.cleaned_data
+                post_url = request.build_absolute_uri(post.get_absolute_url())
+                subject = f"{cd['name']} recommends you read "\
+                          f"{post.title}"
+                message = f"Read {post.title} at {post_url}\n\n" \
+                          f"{cd['name']}\'s comments: {cd['comments']}"
+                send_mail(subject, message, 'the.boxscape.blog@gmail.com', [cd['to']])
+                sent = True
+        else:
+            form = EmailPostForm()
+        return render(request, "share.html",
+                      {'post': post, 'form': form, 'sent': sent})

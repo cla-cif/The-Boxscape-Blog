@@ -12,7 +12,7 @@ def total_posts():
 
 @register.inclusion_tag('latest_posts.html')
 def show_latest_posts(count=5):
-    latest_posts = Post.objects.order_by('-published')[:count]
+    latest_posts = Post.objects.filter(status='pub').order_by('-published')[:count]
     return {'latest_posts': latest_posts}
 
 
