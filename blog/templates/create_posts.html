@@ -12,6 +12,11 @@
             {% if created %}
             <div class="alert alert-success" role="alert">
                 Your post is awaiting approval
+                <script type="text/javascript">
+                    setTimeout(function() {
+                        window.location.href = "{% url 'home' %}";
+                    }, 2500);
+                </script>
             </div>
             {% else %}
 

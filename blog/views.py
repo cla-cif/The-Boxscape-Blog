@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from django.views.generic import TemplateView, CreateView
 from taggit.models import Tag
 from django.db.models import Count
+from cloudinary.forms import cl_init_js_callbacks    
 from django.contrib.auth.models import User
 from .models import Post
 from .forms import CommentForm, EmailPostForm, PostForm
@@ -115,22 +116,23 @@ def create(request):
     form = PostForm()
     if request.method == 'GET':
         return render(
-            request, 
-            "create_posts.html", 
+            request,
+            "create_posts.html",
             {
                 "form": form,
                 "created": False
             })
-    # can't add image field because not in Post model
+    # https://cloudinary.com/documentation/django_image_and_video_upload
     # context = {'form': form, 'created':True}
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = Post()
             post.author = request.user
             post.slug = '-'.join(form.cleaned_data.get('title').split(' '))
             post.title = form.cleaned_data.get('title')
             post.tags = form.cleaned_data.get('tags')
+            # post.image = form.get('featured_image')
             post.excerpt = form.cleaned_data.get('excerpt')
             post.body = form.cleaned_data.get('body')
             post.save()
