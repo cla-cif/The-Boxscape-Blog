@@ -7,7 +7,7 @@ register = template.Library()
 
 @register.simple_tag()
 def total_posts():
-    return Post.objects.count()
+    return Post.objects.filter(status='pub').count()
 
 
 @register.inclusion_tag('latest_posts.html')

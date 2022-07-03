@@ -113,8 +113,16 @@ class PostDetail(View):
 
 def create(request):
     form = PostForm()
+    if request.method == 'GET':
+        return render(
+            request, 
+            "create_posts.html", 
+            {
+                "form": form,
+                "created": False
+            })
     # can't add image field because not in Post model
-    context = {'form': form}
+    # context = {'form': form, 'created':True}
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
@@ -127,7 +135,10 @@ def create(request):
             post.body = form.cleaned_data.get('body')
             post.save()
 
-    return render(request, "create_posts.html", context)
+    return render(request, "create_posts.html", {
+        'form': form,
+        'created': True
+    })
 
 
 class PostLike(View):
