@@ -16,7 +16,7 @@ class AboutView(TemplateView):
 
 class PostList(generic.ListView):
     model = Post
-    queryset = Post.objects.all()
+    queryset = Post.objects.filter(status='pub')
     template_name = "list.html"
     paginate_by = 9
 
@@ -35,7 +35,7 @@ def author_posts(request, pk):
 class PostDetail(View):
 
     def get(self, request, slug, *args, **kwargs):
-        queryset = Post.objects.all()
+        queryset = Post.objects.filter(status='pub')
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by("created")
         # retrieving post by similarity
@@ -68,7 +68,7 @@ class PostDetail(View):
 
     def post(self, request, slug, *args, **kwargs):
 
-        queryset = Post.objects.all()
+        queryset = Post.objects.filter(status='pub')
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by("created")
         # retrieving post by similarity
@@ -111,27 +111,6 @@ class PostDetail(View):
         )
 
 
-# class CreatePost(CreateView):
-#     model = Post
-#     form_class = PostForm
-#     form = PostForm()
-   
-#     template_name = 'create_posts.html'
-#     # fields = '__all__'
-#     # fields = ['title', 'tags', 'excerpt', 'body', ]
-#     # can't add image field because not in Post model
-
-#     def form_valid(self, form, request, *args, **kwargs):
-#         post = Post()
-#         post.author = self.request.user
-#         post.title = form.cleaned_data.get('title')
-#         post.tags = form.cleaned_data.get('tags')
-#         post.excerpt = form.cleaned_data.get('excerpt')
-#         post.body = form.cleaned_data.get('body')
-#         post.save()
-#         return render(request, "list.html",
-#                       {'form': form})
-
 def create(request):
     form = PostForm()
     # can't add image field because not in Post model
@@ -147,7 +126,6 @@ def create(request):
             post.excerpt = form.cleaned_data.get('excerpt')
             post.body = form.cleaned_data.get('body')
             post.save()
-            print('post is created')
 
     return render(request, "create_posts.html", context)
 
@@ -176,26 +154,26 @@ class PostDislike(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-class PostShare(View):
+# class PostShare(View):
 
-    def get(self, request, slug, *args, **kwargs):
-        queryset = Post.objects.all()
-        post = get_object_or_404(queryset, slug=slug)
-        sent = False
+#     def get(self, request, slug, *args, **kwargs):
+#         queryset = Post.objects.all()
+#         post = get_object_or_404(queryset, slug=slug)
+#         sent = False
 
-        if request.method == 'POST':
-            form = EmailPostForm(request.POST)
-            if form.is_valid():
-                # form fields passed validation
-                cd = form.cleaned_data
-                post_url = request.build_absolute_uri(post.get_absolute_url())
-                subject = f"{cd['name']} recommends you read "\
-                          f"{post.title}"
-                message = f"Read {post.title} at {post_url}\n\n" \
-                          f"{cd['name']}\'s comments: {cd['comments']}"
-                send_mail(subject, message, 'the.boxscape.blog@gmail.com', [cd['to']])
-                sent = True
-        else:
-            form = EmailPostForm()
-        return render(request, "share.html",
-                      {'post': post, 'form': form, 'sent': sent})
+#         if request.method == 'POST':
+#             form = EmailPostForm(request.POST)
+#             if form.is_valid():
+#                 # form fields passed validation
+#                 cd = form.cleaned_data
+#                 post_url = request.build_absolute_uri(post.get_absolute_url())
+#                 subject = f"{cd['name']} recommends you read "\
+#                           f"{post.title}"
+#                 message = f"Read {post.title} at {post_url}\n\n" \
+#                           f"{cd['name']}\'s comments: {cd['comments']}"
+#                 send_mail(subject, message, 'the.boxscape.blog@gmail.com', [cd['to']])
+#                 sent = True
+#         else:
+#             form = EmailPostForm()
+#         return render(request, "share.html",
+#                       {'post': post, 'form': form, 'sent': sent})
