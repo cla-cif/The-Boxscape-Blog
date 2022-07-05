@@ -11,6 +11,7 @@ urlpatterns = [
     path("author/<int:pk>/", views.author_posts, name="author_posts"),
     path('about', views.AboutView.as_view(), name='about'),
     path('create', views.create, name='create'),
+    path('<int:pk>/edit', views.edit, name='edit'),
     path('<slug:slug>/share/', views.PostShare.as_view(), name="post_share"),
     path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
 ]

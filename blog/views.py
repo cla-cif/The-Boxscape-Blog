@@ -140,10 +140,30 @@ def create(request):
             for t in tags:
                 post.tags.add(t)
 
-
     return render(request, "create_posts.html", {
         'form': form,
         'created': True
+    })
+
+
+def edit(request, pk):
+    # form = PostForm(request.POST or None, instance=post)
+    # if request.method == 'GET':
+    #     return render(
+    #         request,
+    #         "edit_posts.html",
+    #         {
+    #             "form": form,
+    #             "edited": False
+    #         })
+    # if request.method == 'POST':
+    post = get_object_or_404(Post, pk=pk)  # to get specific post
+    form = PostForm(request.POST or None, instance=post)
+    if form.is_valid():
+        form.save()
+    return render(request, "edit_posts.html", {
+        'form': form,
+        'edited': True
     })
 
 

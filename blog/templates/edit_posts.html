@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %} Create a new Post {% endblock %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+
+{% block content %}
+<div class="container mt-4 mb-4">
+    <div class="row m-0">
+        <div class="col-xl-8">
+            {% if created %}
+            <div class="alert alert-success" role="alert">
+                Your post is awaiting approval
+                <script type="text/javascript">
+                    setTimeout(function() {
+                        window.location.href = "{% url 'home' %}";
+                    }, 2500);
+                </script>
+            </div>
+            {% else %}
+
+            {% if user.is_authenticated %}
+
+            <h3 class="mt-4">Edit your post:</h3>
+            <p>Posting as: {{ user.username }}</p>
+            <div class="form-group">
+                <form method="post" action="{% url 'edit' %}" class="uniForm" style="margin-top: 1.3em;">
+                    <!-- {{ post_form | crispy }} -->
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <div class="d-grid col-6 mx-auto">
+                        <button type="submit" class="btn btn-lg">Submit</button>
+                    </div>
+            </div>
+            {% else %}
+            <h3>You must login or register before editing.</h3>
+
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
