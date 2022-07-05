@@ -132,11 +132,14 @@ def create(request):
             post.author = request.user
             post.slug = '-'.join(form.cleaned_data.get('title').split(' '))
             post.title = form.cleaned_data.get('title')
-            post.tags = form.cleaned_data.get('tags')
+            tags = form.cleaned_data.get('tags')
             # post.image = cloudinary.uploader.upload(request.FILES['file'])
             post.excerpt = form.cleaned_data.get('excerpt')
             post.body = form.cleaned_data.get('body')
             post.save()
+            for t in tags:
+                post.tags.add(t)
+
 
     return render(request, "create_posts.html", {
         'form': form,
