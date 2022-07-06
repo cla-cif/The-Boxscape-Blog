@@ -10,7 +10,7 @@ from cloudinary.models import CloudinaryField
 from cloudinary.forms import cl_init_js_callbacks
 from django.contrib.auth.models import User
 from .models import Post
-from .forms import CommentForm, EmailPostForm, PostForm
+from .forms import CommentForm, EmailPostForm, PostForm, EditPostForm
 
 
 class AboutView(TemplateView):
@@ -116,14 +116,11 @@ class PostDetail(View):
 
 def create(request):
     form = PostForm()
+    context = {'form': form, 'created': False, }
     if request.method == 'GET':
         return render(
             request,
-            "create_posts.html",
-            {
-                "form": form,
-                "created": False
-            })
+            "create_posts.html", context)
     # context = {'form': form, 'created':True}
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
@@ -146,25 +143,23 @@ def create(request):
     })
 
 
-def edit(request, pk):
-    # form = PostForm(request.POST or None, instance=post)
-    # if request.method == 'GET':
-    #     return render(
-    #         request,
-    #         "edit_posts.html",
-    #         {
-    #             "form": form,
-    #             "edited": False
-    #         })
-    # if request.method == 'POST':
-    post = get_object_or_404(Post, pk=pk)  # to get specific post
-    form = PostForm(request.POST or None, instance=post)
-    if form.is_valid():
-        form.save()
-    return render(request, "edit_posts.html", {
-        'form': form,
-        'edited': True
-    })
+def edit(request, id):
+    post = get_object_or_404(Post, pk=id)  # to get specific post
+    print(post.id)
+    form = EditPostForm(request.POST or None, instance=post)
+    context = {'form': form, 'edited': False, 'post': post}
+    if request.method == 'GET':
+        # form = PostForm(request.POST or None, instance=post)
+        return render(
+            request,
+            "edit_posts.html", context)
+    if request.method == 'POST':
+        form = EditPostForm(request.POST or None, instance=post)
+        if form.is_valid():
+            post.status = 'dft'
+            form.save()
+        context = {'form': form, 'edited': True, 'post': post}      
+    return render(request, "edit_posts.html", context)
 
 
 class PostLike(View):

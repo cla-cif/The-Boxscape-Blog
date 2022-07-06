@@ -9,7 +9,7 @@
 <div class="container mt-4 mb-4">
     <div class="row m-0">
         <div class="col-xl-8">
-            {% if created %}
+            {% if edited %}
             <div class="alert alert-success" role="alert">
                 Your post is awaiting approval
                 <script type="text/javascript">
@@ -25,7 +25,7 @@
             <h3 class="mt-4">Edit your post:</h3>
             <p>Posting as: {{ user.username }}</p>
             <div class="form-group">
-                <form method="post" action="{% url 'edit' %}" class="uniForm" style="margin-top: 1.3em;">
+                <form method="post" action="{% url 'post_edit' post.id %}" class="uniForm" style="margin-top: 1.3em;">
                     <!-- {{ post_form | crispy }} -->
                     {% csrf_token %}
                     {{form.as_p}}
