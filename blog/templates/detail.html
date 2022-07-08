@@ -128,7 +128,36 @@
                 </p>
                 <div>{{ comment.body | linebreaks }}</div>
                 <hr>
-                <p class="m-0 d-flex justify-content-end">EDIT | DELETE | STAR</p>
+                <!-- <p class="m-0 d-flex justify-content-end">EDIT | <a
+                        href="{% url 'comment_delete' comment.id %}">DELETE</a> | STAR</p> -->
+                <!-- Button trigger modal -->
+
+
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    DELETE
+                </button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          ...
+                        </div>
+                        <div class="modal-footer">
+                          <form method="POST" action="{% url 'comment_delete' comment.id %}">
+                            {% csrf_token %}
+                            Are you sure you want to delete?
+                            <input type="submit" value="yes">
+                          </form>
+                          <!-- <a href="{% url 'comment_delete' comment.id %}" class="btn btn-secondary" data-bs-dismiss="modal">Delete</a> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
             </div>
             {% endfor %}
         </div>

@@ -29,7 +29,8 @@ class Post(models.Model):
     likes = models.ManyToManyField(User,
                                    related_name='blogpost_like', blank=True)
     dislikes = models.ManyToManyField(User,
-                                      related_name='blogpost_dislike', blank=True)
+                                      related_name='blogpost_dislike',
+                                      blank=True)
 
     class Meta:
         ordering = ["-published"]
@@ -43,11 +44,6 @@ class Post(models.Model):
     def number_of_dislikes(self):
         return self.dislikes.count()
 
-    # def get_absolute_url(self):
-    #     return reverse('blog:post_detail',
-    #                    args=[self.published.year,
-    #                          self.published.month,
-    #                          self.published.day, self.slug])
     def get_absolute_url(self):
         return HttpResponseRedirect(reverse('post_detail', args=[self.slug]))
 

@@ -1,15 +1,16 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
+from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import TemplateView, CreateView, DeleteView
 from taggit.models import Tag
 from django.db.models import Count
 import cloudinary
 from cloudinary.models import CloudinaryField
 from cloudinary.forms import cl_init_js_callbacks
 from django.contrib.auth.models import User
-from .models import Post
+from .models import Post, Comment
 from .forms import CommentForm, EmailPostForm, PostForm, EditPostForm
 
 
@@ -114,6 +115,13 @@ class PostDetail(View):
         )
 
 
+def delete_comment(request, id):
+    if request.method == 'POST':
+        comment = get_object_or_404(Comment, pk=id)
+        comment.delete()
+    return HttpResponseRedirect('/')
+
+
 def create(request):
     form = PostForm()
     context = {'form': form, 'created': False, }
@@ -144,8 +152,7 @@ def create(request):
 
 
 def edit(request, id):
-    post = get_object_or_404(Post, pk=id)  # to get specific post
-    print(post.id)
+    post = get_object_or_404(Post, pk=id)
     form = EditPostForm(request.POST or None, instance=post)
     context = {'form': form, 'edited': False, 'post': post}
     if request.method == 'GET':

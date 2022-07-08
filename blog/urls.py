@@ -7,6 +7,7 @@ urlpatterns = [
     path('', views.PostList.as_view(), name='home'),
     path('like/<slug:slug>', views.PostLike.as_view(), name='post_like'),
     path('dislike/<slug:slug>', views.PostDislike.as_view(), name='post_dislike'), # noqa
+    path('<int:id>/delete', views.delete_comment, name='comment_delete'), # noqa
     path("tag/<slug:slug>/", views.tag, name='tag'),
     path("author/<int:pk>/", views.author_posts, name="author_posts"),
     path('<slug:slug>/share/', views.PostShare.as_view(), name="post_share"),

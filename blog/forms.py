@@ -34,6 +34,7 @@ class EditPostForm(forms.ModelForm):
             'body': forms.Textarea(attrs={'class': 'form-control'}),
         }
 
+
 class EmailPostForm(forms.Form):
     name = forms.CharField(max_length=25)
     to = forms.EmailField()
