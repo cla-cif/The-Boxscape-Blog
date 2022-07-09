@@ -93,13 +93,13 @@
                     </a>
                 </strong>
                 <!-- EDIT POST-->
-                {% if user.is_authenticated and user == post.author %}
+                <!-- {% if user.is_authenticated and user == post.author %}
                 <strong class="col-lg-2 d-flex justify-content-center">
                     <a href="{% url 'post_edit' post.id %}">
                         <i class="far fa-edit"></i>&nbsp;EDIT
                     </a>
                 </strong>
-                {% endif %}
+                {% endif %} -->
             </div>
         </div>
     </div>
@@ -166,7 +166,7 @@
                     </div>
                 </div>
                 <!-- EDIT COMMENT -->
-                <form method="POST" action="{% url 'comment_edit' comment.id %}" id="edit_comment" class="form-inline">
+                <form id="edit_comment" class="form-inline">
                     {% csrf_token %}
                     <input type="submit" class="btn-comment" value="EDIT">
                 </form>
@@ -281,6 +281,37 @@
         {% endfor %}
     </div>
 </div> -->
+
+<!-- {% block javascript %}
+<script>
+    /*
+        On submiting the form, send the POST ajax
+        request to server and after successfull submission
+        display the object.
+    */
+    $("#edit-comment").submit(function (e) {
+        // preventing from page reload and default actions
+        e.preventDefault();
+        // serialize the data for sending the form data.
+        var serializedData = $(this).serialize();
+        // make POST ajax call
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'comment_edit' comment.id %}",
+            data: serializedData,
+            success: function (response) {
+                // on successfull creating object
+                // 1. clear the form.
+                $("#edit-comment").save()
+            },
+            error: function (response) {
+                // alert the error if any error occured
+                alert(response["responseJSON"]["error"]);
+            }
+        })
+    })
+</script>
+{% endblock javascript %} -->
 
 
 {% endblock content %}

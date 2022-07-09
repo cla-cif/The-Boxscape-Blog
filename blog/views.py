@@ -160,26 +160,26 @@ def post_edit(request, id):
     return render(request, "post_edit.html", context)
 
 
-def comment_edit(request, id):
+# def comment_edit(request, id):
 
-    # request should be ajax and method should be POST.
-    if request.is_ajax and request.method == "POST":
-        comment = get_object_or_404(Comment, pk=id)
-        # get the form data
-        form = CommentForm(request.POST)
-        # save the data and after fetch the object in instance
-        if form.is_valid():
-            instance = form.save()
-            # serialize in new friend object in json
-            ser_instance = serializers.serialize('json', [instance, ])
-            # send to client side.
-            return JsonResponse({"instance": ser_instance}, status=200)
-        else:
-            # some form errors occured.
-            return JsonResponse({"error": form.errors}, status=400)
+#     # request should be ajax and method should be POST.
+#     if request.is_ajax and request.method == "POST":
+#         comment = get_object_or_404(Comment, pk=id)
+#         # get the form data
+#         form = CommentForm(request.POST)
+#         # save the data and after fetch the object in instance
+#         if form.is_valid():
+#             instance = form.save()
+#             # serialize in new friend object in json
+#             ser_instance = serializers.serialize('json', [instance, ])
+#             # send to client side.
+#             return JsonResponse({"instance": ser_instance}, status=200)
+#         else:
+#             # some form errors occured.
+#             return JsonResponse({"error": form.errors}, status=400)
 
-    # some error occured
-    return JsonResponse({"error": ""}, status=400)
+#     # some error occured
+#     return JsonResponse({"error": ""}, status=400)
 
 
 def comment_delete(request, id):
