@@ -86,13 +86,13 @@
                         &nbsp;{{ comments.total.count }}
                     </div>
                 </strong>
-                <!-- SHARE -->
+                <!-- SHARE POST -->
                 <strong class="col-lg-2 d-flex justify-content-center">
                     <a href="{% url 'post_share' post.slug %}">
                         <i class="fas fa-share"></i>
                     </a>
                 </strong>
-                <!-- EDIT -->
+                <!-- EDIT POST-->
                 {% if user.is_authenticated and user == post.author %}
                 <strong class="col-lg-2 d-flex justify-content-center">
                     <a href="{% url 'post_edit' post.id %}">
@@ -111,10 +111,11 @@
     <div class="row m-0">
         <!-- COMMENT TITLE -->
         <div class="comment-title mb-4 mt-4">
-            {% if comments.total.count == 1 %}
-            <h3> {{ comments.total.count }} Comment</h3>
-            {% else %}
-            <h3> {{ comments.total.counts }} Comments</h3>
+            {% if post.comments.count == 0 %}
+            <h3> There are no comments yet ;(</h3>
+            {% else  %}
+            <h3> {{ post.comments.count }} Comments</h3>
+
             {% endif %}
         </div>
         <div class="col-xl-8 mb-3">
@@ -127,12 +128,13 @@
                     </span>
                 </p>
                 <div>{{ comment.body | linebreaks }}</div>
-                <hr>
+
                 <!-- <p class="m-0 d-flex justify-content-end">EDIT | <a
                         href="{% url 'comment_delete' comment.id %}">DELETE</a> | STAR</p> -->
                 <!-- Button trigger modal -->
 
                 {% if user.is_authenticated and user.username == comment.name %}
+                <hr>
                 <button type="button" class="btn-comment" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     DELETE
                 </button>
@@ -152,7 +154,7 @@
                                 <form method="POST" action="{% url 'comment_delete' comment.id %}">
                                     {% csrf_token %}
                                     <input type="submit" class="btn" value="Yes">
-                        
+
                                 </form>
                                 <form action="{% url 'post_detail' post.slug %}">
                                     {% csrf_token %}
@@ -163,6 +165,11 @@
                         </div>
                     </div>
                 </div>
+                <!-- EDIT COMMENT -->
+                <form method="POST" action="{% url 'comment_edit' comment.id %}" id="edit_comment" class="form-inline">
+                    {% csrf_token %}
+                    <input type="submit" class="btn-comment" value="EDIT">
+                </form>
                 {% endif %}
             </div>
             {% endfor %}

@@ -16,8 +16,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=200,
                             unique_for_date='published', blank=True)
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="blog_posts"
-    )
+        User, on_delete=models.CASCADE, related_name="blog_posts")
     tags = TaggableManager()
     featured_image = CloudinaryField('image', default='placeholder')
     excerpt = models.TextField(blank=True)
