@@ -88,9 +88,8 @@ class PostDetail(View):
             liked = True
         if post.dislikes.filter(id=self.request.user.id).exists():
             disliked = True
-
+        # create comment 
         comment_form = CommentForm(data=request.POST)
-
         if comment_form.is_valid():
             comment_form.instance.email = request.user.email
             comment_form.instance.name = request.user.username
@@ -115,21 +114,20 @@ class PostDetail(View):
         )
 
 
-def delete_comment(request, id):
+def comment_delete(request, id):
     if request.method == 'POST':
         comment = get_object_or_404(Comment, pk=id)
         comment.delete()
     return HttpResponseRedirect('/')
 
 
-def create(request):
+def post_create(request):
     form = PostForm()
     context = {'form': form, 'created': False, }
     if request.method == 'GET':
         return render(
             request,
-            "create_posts.html", context)
-    # context = {'form': form, 'created':True}
+            "post_create.html", context)
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
@@ -145,13 +143,13 @@ def create(request):
             for t in tags:
                 post.tags.add(t)
 
-    return render(request, "create_posts.html", {
+    return render(request, "post_create.html", {
         'form': form,
         'created': True
     })
 
 
-def edit(request, id):
+def post_edit(request, id):
     post = get_object_or_404(Post, pk=id)
     form = EditPostForm(request.POST or None, instance=post)
     context = {'form': form, 'edited': False, 'post': post}
@@ -159,14 +157,14 @@ def edit(request, id):
         # form = PostForm(request.POST or None, instance=post)
         return render(
             request,
-            "edit_posts.html", context)
+            "post_edit.html", context)
     if request.method == 'POST':
         form = EditPostForm(request.POST or None, instance=post)
         if form.is_valid():
             post.status = 'dft'
             form.save()
         context = {'form': form, 'edited': True, 'post': post}      
-    return render(request, "edit_posts.html", context)
+    return render(request, "post_edit.html", context)
 
 
 class PostLike(View):
@@ -214,5 +212,5 @@ class PostShare(View):
                 sent = True
         else:
             form = EmailPostForm()
-        return render(request, "share.html",
+        return render(request, "post_share.html",
                       {'post': post, 'form': form, 'sent': sent})
