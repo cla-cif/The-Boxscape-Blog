@@ -83,7 +83,7 @@
                 <strong class="col-lg-2 d-flex justify-content-center">
                     <div class="text-details"><i class="far fa-comments"></i>
                         <!-- Our total_comments variable goes before the closing strong tag -->
-                        &nbsp;{{ post.comments.count }}
+                        &nbsp;{{ comments.total.count }}
                     </div>
                 </strong>
                 <!-- SHARE -->
@@ -111,10 +111,10 @@
     <div class="row m-0">
         <!-- COMMENT TITLE -->
         <div class="comment-title mb-4 mt-4">
-            {% if post.comments.count == 1 %}
-            <h3> {{ post.comments.count }} Comment</h3>
+            {% if comments.total.count == 1 %}
+            <h3> {{ comments.total.count }} Comment</h3>
             {% else %}
-            <h3> {{ post.comments.count }} Comments</h3>
+            <h3> {{ comments.total.counts }} Comments</h3>
             {% endif %}
         </div>
         <div class="col-xl-8 mb-3">
@@ -151,11 +151,12 @@
                             <div class="modal-footer">
                                 <form method="POST" action="{% url 'comment_delete' comment.id %}">
                                     {% csrf_token %}
-                                    <input type="submit" value="Yes">
+                                    <input type="submit" class="btn" value="Yes">
+                        
                                 </form>
-                                <form method="POST" action="{% url 'post_detail' comment.id %}">
+                                <form action="{% url 'post_detail' post.slug %}">
                                     {% csrf_token %}
-                                    <input type="submit" value="No, take me back">
+                                    <input type="submit" class="btn" value="No, take me back">
                                 </form>
                                 <!-- <a href="{% url 'comment_delete' comment.id %}" class="btn btn-secondary" data-bs-dismiss="modal">Delete</a> -->
                             </div>

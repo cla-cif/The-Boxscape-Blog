@@ -147,7 +147,6 @@ def post_edit(request, id):
     form = EditPostForm(request.POST or None, instance=post)
     context = {'form': form, 'edited': False, 'post': post}
     if request.method == 'GET':
-        # form = PostForm(request.POST or None, instance=post)
         return render(
             request,
             "post_edit.html", context)
@@ -160,11 +159,15 @@ def post_edit(request, id):
     return render(request, "post_edit.html", context)
 
 
+#def comment_edit(request, id):
+
+
+
 def comment_delete(request, id):
     if request.method == 'POST':
         comment = get_object_or_404(Comment, pk=id)
         comment.delete()
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('post_detail')
 
 
 class PostLike(View):
