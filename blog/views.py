@@ -114,13 +114,6 @@ class PostDetail(View):
         )
 
 
-def comment_delete(request, id):
-    if request.method == 'POST':
-        comment = get_object_or_404(Comment, pk=id)
-        comment.delete()
-    return HttpResponseRedirect('/')
-
-
 def post_create(request):
     form = PostForm()
     context = {'form': form, 'created': False, }
@@ -165,6 +158,13 @@ def post_edit(request, id):
             form.save()
         context = {'form': form, 'edited': True, 'post': post}      
     return render(request, "post_edit.html", context)
+
+
+def comment_delete(request, id):
+    if request.method == 'POST':
+        comment = get_object_or_404(Comment, pk=id)
+        comment.delete()
+    return HttpResponseRedirect('/')
 
 
 class PostLike(View):

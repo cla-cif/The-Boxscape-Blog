@@ -42,7 +42,7 @@
         <div class="col-xl-6">
             <div class="row p-4 m-0">
                 <!-- LIKE -->
-                <strong class="col-md-3 d-flex justify-content-center">
+                <strong class="col-lg-2 d-flex justify-content-center">
                     {% if user.is_authenticated %}
                     <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
                         {% csrf_token %}
@@ -57,12 +57,11 @@
                     {% else %}
                     <span class="text-details"><i class="far fa-heart"></i></span>
                     {% endif %}
-                    <span class="text-details">{{ post.number_of_likes }}</span>
-                    <!--share post-->
+                    <span class="text-details">&nbsp;{{ post.number_of_likes }}</span>
                 </strong>
 
                 <!--DISLIKE DIV-->
-                <strong class="col-md-3 d-flex justify-content-center">
+                <strong class="col-lg-2 d-flex justify-content-center">
                     {% if user.is_authenticated %}
                     <form class="d-inline" action="{% url 'post_dislike' post.slug %}" method="POST">
                         {% csrf_token %}
@@ -75,31 +74,32 @@
                         {% endif %}
                     </form>
                     {% else %}
-                    <span class="text-details"><i class="far fa-heart-broken"></i></span>
+                    <span class="text-details"><i class="fas fa-heart-broken"></i></span>
                     {% endif %}
-                    <span class="text-details">{{ post.number_of_dislikes }}</span>
+                    <span class="text-details">&nbsp;{{ post.number_of_dislikes }}</span>
                 </strong>
 
                 <!-- COMMENT COUNT -->
-                <strong class="col-md-3 d-flex justify-content-center">
+                <strong class="col-lg-2 d-flex justify-content-center">
                     <div class="text-details"><i class="far fa-comments"></i>
                         <!-- Our total_comments variable goes before the closing strong tag -->
-                        {{ post.comments.count }}
+                        &nbsp;{{ post.comments.count }}
                     </div>
                 </strong>
-
                 <!-- SHARE -->
-                <strong class="col-md-3 d-flex justify-content-center">
+                <strong class="col-lg-2 d-flex justify-content-center">
                     <a href="{% url 'post_share' post.slug %}">
                         <i class="fas fa-share"></i>
                     </a>
                 </strong>
                 <!-- EDIT -->
-                <strong class="col-md-3 d-flex justify-content-center">
+                {% if user.is_authenticated and user == post.author %}
+                <strong class="col-lg-2 d-flex justify-content-center">
                     <a href="{% url 'post_edit' post.id %}">
-                        EDIT
+                        <i class="far fa-edit"></i>&nbsp;EDIT
                     </a>
                 </strong>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -117,9 +117,9 @@
             <h3> {{ post.comments.count }} Comments</h3>
             {% endif %}
         </div>
-        <div class="col-xl-8 container-detail">
+        <div class="col-xl-8 mb-3">
             {% for comment in comments %}
-            <div class="comments p-4 mb-3">
+            <div class="comments container-detail p-4 mb-3">
                 <p class="font-weight-bold">
                     <h2>{{ comment.name }}</h2>
                     <span class=" text-details font-weight-normal">
@@ -132,32 +132,37 @@
                         href="{% url 'comment_delete' comment.id %}">DELETE</a> | STAR</p> -->
                 <!-- Button trigger modal -->
 
-
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                {% if user.is_authenticated and user.username == comment.name %}
+                <button type="button" class="btn-comment" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     DELETE
                 </button>
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Hey {{ user.username }}!</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete your comment?
+                            </div>
+                            <div class="modal-footer">
+                                <form method="POST" action="{% url 'comment_delete' comment.id %}">
+                                    {% csrf_token %}
+                                    <input type="submit" value="Yes">
+                                </form>
+                                <form method="POST" action="{% url 'post_detail' comment.id %}">
+                                    {% csrf_token %}
+                                    <input type="submit" value="No, take me back">
+                                </form>
+                                <!-- <a href="{% url 'comment_delete' comment.id %}" class="btn btn-secondary" data-bs-dismiss="modal">Delete</a> -->
+                            </div>
                         </div>
-                        <div class="modal-body">
-                          ...
-                        </div>
-                        <div class="modal-footer">
-                          <form method="POST" action="{% url 'comment_delete' comment.id %}">
-                            {% csrf_token %}
-                            Are you sure you want to delete?
-                            <input type="submit" value="yes">
-                          </form>
-                          <!-- <a href="{% url 'comment_delete' comment.id %}" class="btn btn-secondary" data-bs-dismiss="modal">Delete</a> -->
-                        </div>
-                      </div>
                     </div>
-                  </div>
-
+                </div>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
@@ -185,9 +190,10 @@
                     <button type="submit" class="btn btn-lg">Submit</button>
                 </div>
             </form>
-
-            {% endif %}
-            {% endif %}
+            {% else %}
+            <p>Please log in or register if you want to join the conversation<p>
+                    {% endif %}
+                    {% endif %}
         </div>
     </div>
 </div>

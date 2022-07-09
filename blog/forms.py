@@ -16,7 +16,7 @@ class PostForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'tags': forms.TextInput(attrs={'class': 'form-control'}),
-            'featured_image': forms.FileInput(),
+            'featured_image': forms.FileInput(attrs={'accept': '.jpg,.jpeg'}),
             'excerpt': forms.Textarea(attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
         }

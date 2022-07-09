@@ -141,6 +141,16 @@ ul {
     background-color: var(--white-pure);
 }
 
+.btn-comment {
+    color: var(--very-peri);
+    border: none;
+    background-color: inherit;
+}
+
+.btn-comment:hover {
+    color: var(--orange);
+}
+
 .post-title:hover,
 .page-link {
     color: var(--orange);
