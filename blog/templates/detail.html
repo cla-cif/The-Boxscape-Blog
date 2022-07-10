@@ -4,15 +4,16 @@
 {% load humanize %}
 
 {% block content %}
-<!-- TITLE -->
+
+<!-- POST TITLE -->
 <div class="container container-detail mb-4 p-4">
     <div class="row m-0 title-detail">
         <div class="col-xl-10 align-self-center">
             <h1 class="post-title pb-3 m-0">{{ post.title }}</h1>
-            <p class="card-text text-details h6 "> BY <a class="author"
+            <p class="card-text text-details"> BY <a class="author"
                     href="{% url 'author_posts' post.author.id %}">{{ post.author|upper}}</a><span class="pipe">
                     |
-                </span>{{ post.created|naturaltime|upper }}
+                </span>{{ post.created|naturalday|upper }}
             </p>
         </div>
         <div class="col-xl-2 align-self-center">
@@ -30,151 +31,144 @@
                 {{ post.body | safe }}<i class="fa fa-quote-right fa-3x fa-pull-right"></i>
             </p>
         </div>
-        <!-- HORIZONTAL LINE -->
 
+        <!-- HORIZONTAL LINE -->
         <div class="row m-0">
             <div class="col-xl-12">
                 <hr>
             </div>
         </div>
 
-        <!-- BUTTONS DIV -->
-        <div class="col-xl-6">
-            <div class="row p-4 m-0">
-                <!-- LIKE -->
-                <strong class="col-lg-2 d-flex justify-content-center">
-                    {% if user.is_authenticated %}
-                    <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
-                        {% csrf_token %}
-                        {% if liked %}
-                        <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i
-                                class="fas fa-heart"></i></button>
-                        {% else %}
-                        <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i
-                                class="far fa-heart"></i></button>
-                        {% endif %}
-                    </form>
+        <!-- POST BUTTONS -->
+        <div class="d-flex flex-nowrap pb-4 pt-4">
+            <!-- POST LIKE -->
+            <strong class="col-lg-2 d-flex justify-content-center">
+                {% if user.is_authenticated %}
+                <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
+                    {% csrf_token %}
+                    {% if liked %}
+                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i
+                            class="fas fa-heart"></i></button>
                     {% else %}
-                    <span class="text-details"><i class="far fa-heart"></i></span>
+                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i
+                            class="far fa-heart"></i></button>
                     {% endif %}
-                    <span class="text-details">&nbsp;{{ post.number_of_likes }}</span>
-                </strong>
+                </form>
+                {% else %}
+                <span class="text-details"><i class="far fa-heart"></i></span>
+                {% endif %}
+                <span class="text-details">&nbsp;{{ post.number_of_likes }}</span>
+            </strong>
 
-                <!--DISLIKE DIV-->
-                <strong class="col-lg-2 d-flex justify-content-center">
-                    {% if user.is_authenticated %}
-                    <form class="d-inline" action="{% url 'post_dislike' post.slug %}" method="POST">
-                        {% csrf_token %}
-                        {% if disliked %}
-                        <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-dislike"><i
-                                class="fas fa-heart-broken"></i></button>
-                        {% else %}
-                        <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-dislike"><i
-                                class="fas fa-heart-broken"></i></button>
-                        {% endif %}
-                    </form>
+            <!-- POST DISLIKE -->
+            <strong class="col-lg-2 d-flex justify-content-center">
+                {% if user.is_authenticated %}
+                <form class="d-inline" action="{% url 'post_dislike' post.slug %}" method="POST">
+                    {% csrf_token %}
+                    {% if disliked %}
+                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-dislike"><i
+                            class="fas fa-heart-broken"></i></button>
                     {% else %}
-                    <span class="text-details"><i class="fas fa-heart-broken"></i></span>
+                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-dislike"><i
+                            class="fas fa-heart-broken"></i></button>
                     {% endif %}
-                    <span class="text-details">&nbsp;{{ post.number_of_dislikes }}</span>
-                </strong>
+                </form>
+                {% else %}
+                <span class="text-details"><i class="fas fa-heart-broken"></i></span>
+                {% endif %}
+                <span class="text-details">&nbsp;{{ post.number_of_dislikes }}</span>
+            </strong>
 
-                <!-- COMMENT COUNT -->
-                <strong class="col-lg-2 d-flex justify-content-center">
-                    <div class="text-details"><i class="far fa-comments"></i>
-                        <!-- Our total_comments variable goes before the closing strong tag -->
-                        &nbsp;{{ comments.total.count }}
-                    </div>
-                </strong>
-                <!-- SHARE POST -->
-                <strong class="col-lg-2 d-flex justify-content-center">
-                    <a href="{% url 'post_share' post.slug %}">
-                        <i class="fas fa-share"></i>
-                    </a>
-                </strong>
-                <!-- EDIT POST-->
-                <!-- {% if user.is_authenticated and user == post.author %}
-                <strong class="col-lg-2 d-flex justify-content-center">
-                    <a href="{% url 'post_edit' post.id %}">
-                        <i class="far fa-edit"></i>&nbsp;EDIT
-                    </a>
-                </strong>
-                {% endif %} -->
-            </div>
+            <!-- COMMENT COUNT -->
+            <strong class="col-lg-2 d-flex justify-content-center">
+                <div class="text-details"><i class="far fa-comments"></i>
+                    <!-- Our total_comments variable goes before the closing strong tag -->
+                    &nbsp;{{ post.comments.count }}
+                </div>
+            </strong>
+
+            <!-- POST EDIT -->
+            {% if user.is_authenticated and user == post.author %}
+            <strong class="col-lg-2 d-flex justify-content-center">
+                <a href="{% url 'post_edit' post.id %}">
+                    <i class="far fa-edit"></i>&nbsp;EDIT
+                </a>
+            </strong>
+            {% endif %}
         </div>
     </div>
 </div>
 
-
 <!-- COMMENTS LIST -->
 <div class="container mb-4">
     <div class="row m-0">
-        <!-- COMMENT TITLE -->
+
+        <!-- COMMENT COUNTER TITLE -->
         <div class="comment-title mb-4 mt-4">
             {% if post.comments.count == 0 %}
-            <h3> There are no comments yet ;(</h3>
+            <h3> There are no comments yet</h3>
             {% else  %}
             <h3> {{ post.comments.count }} Comments</h3>
-
             {% endif %}
         </div>
+
+        <!-- COMMENT LIST -->
         <div class="col-xl-8 mb-3">
             {% for comment in comments %}
             <div class="comments container-detail p-4 mb-3">
-                <p class="font-weight-bold">
-                    <h2>{{ comment.name }}</h2>
-                    <span class=" text-details font-weight-normal">
-                        {{ comment.created|naturaltime|upper }}
-                    </span>
-                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4>{{ comment.name }}</h4>
+                    <div class="text-details card-text">{{ comment.created|naturalday|upper }}</div>
+                </div>
                 <div>{{ comment.body | linebreaks }}</div>
 
-                <!-- <p class="m-0 d-flex justify-content-end">EDIT | <a
-                        href="{% url 'comment_delete' comment.id %}">DELETE</a> | STAR</p> -->
-                <!-- Button trigger modal -->
-
+                <!-- COMMENT OPTIONAL BUTTONS -->
                 {% if user.is_authenticated and user.username == comment.name %}
                 <hr>
-                <button type="button" class="btn-comment" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    DELETE
-                </button>
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Hey {{ user.username }}!</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                Are you sure you want to delete your comment?
-                            </div>
-                            <div class="modal-footer">
-                                <form method="POST" action="{% url 'comment_delete' comment.id %}">
-                                    {% csrf_token %}
-                                    <input type="submit" class="btn" value="Yes">
+                <div class="d-flex flex-row-reverse">
 
-                                </form>
-                                <form action="{% url 'post_detail' post.slug %}">
-                                    {% csrf_token %}
-                                    <input type="submit" class="btn" value="No, take me back">
-                                </form>
-                                <!-- <a href="{% url 'comment_delete' comment.id %}" class="btn btn-secondary" data-bs-dismiss="modal">Delete</a> -->
+                    <!-- DELETE COMMENT -->
+                    <button type="button" class="btn-comment" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        DELETE
+                    </button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Hey {{ user.username }}!</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete your comment?
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="{% url 'post_detail' post.slug %}">
+                                        {% csrf_token %}
+                                        <input type="submit" class="btn btn-negative" value="No, take me back">
+                                    </form>
+                                    <form method="POST" action="{% url 'comment_delete' comment.id %}">
+                                        {% csrf_token %}
+                                        <input type="submit" class="btn" value="Yes">
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- EDIT COMMENT -->
+                    <form id="edit_comment" class="form-inline">
+                        {% csrf_token %}
+                        <input type="submit" class="btn-comment" value="EDIT">
+                    </form>
                 </div>
-                <!-- EDIT COMMENT -->
-                <form id="edit_comment" class="form-inline">
-                    {% csrf_token %}
-                    <input type="submit" class="btn-comment" value="EDIT">
-                </form>
-                {% endif %}
             </div>
-            {% endfor %}
+            {% endif %}
         </div>
+        {% endfor %}
     </div>
+</div>
 </div>
 
 <!-- COMMENT BOX -->
@@ -189,12 +183,12 @@
 
             {% if user.is_authenticated %}
 
-            <h3 class="mt-4">Contribute to the conversation:</h3>
+            <h3 class="mt-4">Contribute to the conversation</h3>
             <p>Posting as: {{ user.username }}</p>
             <form method="post" class="uniForm" style="margin-top: 1.3em;">
                 {{ comment_form | crispy }}
                 {% csrf_token %}
-                <div class="d-grid col-6 mx-auto">
+                <div class="d-grid col-6 mx-auto pt-4 pb-4">
                     <button type="submit" class="btn btn-lg">Submit</button>
                 </div>
             </form>
@@ -206,8 +200,7 @@
     </div>
 </div>
 
-
-
+<!-- SUGGESTED POSTS LIST -->
 <div class="container pt-4">
     <div class="mt-4 mb-4">
         <h2 class="d-flex justify-content-center">You may also like...</h2>
@@ -253,65 +246,7 @@
         {% endif %}
         {% endfor %}
     </div>
-
+    
 </div>
-
-
-<!-- <div class="container mb-4 mt-4">
-    <div class="row gx-5">
-        <h3 class="d-flex justify-content-center">Similar posts</h3>
-        
-        {% for post in similar_posts %}
-        <div class="col-xl-2 col-md-3 col-sm-4 p-4 container-detail">
-            <div class="image" style="width: 15rem;">
-                {% if "placeholder" in post.featured_image.url %}
-                <img src="{% static 'placeholder.jpg' %}">
-                {% else %}
-                <img src=" {{ post.featured_image.url }}">
-                {% endif %}
-            </div>
-            <div>
-                <h3>
-                    <a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a>
-                </h3>
-            </div>
-        </div>
-        {% empty %}
-        <h2>There are no similar posts yet</h2>
-        {% endfor %}
-    </div>
-</div> -->
-
-<!-- {% block javascript %}
-<script>
-    /*
-        On submiting the form, send the POST ajax
-        request to server and after successfull submission
-        display the object.
-    */
-    $("#edit-comment").submit(function (e) {
-        // preventing from page reload and default actions
-        e.preventDefault();
-        // serialize the data for sending the form data.
-        var serializedData = $(this).serialize();
-        // make POST ajax call
-        $.ajax({
-            type: 'POST',
-            url: "{% url 'comment_edit' comment.id %}",
-            data: serializedData,
-            success: function (response) {
-                // on successfull creating object
-                // 1. clear the form.
-                $("#edit-comment").save()
-            },
-            error: function (response) {
-                // alert the error if any error occured
-                alert(response["responseJSON"]["error"]);
-            }
-        })
-    })
-</script>
-{% endblock javascript %} -->
-
 
 {% endblock content %}

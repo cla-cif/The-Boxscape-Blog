@@ -21,9 +21,9 @@ body {
     font-family: var(--font-default), sans-serif;
 }
 
-.title {
+/* .title {
     font-family: var(--font-title);
-}
+} */
 
 img:hover {
     opacity: .8;
@@ -66,11 +66,19 @@ ul {
     color: var(--white-pure);
 }
 
+.btn-negative {
+    background-color: var(--green-dark);
+    color:var(--white-pure);
+    border: none;
+}
+.btn-negative:hover{
+    opacity: .8;
+}
+
 /* sidebar-box */
 .sidebar-box {
     background-color: var(--white-pure);
 }
-
 
 
 /* card elements */
@@ -115,6 +123,7 @@ ul {
     padding: 40px 120px;
     word-wrap: break-word;
     font-size: 17px;
+    font-weight: 200;
 }
 
 .title-detail {

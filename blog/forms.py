@@ -7,6 +7,11 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('body',)
 
+        widgets = {
+            'body': forms.Textarea(attrs={'class': 'form-control',
+                                          'rows': 4}),
+        }
+
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -33,9 +38,3 @@ class EditPostForm(forms.ModelForm):
             'excerpt': forms.Textarea(attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
         }
-
-
-class EmailPostForm(forms.Form):
-    name = forms.CharField(max_length=25)
-    to = forms.EmailField()
-    comments = forms.CharField(required=False, widget=forms.Textarea)

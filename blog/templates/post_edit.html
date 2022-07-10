@@ -6,6 +6,8 @@
 
 
 {% block content %}
+
+<!-- ALERT MESSAGE -->
 <div class="container mt-4 mb-4">
     <div class="row m-0">
         <div class="col-xl-8">
@@ -13,25 +15,33 @@
             <div class="alert alert-success" role="alert">
                 Your post is awaiting approval
                 <script type="text/javascript">
-                    setTimeout(function() {
+                    setTimeout(function () {
                         window.location.href = "{% url 'home' %}";
                     }, 2500);
                 </script>
             </div>
             {% else %}
 
+<!-- CREATE POST FORM -->
             {% if user.is_authenticated %}
-
-            <h3 class="mt-4">Edit your post:</h3>
-            <p>Posting as: {{ user.username }}</p>
+            <div class="d-flex justify-content-end">
+                <form action="{% url 'post_detail' post.slug %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-negative btn-lg">Discard</button>
+                </form>
+            </div>
+            <h3 class="mt-4 text-center">Edit your post</h3>
+            <p>Editing as: {{ user.username }}</p>
             <div class="form-group">
                 <form method="post" action="{% url 'post_edit' post.id %}" class="uniForm" style="margin-top: 1.3em;">
                     <!-- {{ post_form | crispy }} -->
                     {% csrf_token %}
                     {{form.as_p}}
-                    <div class="d-grid col-6 mx-auto">
+                    <div class="d-grid col-6 mx-auto pt-4 pb-4">
                         <button type="submit" class="btn btn-lg">Submit</button>
                     </div>
+                </form>
+
             </div>
             {% else %}
             <h3>You must login or register before editing.</h3>

@@ -7,9 +7,8 @@
 {% block content %}
 <div class="wrapper d-flex align-items-stretch">
 
-    <!-- Blog Entries Column -->
+    <!-- MAIN / POSTS LIST -->
     <div class="container-fluid pt-4 pb-4">
-        <!--class="col-12 mt-3 left"-->
         <div class="row flex-shrink-0 m-0">
             {% for post in post_list %}
             <div class="col-xl-4 col-md-12">
@@ -37,8 +36,9 @@
                             <p class="card-text">{{ post.excerpt|truncatechars:160 }}</p>
                         </a>
                         <hr />
-                        <p class="card-text text-details d-flex"> BY&nbsp; <a class="author"
-                                href="{% url 'author_posts' post.author.id %}">{{ post.author|upper}}</a> &nbsp;&nbsp;|&nbsp&nbsp;
+                        <p class="card-text text-details d-flex p-0 justify-content-center"> BY&nbsp; <a class="author"
+                                href="{% url 'author_posts' post.author.id %}">{{ post.author|upper}}</a>
+                            &nbsp;&nbsp;|&nbsp&nbsp;
                             </span>{{ post.created|naturalday|upper }} &nbsp;&nbsp;|&nbsp;&nbsp; </span>
                             <strong class="text-details"><i class="far fa-comments"></i>
                                 {{ post.comments.count }}</strong>
@@ -55,23 +55,31 @@
         </div>
     </div>
 
+    <!-- SIDEBAR -->
     <div class="container sidebar" style="width:25%">
-
         <div class="col pt-4">
+
+            <!-- total posts counter -->
             <div class="row m-0">
                 <h4 class="pb-4">Total posts: {% total_posts %}</h4>
-                <div class="sidebar-box m-0 p-4"><p class="text-details">You're welcome to post your ideas and be respectful of others' opinion, identity, preferences, religion, culture.</p>
+                <div class="sidebar-box m-0 p-4">
+                    <p class="text-details">You're welcome to post your ideas and be respectful of others' opinion,
+                        identity, preferences, religion, culture.</p>
                     <a href="{% url 'about' %}">
                         <p class="text-details text-center text-decoration-underline">Read about our values</p>
                     </a>
-                    <div class="col p-0 d-flex justify-content-center"><a href="{% url 'post_create' %}"><button class="btn btn-lg"
-                                type="submit">Create a post</button></a></div>
+                    <div class="col p-0 d-flex justify-content-center"><a href="{% url 'post_create' %}"><button
+                                class="btn btn-lg" type="submit">Create a post</button></a></div>
                 </div>
             </div>
+
+            <!-- latest posts list -->
             <div class="row m-0">
                 <h4 class="pb-4 pt-4">Latest:</h4>
                 <div class="sidebar-box m-0 p-0">{% show_latest_posts 3 %}</div>
             </div>
+
+            <!-- most commented posts -->
             <div class="row m-0">
                 <h4 class="pb-4 pt-4">Trending posts:</h4>
                 <div class="sidebar-box p-0">
@@ -85,26 +93,28 @@
                     </ul>
                 </div>
             </div>
+
+            <!-- archive list -->
             <div class="row m-0">
                 <h4 class="pb-4 pt-4">Archive:</h4>
                 <div class="sidebar-box p-0">
 
                 </div>
             </div>
+
         </div>
-
     </div>
-    <!-- end sidebar -->
-
 </div>
+
+<!-- PAGINATION -->
 {% if is_paginated %}
 <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center">
         {% if page_obj.has_previous %}
-        <li><a href="?page={{ page_obj.previous_page_number }}" class="btn"> PREV </a></li>
+        <li><a href="?page={{ page_obj.previous_page_number }}" class="btn btn-negative"> PREV </a></li>
         {% endif %}
         {% if page_obj.has_next %}
-        <li><a href="?page={{ page_obj.next_page_number }}" class="btn"> NEXT</a></li>
+        <li><a href="?page={{ page_obj.next_page_number }}" class="btn btn-negative"> NEXT </a></li>
         {% endif %}
     </ul>
 </nav>
