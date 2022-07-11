@@ -12,7 +12,7 @@ from cloudinary.models import CloudinaryField
 from cloudinary.forms import cl_init_js_callbacks
 from django.contrib.auth.models import User
 from .models import Post, Comment
-from .forms import CommentForm, PostForm, EditPostForm
+from .forms import CommentForm, PostForm, EditPostForm, EditCommentForm
 
 
 class AboutView(TemplateView):
@@ -160,6 +160,21 @@ def post_edit(request, id):
     return render(request, "post_edit.html", context)
 
 
+def comment_edit(request, id):
+    comment = get_object_or_404(Comment, pk=id)
+    edit_form = EditCommentForm(request.POST or None, instance=comment)
+    if request.method == 'GET':
+        context = {'edit_form': edit_form, 'comment': comment}
+        print(edit_form)
+        return render(request, 'detail.html', context)
+    if request.method == 'POST':
+        comment = get_object_or_404(Comment, pk=id)
+        if edit_form.is_valid():
+            edit_form.save()
+        context = {'edit_form': edit_form, 'comment': comment}
+        return render(request, 'detail.html', context)
+        
+    
 def comment_delete(request, id):
     if request.method == 'POST':
         comment = get_object_or_404(Comment, pk=id)

@@ -128,10 +128,10 @@
                 <div class="d-flex flex-row-reverse">
 
                     <!-- DELETE COMMENT -->
-                    <button type="button" class="btn-comment" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn-comment" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                         DELETE
                     </button>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -158,10 +158,41 @@
                     </div>
 
                     <!-- EDIT COMMENT -->
-                    <form id="edit_comment" class="form-inline">
-                        {% csrf_token %}
-                        <input type="submit" class="btn-comment" value="EDIT">
-                    </form>
+                    <a href="{% url 'comment_edit' comment.id %}" class="btn-comment" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        EDIT
+                    </a>
+                    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Hey {{ user.username }}!</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div> -->
+                                <div class="modal-body">
+                                    <form action="{% url 'comment_edit' comment.id %}" method="POST">
+                                        {% csrf_token %}
+                                        {{edit_form.as_p}}
+                                        <!-- {{comment.body}} -->
+                                    
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="{% url 'post_detail' post.slug %}">
+                                        {% csrf_token %}
+                                        <input type="submit" class="btn btn-negative" value="No, take me back">
+                                    </form>
+                                    <form method="POST" action="{% url 'comment_edit' comment.id %}">
+                                        {% csrf_token %}
+                                        {{edit_form.as_p}}
+                                        <input type="submit" class="btn" value="Submit changes">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             {% endif %}
@@ -246,7 +277,7 @@
         {% endif %}
         {% endfor %}
     </div>
-    
+
 </div>
 
 {% endblock content %}

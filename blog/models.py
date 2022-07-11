@@ -19,6 +19,7 @@ class Post(models.Model):
         User, on_delete=models.CASCADE, related_name="blog_posts")
     tags = TaggableManager()
     featured_image = CloudinaryField('image', default='placeholder')
+    image = models.ImageField(upload_to='images/', blank=True)
     excerpt = models.TextField(blank=True)
     body = models.TextField()
     updated = models.DateTimeField(auto_now=True)

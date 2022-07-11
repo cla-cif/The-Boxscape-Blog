@@ -21,7 +21,7 @@ class PostForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'tags': forms.TextInput(attrs={'class': 'form-control'}),
-            'featured_image': forms.FileInput(attrs={'accept': '.jpg,.jpeg'}),
+            'featured_image': forms.FileInput(attrs={'accept': '.jpg,.jpeg,.WebP'}),
             'excerpt': forms.Textarea(attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
         }
@@ -37,4 +37,15 @@ class EditPostForm(forms.ModelForm):
             'featured_image': forms.FileInput(),
             'excerpt': forms.Textarea(attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
+        }
+
+
+class EditCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('body',)
+
+        widgets = {
+            'body': forms.Textarea(attrs={'class': 'form-control',
+                                          'rows': 4}),
         }
