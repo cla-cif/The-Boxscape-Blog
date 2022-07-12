@@ -130,7 +130,7 @@ def post_create(request):
             post.slug = '-'.join(form.cleaned_data.get('title').split(' '))
             post.title = form.cleaned_data.get('title')
             tags = form.cleaned_data.get('tags')
-            post.image = cloudinary.uploader.upload(request.FILES['featured_image'])
+            # post.image = cloudinary.uploader.upload(request.FILES['featured_image'])
             post.excerpt = form.cleaned_data.get('excerpt')
             post.body = form.cleaned_data.get('body')
             post.save()
