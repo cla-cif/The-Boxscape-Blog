@@ -125,7 +125,7 @@ def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            post = Post()
+            post = form.save()
             post.author = request.user
             post.slug = '-'.join(form.cleaned_data.get('title').split(' '))
             post.title = form.cleaned_data.get('title')
