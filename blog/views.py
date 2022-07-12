@@ -204,3 +204,10 @@ class PostDislike(View):
             post.dislikes.add(request.user)
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+
+class PostCreateView(CreateView):
+    model = Post
+    fields = ['title', 'featured_image', 'excerpt', 'body']
+    template_name = "post_create.html"
