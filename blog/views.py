@@ -159,22 +159,45 @@ def post_edit(request, id):
         context = {'form': form, 'edited': True, 'post': post}
     return render(request, "post_edit.html", context)
 
+# COMMENT EDIT 
+# def comment_edit(request, id):
+#     comment = get_object_or_404(Comment, pk=id)
+#     edit_form = EditCommentForm(request.POST or None, instance=comment)
+#     if request.method == 'GET':
+#         context = {'edit_form': edit_form, 'comment': comment}
+#         print(edit_form)
+#         return render(request, 'detail.html', context)
+#     if request.method == 'POST':
+#         comment = get_object_or_404(Comment, pk=id)
+#         if edit_form.is_valid():
+#             edit_form.save()
+#         context = {'edit_form': edit_form, 'comment': comment}
+#         return render(request, 'detail.html', context)
 
+
+# COMMENT EDIT WITH AJAX
 def comment_edit(request, id):
-    comment = get_object_or_404(Comment, pk=id)
-    edit_form = EditCommentForm(request.POST or None, instance=comment)
-    if request.method == 'GET':
-        context = {'edit_form': edit_form, 'comment': comment}
-        print(edit_form)
-        return render(request, 'detail.html', context)
-    if request.method == 'POST':
+
+    # request should be ajax and method should be POST.
+    if request.is_ajax and request.method == "POST":
         comment = get_object_or_404(Comment, pk=id)
-        if edit_form.is_valid():
-            edit_form.save()
-        context = {'edit_form': edit_form, 'comment': comment}
-        return render(request, 'detail.html', context)
-        
-    
+        # get the form data
+        form = CommentForm(request.POST or None, instance=comment)
+        # save the data and after fetch the object in instance
+        if form.is_valid():
+            instance = form.save()
+            # serialize in new friend object in json
+            comment = serializers.serialize('json', [instance, ])
+            print(comment)
+            # send to client side.
+            return JsonResponse({"instance": comment}, status=200)
+        else:
+            # some form errors occured.
+            return JsonResponse({"error": form.errors}, status=400)
+            # some error occured
+    return JsonResponse({"error": ""}, status=400)
+
+   
 def comment_delete(request, id):
     if request.method == 'POST':
         comment = get_object_or_404(Comment, pk=id)

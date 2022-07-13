@@ -158,25 +158,28 @@
                     </div>
 
                     <!-- EDIT COMMENT -->
-                    <a href="{% url 'comment_edit' comment.id %}" class="btn-comment" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                    <button class="btn-comment" type="submit" id="edit-comment">
                         EDIT
-                    </a>
-                    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    </button>
+                    <!-- <a href="{% url 'comment_edit' comment.id %}" class="btn-comment" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        EDIT
+                    </a> -->
+                    <!-- <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
-                            <div class="modal-content">
+                            <div class="modal-content"> -->
                                 <!-- <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Hey {{ user.username }}!</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div> -->
-                                <div class="modal-body">
+                                <!-- <div class="modal-body">
                                     <form action="{% url 'comment_edit' comment.id %}" method="POST">
                                         {% csrf_token %}
-                                        {{edit_form.as_p}}
+                                        {{edit_form.as_p}} -->
                                         <!-- {{comment.body}} -->
                                     
-                                    </form>
+                                    <!-- </form>
                                 </div>
                                 <div class="modal-footer">
                                     <form action="{% url 'post_detail' post.slug %}">
@@ -190,8 +193,8 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </div> -->
+                    <!-- </div> -->
 
                 </div>
             </div>
@@ -279,5 +282,36 @@
     </div>
 
 </div>
+
+{% block javascript %}
+<script>
+    /*
+        On submiting the form, send the POST ajax
+        request to server and after successfull submission
+        display the object.
+    */
+    $("#edit-comment").onclick(function (e) {
+        // preventing from page reload and default actions
+        e.preventDefault();
+        // serialize the data for sending the form data.
+        var serializedData = $(this).serialize();
+        // make POST ajax call
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'comment_edit' 1 %}",
+            data: serializedData,
+            success: function (response) {
+                // on successfull creating object
+                // 1. clear the form.
+                $("#edit-comment").save()
+            },
+            error: function (response) {
+                // alert the error if any error occured
+                alert(response["responseJSON"]["error"]);
+            }
+        })
+    })
+</script>
+{% endblock javascript %}
 
 {% endblock content %}
