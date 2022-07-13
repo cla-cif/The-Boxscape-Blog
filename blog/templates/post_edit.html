@@ -22,7 +22,7 @@
             </div>
             {% else %}
 
-<!-- CREATE POST FORM -->
+<!-- EDIT POST FORM -->
             {% if user.is_authenticated %}
             <div class="d-flex justify-content-end">
                 <form action="{% url 'post_detail' post.slug %}">

@@ -30,11 +30,11 @@ class PostForm(forms.ModelForm):
 class EditPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'featured_image', 'excerpt', 'body')
+        fields = ('title', 'excerpt', 'body') # 'featured_image',
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'featured_image': forms.FileInput(),
+            # 'featured_image': forms.FileInput(),
             'excerpt': forms.Textarea(attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
         }
