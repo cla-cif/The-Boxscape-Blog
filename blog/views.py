@@ -176,25 +176,37 @@ def post_edit(request, id):
 
 
 # COMMENT EDIT WITH AJAX
-def comment_edit(request, id):
+# def comment_edit(request, id):
 
-    # request should be ajax and method should be POST.
+#     # request should be ajax and method should be POST.
+#     if request.is_ajax and request.method == "POST":
+#         comment = get_object_or_404(Comment, pk=id)
+#         # get the form data
+#         form = CommentForm(request.POST or None, instance=comment)
+#         # save the data and after fetch the object in instance
+#         if form.is_valid():
+#             instance = form.save()
+#             # serialize in new friend object in json
+#             comment = serializers.serialize('json', [instance, ])
+#             print(comment)
+#             # send to client side.
+#             return JsonResponse({"instance": comment}, status=200)
+#         else:
+#             # some form errors occured.
+#             return JsonResponse({"error": form.errors}, status=400)
+#             # some error occured
+#     return JsonResponse({"error": ""}, status=400)
+
+def comment_edit(request, id):
     if request.is_ajax and request.method == "POST":
         comment = get_object_or_404(Comment, pk=id)
-        # get the form data
-        form = CommentForm(request.POST or None, instance=comment)
-        # save the data and after fetch the object in instance
+        form = CommentForm(request.POST)
         if form.is_valid():
             instance = form.save()
-            # serialize in new friend object in json
-            comment = serializers.serialize('json', [instance, ])
-            print(comment)
-            # send to client side.
-            return JsonResponse({"instance": comment}, status=200)
+            ser_instance = serializers.serialize('json', [instance, ])
+            return JsonResponse({"instance": ser_instance, "comment": comment}, status=200)
         else:
-            # some form errors occured.
             return JsonResponse({"error": form.errors}, status=400)
-            # some error occured
     return JsonResponse({"error": ""}, status=400)
 
    

@@ -111,6 +111,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'boxscape.wsgi.application'
 
+# TAGGIT_TAGS_FROM_STRING = 'appname.utils.comma_splitter'
+# TAGGIT_STRING_FROM_TAGS = 'appname.utils.comma_joiner'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

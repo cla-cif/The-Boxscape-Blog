@@ -27,6 +27,11 @@ def total_posts():
     return Post.objects.filter(status='pub').count()
 
 
+@register.simple_tag()
+def total_users():
+    return Post.author.count()
+
+
 @register.inclusion_tag('latest_posts.html')
 def show_latest_posts(count=5):
     latest_posts = Post.objects.filter(status='pub').order_by('-published')[:count]
