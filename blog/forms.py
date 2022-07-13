@@ -16,12 +16,12 @@ class CommentForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'tags', 'featured_image', 'excerpt', 'body')
+        fields = ('title', 'tags', 'excerpt', 'body') # 'featured_image',
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'tags': forms.TextInput(attrs={'class': 'form-control'}),
-            'featured_image': forms.FileInput(attrs={'accept': '.jpg,.jpeg,.WebP'}),
+            # 'featured_image': forms.FileInput(attrs={'accept': '.jpg,.jpeg,.WebP'}),
             'excerpt': forms.Textarea(attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
         }

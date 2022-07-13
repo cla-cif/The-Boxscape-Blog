@@ -125,7 +125,7 @@ def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            post = form.save()
+            post = Post()
             post.author = request.user
             post.slug = '-'.join(form.cleaned_data.get('title').split(' '))
             post.title = form.cleaned_data.get('title')
@@ -207,7 +207,7 @@ class PostDislike(View):
 
 
 
-class PostCreateView(CreateView):
-    model = Post
-    fields = ['title', 'featured_image', 'excerpt', 'body']
-    template_name = "post_create.html"
+# class PostCreateView(CreateView):
+#     model = Post
+#     fields = ['title', 'featured_image', 'excerpt', 'body']
+#     template_name = "post_create.html"
