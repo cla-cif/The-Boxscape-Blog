@@ -1,4 +1,5 @@
 from django import template
+from django.contrib.auth.models import User
 from django.db.models import Count, Case, When, Value
 from ..models import Post, Comment
 
@@ -29,7 +30,7 @@ def total_posts():
 
 @register.simple_tag()
 def total_users():
-    return Post.author.count()
+    return User.objects.count()
 
 
 @register.inclusion_tag('latest_posts.html')
