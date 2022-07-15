@@ -198,18 +198,24 @@ def post_edit(request, id):
 #     return JsonResponse({"error": ""}, status=400)
 
 def comment_edit(request, id):
+    print(id)
+    comment = get_object_or_404(Comment, pk=id)
+    form = EditCommentForm(request.POST or None, instance=comment)
+    context = {'comment':comment, 'comment_edit_form':form}
+
     if request.is_ajax and request.method == "POST":
         comment = get_object_or_404(Comment, pk=id)
-        form = CommentForm(request.POST)
+        form = EditCommentForm(request.POST)
         if form.is_valid():
             instance = form.save()
             ser_instance = serializers.serialize('json', [instance, ])
             return JsonResponse({"instance": ser_instance, "comment": comment}, status=200)
         else:
             return JsonResponse({"error": form.errors}, status=400)
-    return JsonResponse({"error": ""}, status=400)
-
+    # return JsonResponse({"error": ""}, status=400)
+    return render(request, 'detail.html', context)
    
+
 def comment_delete(request, id):
     if request.method == 'POST':
         comment = get_object_or_404(Comment, pk=id)
