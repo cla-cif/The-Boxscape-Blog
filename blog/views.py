@@ -1,15 +1,10 @@
-from django.shortcuts import render, get_object_or_404, reverse, redirect
+from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect, JsonResponse
-from django.core import serializers
-from django.core.mail import send_mail
-from django.views.generic import TemplateView, CreateView, DeleteView
+from django.http import HttpResponseRedirect
+from django.views.generic import TemplateView
 from taggit.models import Tag
 from django.db.models import Count
-import cloudinary
-from cloudinary.models import CloudinaryField
-from cloudinary.forms import cl_init_js_callbacks
 from django.contrib.auth.models import User
 from .models import Post, Comment
 from .forms import CommentForm, PostForm, EditPostForm, EditCommentForm
@@ -154,7 +149,6 @@ def post_create(request):
             post.slug = '-'.join(form.cleaned_data.get('title').split(' '))
             post.title = form.cleaned_data.get('title')
             tags = form.cleaned_data.get('tags')
-            # post.image = cloudinary.uploader.upload(request.FILES['featured_image'])
             post.excerpt = form.cleaned_data.get('excerpt')
             post.body = form.cleaned_data.get('body')
             post.save()
@@ -165,6 +159,7 @@ def post_create(request):
         'form': form,
         'created': True
     })
+
 
 # POST EDIT
 def post_edit(request, id):
@@ -182,6 +177,7 @@ def post_edit(request, id):
             form.save()
         context = {'form': form, 'edited': True, 'post': post}
     return render(request, "post_edit.html", context)
+
 
 # COMMENT EDIT
 def comment_edit(request, id):
