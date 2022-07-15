@@ -158,21 +158,11 @@
                     </div>
 
                     <!-- EDIT COMMENT -->
-
-                    <button class="btn-comment" type="submit" id="edit-comment">
-                        EDIT
+                    <button class="btn-comment">
+                        <a href="{% url 'comment_edit' comment.id %}">
+                            EDIT
+                        </a>
                     </button>
-                    <form method="POST" action="{% url 'comment_edit' 49 %}" class="uniForm" id="edit-comment-form" style="margin-top: 1.3em;">
-        
-                        {% csrf_token %}
-                        {{ comment_edit_form.as_p }}
-                        <div class="d-grid col-6 mx-auto pt-4 pb-4">
-                            <!-- <button type="submit" class="btn btn-lg">Submit</button> -->
-                            <!-- <button class="btn-comment" type="submit" id="edit-comment">
-                                EDIT2
-                            </button> -->
-                        </div>
-                    </form>
 
                 </div>
             </div>
@@ -260,39 +250,5 @@
     </div>
 
 </div>
-
-{% block javascript %}
-<script>
-    /*
-        On submiting the form, send the POST ajax
-        request to server and after successfull submission
-        display the object.
-    */
-    $("#edit-comment").click(function (e) {
-        console.log('test')
-        // preventing from page reload and default actions
-        e.preventDefault();
-        // serialize the data for sending the form data.
-        var serializedData = $("#edit-comment-form").serialize();
-        console.log(serializedData) 
-        // make POST ajax call
-        $.ajax({
-            type: 'POST',
-            url: "{% url 'comment_edit' 101 %}",
-            data: serializedData,
-            success: function (response) {
-                // on successfull creating object
-                // 1. clear the form.
-                $("#edit-comment-form").save()
-            },
-            error: function (response) {
-                // alert the error if any error occured
-                alert(response["responseJSON"]["error"]);
-            }
-        });
-
-    })
-</script>
-{% endblock javascript %}
 
 {% endblock content %}

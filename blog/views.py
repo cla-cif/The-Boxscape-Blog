@@ -92,8 +92,8 @@ class PostDetail(View):
         # create comment
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
-            comment_form.instance.email = request.user.email
-            comment_form.instance.name = request.user.username
+            # comment_form.instance.email = request.user.email
+            # comment_form.instance.name = request.user.username
             comment = comment_form.save(commit=False)
             comment.post = post
             comment.save()
@@ -113,6 +113,30 @@ class PostDetail(View):
                 "similar_posts": similar_posts
             },
         )
+
+
+class PostLike(View):
+
+    def post(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
+        if post.likes.filter(id=request.user.id).exists():
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
+
+        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+class PostDislike(View):
+
+    def post(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
+        if post.dislikes.filter(id=request.user.id).exists():
+            post.dislikes.remove(request.user)
+        else:
+            post.dislikes.add(request.user)
+
+        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
 def post_create(request):
@@ -142,7 +166,7 @@ def post_create(request):
         'created': True
     })
 
-
+# POST EDIT
 def post_edit(request, id):
     post = get_object_or_404(Post, pk=id)
     form = EditPostForm(request.POST or None, instance=post)
@@ -159,96 +183,25 @@ def post_edit(request, id):
         context = {'form': form, 'edited': True, 'post': post}
     return render(request, "post_edit.html", context)
 
-# COMMENT EDIT 
-# def comment_edit(request, id):
-#     comment = get_object_or_404(Comment, pk=id)
-#     edit_form = EditCommentForm(request.POST or None, instance=comment)
-#     if request.method == 'GET':
-#         context = {'edit_form': edit_form, 'comment': comment}
-#         print(edit_form)
-#         return render(request, 'detail.html', context)
-#     if request.method == 'POST':
-#         comment = get_object_or_404(Comment, pk=id)
-#         if edit_form.is_valid():
-#             edit_form.save()
-#         context = {'edit_form': edit_form, 'comment': comment}
-#         return render(request, 'detail.html', context)
-
-
-# COMMENT EDIT WITH AJAX
-# def comment_edit(request, id):
-
-#     # request should be ajax and method should be POST.
-#     if request.is_ajax and request.method == "POST":
-#         comment = get_object_or_404(Comment, pk=id)
-#         # get the form data
-#         form = CommentForm(request.POST or None, instance=comment)
-#         # save the data and after fetch the object in instance
-#         if form.is_valid():
-#             instance = form.save()
-#             # serialize in new friend object in json
-#             comment = serializers.serialize('json', [instance, ])
-#             print(comment)
-#             # send to client side.
-#             return JsonResponse({"instance": comment}, status=200)
-#         else:
-#             # some form errors occured.
-#             return JsonResponse({"error": form.errors}, status=400)
-#             # some error occured
-#     return JsonResponse({"error": ""}, status=400)
-
+# COMMENT EDIT
 def comment_edit(request, id):
-    print(id)
     comment = get_object_or_404(Comment, pk=id)
     form = EditCommentForm(request.POST or None, instance=comment)
-    context = {'comment':comment, 'comment_edit_form':form}
-
-    if request.is_ajax and request.method == "POST":
-        comment = get_object_or_404(Comment, pk=id)
-        form = EditCommentForm(request.POST)
+    context = {'form': form, 'edited': False, 'comment': comment}
+    if request.method == 'GET':
+        return render(
+            request,
+            "comment_edit.html", context)
+    if request.method == 'POST':
+        form = CommentForm(request.POST or None, instance=comment)
         if form.is_valid():
-            instance = form.save()
-            ser_instance = serializers.serialize('json', [instance, ])
-            return JsonResponse({"instance": ser_instance, "comment": comment}, status=200)
-        else:
-            return JsonResponse({"error": form.errors}, status=400)
-    # return JsonResponse({"error": ""}, status=400)
-    return render(request, 'detail.html', context)
-   
+            form.save(commit=False)
+        context = {'form': form, 'edited': True, 'comment': comment}
+    return render(request, "comment_edit.html", context)
+
 
 def comment_delete(request, id):
     if request.method == 'POST':
         comment = get_object_or_404(Comment, pk=id)
         comment.delete()
     return HttpResponseRedirect('post_detail')
-
-
-class PostLike(View):
-
-    def post(self, request, slug, *args, **kwargs):
-        post = get_object_or_404(Post, slug=slug)
-        if post.likes.filter(id=request.user.id).exists():
-            post.likes.remove(request.user)
-        else:
-            post.likes.add(request.user)
-
-        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
-
-
-class PostDislike(View):
-
-    def post(self, request, slug, *args, **kwargs):
-        post = get_object_or_404(Post, slug=slug)
-        if post.dislikes.filter(id=request.user.id).exists():
-            post.dislikes.remove(request.user)
-        else:
-            post.dislikes.add(request.user)
-
-        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
-
-
-
-# class PostCreateView(CreateView):
-#     model = Post
-#     fields = ['title', 'featured_image', 'excerpt', 'body']
-#     template_name = "post_create.html"
