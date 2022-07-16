@@ -88,7 +88,7 @@ class PostDetail(View):
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             # comment_form.instance.email = request.user.email
-            # comment_form.instance.name = request.user.username
+            comment_form.instance.name = request.user.username
             comment = comment_form.save(commit=False)
             comment.post = post
             comment.save()
@@ -191,13 +191,27 @@ def comment_edit(request, id):
     if request.method == 'POST':
         form = CommentForm(request.POST or None, instance=comment)
         if form.is_valid():
-            form.save(commit=False)
+            form.save()
         context = {'form': form, 'edited': True, 'comment': comment}
     return render(request, "comment_edit.html", context)
 
+# COMMENT DELETE
+# def comment_delete(request, id):
+#     if request.method == 'POST':
+#         comment = get_object_or_404(Comment, pk=id)
+#         comment.delete()
+#     return HttpResponseRedirect('post_detail')
+
 
 def comment_delete(request, id):
-    if request.method == 'POST':
-        comment = get_object_or_404(Comment, pk=id)
-        comment.delete()
-    return HttpResponseRedirect('post_detail')
+    comment = get_object_or_404(Comment, pk=id)
+    
+    if request.method == "POST":
+        perform_delete(request, comment)
+        return redirect("your_view", comment.content_object.id)
+    else:
+        return render_to_response('comments/delete.html',
+                                    {'comment': comment, "next": next},
+                                      RequestContext(request))
+    
+        
