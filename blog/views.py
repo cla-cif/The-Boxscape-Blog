@@ -167,6 +167,7 @@ def post_edit(request, id):
     form = EditPostForm(request.POST or None, instance=post)
     context = {'form': form, 'edited': False, 'post': post}
     if request.method == 'GET':
+
         return render(
             request,
             "post_edit.html", context)
@@ -191,6 +192,7 @@ def comment_edit(request, id):
     if request.method == 'POST':
         form = CommentForm(request.POST or None, instance=comment)
         if form.is_valid():
+            comment.approved = False
             form.save()
         context = {'form': form, 'edited': True, 'comment': comment}
     return render(request, "comment_edit.html", context)

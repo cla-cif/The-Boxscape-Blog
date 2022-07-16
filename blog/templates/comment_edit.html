@@ -12,32 +12,35 @@
     <div class="row m-0">
         <div class="col-xl-8">
             {% if edited %}
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-success alert-dismissable" role="alert">
                 Your comment is awaiting approval
-                <script type="text/javascript">
-                    $(".alert-success").delay(5000).slideUp(500, function () {
-                        $(this).alert('close');
-                    });
-
-                    setTimeout(function () {
-                        window.location.href = "{% url 'home' %}";
-                    }, 2500);
-                </script>
+                <!-- <button type="button" class="btn-close d-inline-flex align-items-end" data-bs-dismiss="alert"
+                    aria-label="close"></button> -->
             </div>
+
+            <script>
+                // setTimeout(function () {
+                //     window.location.href = "{% url 'home' %}";
+                // }, 2500);
+                setTimeout(function goBack() {
+                    history.back();
+                }, 3000);
+            </script>
+
             {% else %}
 
             <!-- EDIT POST FORM -->
             {% if user.is_authenticated %}
             <div class="d-flex justify-content-end">
-                <form action="{% url 'comment_edit' comment.id %}">
+                <form>
                     {% csrf_token %}
-                    <button type="submit" class="btn-negative btn-lg">Discard</button>
+                    <button onclick= "goBack()" type="submit" class="btn-negative btn-lg">Discard</button>
                 </form>
             </div>
             <h3 class="mt-4 text-center">Edit your comment</h3>
             <div class="form-group">
                 <form method="post" action="{% url 'comment_edit' comment.id %}" class="uniForm"
-                    style="margin-top: 1.3em;" name="next" value="{{ request.path }}">
+                    style="margin-top: 1.3em;"> <!-- name="next" value="{{ request.path }}" --> 
                     <!-- {{ post_form | crispy }} -->
                     {% csrf_token %}
                     {{form.as_p}}
@@ -60,6 +63,14 @@
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
+
+    $(".alert-success").delay(5000).slideUp(500, function () {
+        $(this).alert('close');
+    });
+
+    function goBack() {
+    history.back;
+}
 </script>
 {% endblock %}
 

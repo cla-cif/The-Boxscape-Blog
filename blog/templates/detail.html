@@ -99,7 +99,7 @@
     </div>
 </div>
 
-<!-- COMMENTS LIST -->
+<!-- COMMENTS SECTION -->
 <div class="container mb-4">
     <div class="row m-0">
 
@@ -125,6 +125,7 @@
                 <div>{{ comment.body | linebreaks }}</div>
 
                 <!-- COMMENT OPTIONAL BUTTONS -->
+
                 {% if user.is_authenticated and user.username == comment.name %}
                 <hr>
                 <div class="d-flex flex-row-reverse">
@@ -167,8 +168,8 @@
                     </button>
 
                 </div>
+                {% endif %}
             </div>
-            {% endif %}
             {% endfor %}
         </div>
     </div>
@@ -262,9 +263,8 @@
     }
 
     $(".alert-success").delay(5000).slideUp(500, function () {
-                        $(this).alert('close');
-                    });
-
+        $(this).alert('close');
+    });
 </script>
 {% endblock %}
 
