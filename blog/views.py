@@ -195,23 +195,13 @@ def comment_edit(request, id):
         context = {'form': form, 'edited': True, 'comment': comment}
     return render(request, "comment_edit.html", context)
 
+
 # COMMENT DELETE
-# def comment_delete(request, id):
-#     if request.method == 'POST':
-#         comment = get_object_or_404(Comment, pk=id)
-#         comment.delete()
-#     return HttpResponseRedirect('post_detail')
+def comment_delete(request, id, *args):
+    if request.method == 'POST':
+        comment = get_object_or_404(Comment, pk=id)
+        comment.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-def comment_delete(request, id):
-    comment = get_object_or_404(Comment, pk=id)
-    
-    if request.method == "POST":
-        perform_delete(request, comment)
-        return redirect("your_view", comment.content_object.id)
-    else:
-        return render_to_response('comments/delete.html',
-                                    {'comment': comment, "next": next},
-                                      RequestContext(request))
-    
         

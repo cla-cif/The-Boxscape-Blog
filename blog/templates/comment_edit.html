@@ -15,6 +15,10 @@
             <div class="alert alert-success" role="alert">
                 Your comment is awaiting approval
                 <script type="text/javascript">
+                    $(".alert-success").delay(5000).slideUp(500, function () {
+                        $(this).alert('close');
+                    });
+
                     setTimeout(function () {
                         window.location.href = "{% url 'home' %}";
                     }, 2500);
@@ -48,4 +52,15 @@
         </div>
     </div>
 </div>
+
+{% block javascript %}
+
+<!-- to prevent double submission on refresh page -->
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
 {% endblock %}
+
+{% endblock content %}

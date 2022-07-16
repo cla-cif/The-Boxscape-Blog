@@ -107,6 +107,8 @@
         <div class="comment-title mb-4 mt-4">
             {% if post.comments.count == 0 %}
             <h3> There are no comments yet</h3>
+            {% elif post.comments.count == 1 %}
+            <h3> {{ post.comments.count }} Comment</h3>
             {% else  %}
             <h3> {{ post.comments.count }} Comments</h3>
             {% endif %}
@@ -167,11 +169,11 @@
                 </div>
             </div>
             {% endif %}
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>
-</div>
+
 
 <!-- COMMENT BOX -->
 <div class="container mt-4 mb-4">
@@ -250,5 +252,20 @@
     </div>
 
 </div>
+
+{% block javascript %}
+
+<!-- to prevent double submission on refresh page -->
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+
+    $(".alert-success").delay(5000).slideUp(500, function () {
+                        $(this).alert('close');
+                    });
+
+</script>
+{% endblock %}
 
 {% endblock content %}
