@@ -1,13 +1,14 @@
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, BadHeaderError
+from django.core.mail import send_mail
 from django.views.generic import TemplateView
 from taggit.models import Tag
 from django.db.models import Count
 from django.contrib.auth.models import User
 from .models import Post, Comment
-from .forms import CommentForm, PostForm, EditPostForm, EditCommentForm
+from .forms import CommentForm, PostForm, EditPostForm, EditCommentForm, ContactForm
 
 
 class AboutView(TemplateView):
@@ -206,4 +207,24 @@ def comment_delete(request, id, *args):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-        
+# CONTACT FORM
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = "Contact us"
+            body = {
+                'first_name': form.cleaned_data['first_name'],
+                'last_name': form.cleaned_data['last_name'],
+                'email': form.cleaned_data['email_address'],
+                'message': form.cleaned_data['message'],
+            }
+            message = "\n".join(body.values())
+        try:
+            send_mail(subject, message, 'admin@example.com',
+                        ['admin@example.com'])
+        except BadHeaderError:
+            return HttpResponse('Invalid header found.')
+    return redirect("list.html")
+    form = ContactForm()
+    return render(request, "contact.html", {'form': form})
