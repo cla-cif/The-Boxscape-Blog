@@ -225,6 +225,6 @@ def contact(request):
                         ['admin@example.com'])
         except BadHeaderError:
             return HttpResponse('Invalid header found.')
-    return redirect("list.html")
+    return redirect("/contact")
     form = ContactForm()
-    return render(request, "contact.html", {'form': form})
+    return render(request, "/contact", {'form': form})

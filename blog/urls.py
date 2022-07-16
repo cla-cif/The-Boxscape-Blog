@@ -6,6 +6,10 @@ from .feeds import LatestPostsFeed
 
 urlpatterns = [
     path('', views.PostList.as_view(), name='home'),
+    path('about', views.AboutView.as_view(), name='about'),
+    path('create', views.post_create, name='post_create'),
+    path('feed/', LatestPostsFeed(), name='post_feed'),
+    path('contact', views.contact, name='contact'),
     path('like/<slug:slug>', views.PostLike.as_view(), name='post_like'),
     path('dislike/<slug:slug>', views.PostDislike.as_view(), name='post_dislike'), # noqa
     path('<int:id>/delete', views.comment_delete, name='comment_delete'),
@@ -14,8 +18,4 @@ urlpatterns = [
     path("author/<int:pk>/", views.author_posts, name="author_posts"),
     path('<int:id>/edit-post/', views.post_edit, name='post_edit'),
     path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
-    path('feed/', LatestPostsFeed(), name='post_feed'),
-    path('about', views.AboutView.as_view(), name='about'),
-    path('contact', views.contact, name='contact'),
-    path('create', views.post_create, name='post_create'),
     ]
