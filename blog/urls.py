@@ -2,14 +2,14 @@ from django.urls import path
 from . import views
 from .feeds import LatestPostsFeed
 
-#app_name = 'blog'
+# app_name = 'blog'
 
 urlpatterns = [
     path('', views.PostList.as_view(), name='home'),
+    path('contact', views.contact, name='contact'),
     path('about', views.AboutView.as_view(), name='about'),
     path('create', views.post_create, name='post_create'),
     path('feed/', LatestPostsFeed(), name='post_feed'),
-    path('contact', views.contact, name='contact'),
     path('like/<slug:slug>', views.PostLike.as_view(), name='post_like'),
     path('dislike/<slug:slug>', views.PostDislike.as_view(), name='post_dislike'), # noqa
     path('<int:id>/delete', views.comment_delete, name='comment_delete'),

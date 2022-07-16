@@ -81,6 +81,8 @@ EMAIL_HOST_USER: os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD: os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS: True
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

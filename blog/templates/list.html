@@ -41,12 +41,9 @@
                             &nbsp;&nbsp;|&nbsp&nbsp;
                             </span>{{ post.created|naturalday|upper }} &nbsp;&nbsp;|&nbsp;&nbsp; </span>
                             <strong class="text-details"><i class="far fa-comments"></i>
-                     
                                 {{ post.comments.count }}
-                         
                             </strong>
                         </p>
-
                     </div>
                 </div>
             </div>
@@ -64,7 +61,7 @@
             <div class="row m-0">
                 <h4 class="pb-4">Subscribe</h4>
                 <div class="sidebar-box m-0 p-4">   
-                    <a href="{% url 'post_feed' %}"><h5 class="text-details">Feed RSS</h5></a>
+                    <a href="{% url 'post_feed' %}"><h5 class="text-details mb-0">Feed RSS</h5></a>
                 </div>
             </div>
             <!-- total posts counter -->
@@ -107,8 +104,8 @@
                 <h4 class="pb-4 pt-4">Some numbers:</h4>
                 <div class="sidebar-box p-0">
                     <ul class="p-4 m-0">
-                        <h5 class="pb-4">Total posts: {% total_posts %}</h5>
-                        <h5>Total users: {% total_users %}</h5>
+                        <h6 class="pb-4">Total posts: {% total_posts %}</h6>
+                        <h6>Total users: {% total_users %}</h6>
                     </ul>
                 </div>
             </div>

@@ -15,10 +15,10 @@ class LatestPostsFeed(Feed):
 
     def item_title(self, item):
         return item.title
-       
+
     def item_description(self, item):
         return truncatewords(item.body, 30)
- 
+
     def item_link(self, item):
         return reverse('post_detail', args=[item.slug])
 

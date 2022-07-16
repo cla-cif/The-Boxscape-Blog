@@ -70,8 +70,8 @@
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 {% for message in messages %}
-                <div class="row alert alert-success d-flex {{ message.tags}} fade show" id="msg"
-                    role="alert"> <!-- alert-dismissable -->
+                <div class="row alert alert-success d-flex {{ message.tags}} fade show" id="msg" role="alert"></div>
+                    <!-- alert-dismissable -->
                     <div class="col-11">{{ message | safe }}</div>
                     <div class="col-1">
                         <button type="button" class="btn-close d-flex align-items-end" data-bs-dismiss="alert"
@@ -87,9 +87,9 @@
         // $(".alert-success").fadeTo(2000, 500).slideUp(500, function(){
         //     $(".alert-success").slideUp(500);
         // });
-        $(".alert-success").delay(2000).slideUp(500, function() {
-    $(this).alert('close');
-});
+        $(".alert-success").delay(2000).slideUp(500, function () {
+            $(this).alert('close');
+        });
     </script>
 
     <!-- BLOCK CONTENT -->
@@ -101,13 +101,15 @@
 
     <!-- FOOTER -->
     <footer class="footer mt-auto p-4 footer-bg">
-        <p class="m-0 text-center text-white"><a class="footer-link" href="{% url 'about' %}">About</a></p>
-        <p class="m-0 text-center text-white"><a class="footer-link" href="{% url 'contact' %}">Reach out</a></p>
-        <p class="m-0 text-center text-white">More:
+        <p class="mb-2 text-center text-white"><a class="footer-link" href="{% url 'about' %}">About</a></p>
+        <p class="mb-2 text-center text-white"><a class="footer-link" href="{% url 'contact' %}">Reach out</a></p>
+        <p class="mb-2 text-center text-white">More:
+            <a class="footer-link" target="_blank" href="https://discord.com/"><i
+                    class="fab fa-discord fa-lg ms-3 footer-link"></i></a>
             <a class="footer-link" target="_blank" href="https://twitter.com/?lang=en"><i
                     class="fab fa-twitter fa-lg ms-3 footer-link"></i></a>
-            <a class="footer-link" target="_blank" href="https://discord.com/"><i
-                    class="fab fa-discord fa-lg ms-3 footer-link"></i>
+            <a class="footer-link" target="_blank" href="{% url 'post_feed' %}"><i
+                    class="fas fa-rss fa-lg ms-3 footer-link"></i></a>
         </p>
         <p class="m-0 text-center text-white">© 2022 work in progress</p>
     </footer>

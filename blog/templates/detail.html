@@ -28,7 +28,7 @@
         <!-- POST-BODY -->
         <div class="col-xl-12">
             <p class="post-body m-0"><i class="fa fa-quote-left fa-3x fa-pull-left"></i>
-                {{ post.body | safe }}<i class="fa fa-quote-right fa-3x fa-pull-right"></i>
+                {{ post.body | safe | linebreaks }}<i class="fa fa-quote-right fa-3x fa-pull-right"></i>
             </p>
         </div>
 

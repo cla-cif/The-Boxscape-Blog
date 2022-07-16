@@ -4,11 +4,11 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, HttpResponse, BadHeaderError
 from django.core.mail import send_mail
 from django.views.generic import TemplateView
-from taggit.models import Tag
+# from taggit.models import Tag
 from django.db.models import Count
 from django.contrib.auth.models import User
 from .models import Post, Comment
-from .forms import CommentForm, PostForm, EditPostForm, EditCommentForm, ContactForm
+from .forms import CommentForm, PostForm, EditPostForm, EditCommentForm, ContactForm # noqa
 
 
 class AboutView(TemplateView):
@@ -222,9 +222,9 @@ def contact(request):
             message = "\n".join(body.values())
         try:
             send_mail(subject, message, 'admin@example.com',
-                        ['admin@example.com'])
+                      ['admin@example.com'])
         except BadHeaderError:
             return HttpResponse('Invalid header found.')
-    return redirect("/contact")
+    return render(request, "contact.html")
     form = ContactForm()
-    return render(request, "/contact", {'form': form})
+    return render(request, "contact.html", {'form': form})
