@@ -208,7 +208,7 @@ def comment_delete(request, id, *args):
 
 
 # CONTACT FORM
-def contact(request):
+def contact_us(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -225,6 +225,6 @@ def contact(request):
                       ['admin@example.com'])
         except BadHeaderError:
             return HttpResponse('Invalid header found.')
-    return render(request, "contact.html")
+        return redirect('contact')
     form = ContactForm()
-    return render(request, "contact.html", {'form': form})
+    return render(request, "contact_us.html", {'form': form})
