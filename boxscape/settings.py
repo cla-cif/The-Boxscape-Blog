@@ -81,7 +81,13 @@ EMAIL_HOST_USER: os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD: os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS: True
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' to test in CLI
+
+EMAIL_BACKEND = 'django_ses.SESBackend'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_SES_REGION_NAME = 'us-east-1'  # (ex: us-east-2)
+AWS_SES_REGION_ENDPOINT = 'email.us-east-1.amazonaws.com'  # (ex: email.us-east-2.amazonaws.com)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

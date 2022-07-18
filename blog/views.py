@@ -221,10 +221,10 @@ def contact_us(request):
             }
             message = "\n".join(body.values())
         try:
-            send_mail(subject, message, 'admin@example.com',
-                      ['admin@example.com'])
+            send_mail(subject, message, 'the.boxscape.blog@gmail.com',
+                      ['the.boxscape.blog@gmail.com'])
         except BadHeaderError:
             return HttpResponse('Invalid header found.')
-        return redirect('contact')
+        return redirect('home')
     form = ContactForm()
     return render(request, "contact_us.html", {'form': form})
