@@ -81,7 +81,7 @@ EMAIL_HOST_USER: os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD: os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS: True
 
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' ## for testing
 
 EMAIL_BACKEND = 'django_ses.SESBackend'
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
