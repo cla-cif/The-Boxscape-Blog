@@ -83,7 +83,8 @@
             <strong class="col-lg-2 d-flex justify-content-center">
                 <div class="text-details"><i class="far fa-comments"></i>
                     <!-- Our total_comments variable goes before the closing strong tag -->
-                    &nbsp;{{ post.comments.count }}
+                    &nbsp;{{ number_comments }}
+                    
                 </div>
             </strong>
 
@@ -105,12 +106,12 @@
 
         <!-- COMMENT COUNTER TITLE -->
         <div class="comment-title mb-4 mt-4">
-            {% if post.comments.count == 0 %}
+            {% if number_comments == 0 %}
             <h3> There are no comments yet</h3>
-            {% elif post.comments.count == 1 %}
-            <h3> {{ post.comments.count }} Comment</h3>
+            {% elif number_comments == 1 %}
+            <h3> {{ number_comments }} Comment</h3>
             {% else  %}
-            <h3> {{ post.comments.count }} Comments</h3>
+            <h3> {{ number_comments }} Comments</h3>
             {% endif %}
         </div>
 

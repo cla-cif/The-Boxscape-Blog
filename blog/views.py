@@ -21,10 +21,17 @@ class PostList(generic.ListView):
     template_name = "list.html"
     paginate_by = 9
 
-
 def tag(request, slug):
     post = Post.objects.filter(tags__slug=slug)
     return render(request, 'list.html', {"post_list": post, "tag": slug})
+
+
+# def number_comments(request, slug, id):
+#     queryset = Post.objects.filter(status='pub')
+#     post = get_object_or_404(queryset, slug=slug)
+#     comments = post.comments.filter(approved=True).order_by("created")
+#     number_comments = len(comments)
+#     return render(request, 'list.html', {'number_comments': number_comments})
 
 
 def author_posts(request, pk):
@@ -34,11 +41,11 @@ def author_posts(request, pk):
 
 
 class PostDetail(View):
-
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.filter(status='pub')
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by("created")
+        number_comments = len(comments)
         # retrieving post by similarity
         post_tags_ids = post.tags.values_list('id', flat=True)
         similar_posts = Post.objects.filter(tags__in=post_tags_ids)\
@@ -59,11 +66,12 @@ class PostDetail(View):
             {
                 "post": post,
                 "comments": comments,
+                "number_comments": number_comments,
                 "commented": False,
                 "liked": liked,
                 "disliked": disliked,
                 "comment_form": CommentForm(),
-                "similar_posts": similar_posts  # new
+                "similar_posts": similar_posts  
             },
         )
 
@@ -72,6 +80,7 @@ class PostDetail(View):
         queryset = Post.objects.filter(status='pub')
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by("created")
+        number_comments = len(comments)
         # retrieving post by similarity
         post_tags_ids = post.tags.values_list('id', flat=True)
         similar_posts = Post.objects.filter(tags__in=post_tags_ids)\
@@ -103,6 +112,7 @@ class PostDetail(View):
                 "post": post,
                 "comments": comments,
                 "commented": True,
+                "number_comments": number_comments,
                 "comment_form": comment_form,
                 "liked": liked,
                 "disliked": disliked,
@@ -228,3 +238,6 @@ def contact_us(request):
         return redirect('home')
     form = ContactForm()
     return render(request, "contact_us.html", {'form': form})
+
+
+    

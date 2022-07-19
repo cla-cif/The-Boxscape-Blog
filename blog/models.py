@@ -49,12 +49,6 @@ class Post(models.Model):
     def get_absolute_url(self):
         return HttpResponseRedirect(reverse('post_detail', args=[self.slug]))
 
-    # def comma_splitter(tag_string):
-    #     return [t.strip().lower() for t in tag_string.split(' ') if t.strip()]
-
-    # def comma_joiner(tags):
-    #     return ' '.join(t.name for t in tags)
-
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE,

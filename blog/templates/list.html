@@ -41,7 +41,8 @@
                             &nbsp;&nbsp;|&nbsp&nbsp;
                             </span>{{ post.created|naturalday|upper }} &nbsp;&nbsp;|&nbsp;&nbsp; </span>
                             <strong class="text-details"><i class="far fa-comments"></i>
-                                {{ post.comments.count }}
+                                <!-- {{ post.comments.count }} -->
+                                {{ number_comments }}
                             </strong>
                         </p>
                     </div>
