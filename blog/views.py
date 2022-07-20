@@ -74,7 +74,7 @@ class PostDetail(View):
                 "liked": liked,
                 "disliked": disliked,
                 "comment_form": CommentForm(),
-                "similar_posts": similar_posts  
+                "similar_posts": similar_posts
             },
         )
 
@@ -239,8 +239,6 @@ def contact_us(request):
         except BadHeaderError:
             return HttpResponse('Invalid header found.')
         return redirect('home')
-    form = ContactForm()
-    return render(request, "contact_us.html", {'form': form})
-
-
-    
+    # form = ContactForm()
+    # return render(request, "contact_us.html", {'form': form})
+    return redirect('home')

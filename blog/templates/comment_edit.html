@@ -41,8 +41,8 @@
             <div class="form-group">
                 <form method="post" action="{% url 'comment_edit' comment.id %}" class="uniForm"
                     style="margin-top: 1.3em;"> <!-- name="next" value="{{ request.path }}" --> 
-                    <!-- {{ post_form | crispy }} -->
                     {% csrf_token %}
+                    <!-- {% crispy form %} -->
                     {{form.as_p}}
                     <div class="d-grid col-6 mx-auto pt-4 pb-4">
                         <button type="submit" class="btn btn-lg">Submit</button>

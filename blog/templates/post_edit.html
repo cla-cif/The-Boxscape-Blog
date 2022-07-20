@@ -34,7 +34,7 @@
             <p>Editing as: {{ user.username }}</p>
             <div class="form-group">
                 <form method="post" action="{% url 'post_edit' post.id %}" class="uniForm" style="margin-top: 1.3em;">
-                    <!-- {{ post_form | crispy }} -->
+                    {{ post_form | crispy }}
                     {% csrf_token %}
                     {{form.as_p}}
                     <div class="d-grid col-6 mx-auto pt-4 pb-4">

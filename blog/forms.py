@@ -1,4 +1,6 @@
 from django import forms
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Div
 from .models import Comment, Post
 
 
@@ -50,6 +52,28 @@ class EditPostForm(forms.ModelForm):
 
 
 class ContactForm(forms.Form):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_method = 'post'
+        # self.helper.add_input(Submit('submit', 'Submit',
+        #                              css_class='btn btn-lg'))
+        self.helper.layout = Layout(
+            Fieldset(
+                'First Name',
+                'Surname',
+                'Email',
+                'Message',
+            ),
+            Div(
+                self.helper.add_input(Submit('submit', 'Submit',
+                                             css_class='btn btn-lg'),
+                                      css_class='d-grid col-6 mx-auto pt-4 pb-4',
+                                      )
+            )
+        )
+
     first_name = forms.CharField(max_length=50)
     last_name = forms.CharField(max_length=50)
     email_address = forms.EmailField(max_length=150)

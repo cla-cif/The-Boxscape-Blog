@@ -19,10 +19,11 @@
             </p>
             <form method="post">
                 {% csrf_token %}
-                {{form.as_p}}
-                <div class="d-grid col-6 mx-auto pt-4 pb-4">
+                {% crispy form %}
+                <!-- {{ post_form | crispy }} -->
+                <!-- <div class="d-grid col-6 mx-auto pt-4 pb-4">
                     <button type="submit" class="btn btn-lg">Send</button>
-                </div>
+                </div> -->
             </form>
         </div>
     </div>
