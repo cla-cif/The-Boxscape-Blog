@@ -8,7 +8,7 @@ from django.views.generic import TemplateView
 from django.db.models import Count
 from django.contrib.auth.models import User
 from .models import Post, Comment
-from .forms import CommentForm, PostForm, EditPostForm, EditCommentForm, ContactForm # noqa
+from .forms import CommentForm, PostForm, EditPostForm, EditCommentForm, ContactForm  # noqa
 
 
 class AboutView(TemplateView):
@@ -148,6 +148,25 @@ class PostDislike(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
+class PostDelete(View):
+
+    def delete(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
+        post.object.delete()
+        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+# def delete_view(request, id):
+#     context ={}
+#     obj = get_object_or_404(GeeksModel, id = id)
+#     if request.method =="POST":
+
+#         obj.delete()
+#         return HttpResponseRedirect("/")
+
+#     return render(request, "delete_view.html", context)
+
+
 def post_create(request):
     form = PostForm()
     context = {'form': form, 'created': False, }
@@ -239,6 +258,5 @@ def contact_us(request):
         except BadHeaderError:
             return HttpResponse('Invalid header found.')
         return redirect('home')
-    # form = ContactForm()
-    # return render(request, "contact_us.html", {'form': form})
-    return redirect('home')
+    form = ContactForm()
+    return render(request, "contact_us.html", {'form': form})

@@ -12,6 +12,7 @@ urlpatterns = [
     path('contact/', views.contact_us, name='contact'),
     path('like/<slug:slug>', views.PostLike.as_view(), name='post_like'),
     path('dislike/<slug:slug>', views.PostDislike.as_view(), name='post_dislike'), # noqa
+    path('delete/<slug:slug>', views.PostDelete.as_view(), name='post_delete'),
     path('<int:id>/delete', views.comment_delete, name='comment_delete'),
     path('<int:id>/edit-comment/', views.comment_edit, name='comment_edit'),
     path("tag/<slug:slug>/", views.tag, name='tag'),

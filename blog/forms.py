@@ -1,6 +1,7 @@
 from django import forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Div
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Div, HTML  # noqa
+from crispy_forms.bootstrap import StrictButton
 from .models import Comment, Post
 
 
@@ -57,20 +58,21 @@ class ContactForm(forms.Form):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
         self.helper.form_method = 'post'
-        # self.helper.add_input(Submit('submit', 'Submit',
-        #                              css_class='btn btn-lg'))
+
+        # self.helper.add_input(Submit('submit', 'Submit', THIS WORKS
+        #                              css_class='btn btn-lg')) THIS WORKS
+
+        self.helper.form_class = 'form-vertical'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-12'
         self.helper.layout = Layout(
-            Fieldset(
-                'First Name',
-                'Surname',
-                'Email',
-                'Message',
-            ),
+            'first_name',
+            'last_name',
+            'email_address',
+            'message',
             Div(
-                self.helper.add_input(Submit('submit', 'Submit',
-                                             css_class='btn btn-lg'),
-                                      css_class='d-grid col-6 mx-auto pt-4 pb-4',
-                                      )
+                StrictButton('Send', css_class='btn btn-lg', type='submit'),
+                css_class='d-grid col-6 mx-auto pt-4 pb-4'
             )
         )
 

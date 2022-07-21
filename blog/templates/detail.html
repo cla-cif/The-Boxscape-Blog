@@ -96,6 +96,15 @@
                 </a>
             </strong>
             {% endif %}
+
+            <!-- POST DELETE -->
+            {% if user.is_authenticated and user == post.author %}
+            <strong class="col-lg-2 d-flex justify-content-center">
+                <a href="{% url 'post_delete' post.id %}">
+                    <i class="fas fa trash-alt"></i>&nbsp;EDIT
+                </a>
+            </strong>
+            {% endif %}
         </div>
     </div>
 </div>
