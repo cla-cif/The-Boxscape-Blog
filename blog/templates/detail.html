@@ -82,30 +82,21 @@
             <!-- COMMENT COUNT -->
             <strong class="col-lg-2 d-flex justify-content-center">
                 <div class="text-details"><i class="far fa-comments"></i>
-                    <!-- Our total_comments variable goes before the closing strong tag -->
                     &nbsp;{{ number_comments }}
-                    
                 </div>
             </strong>
 
-            <!-- POST EDIT -->
             {% if user.is_authenticated and user == post.author %}
+            <!-- POST EDIT -->
             <strong class="col-lg-2 d-flex justify-content-center">
                 <a href="{% url 'post_edit' post.id %}">
                     <i class="far fa-edit"></i>&nbsp;EDIT
                 </a>
             </strong>
-            {% endif %}
 
             <!-- POST DELETE -->
-            {% if user.is_authenticated and user == post.author %}
-            <!-- <strong class="col-lg-2 d-flex justify-content-center">
-                <a href="{% url 'post_delete' post.pk %}">
-                    <i class="fas fa-trash"></i>&nbsp;DELETE
-                </a>
-            </strong> -->
             <button type="button" class="btn-comment" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                <i class="fas fa-trash"></i>&nbsp;DELETE
+                <i class="fas fa-trash"></i>&nbsp;<strong>DELETE</strong>
             </button>
             <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -113,8 +104,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Hey {{ user.username }}!</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             Are you sure you want to delete your post?
