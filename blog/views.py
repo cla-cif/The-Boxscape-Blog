@@ -3,7 +3,7 @@ from django.views import generic, View
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, HttpResponse, BadHeaderError
 from django.core.mail import send_mail
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DeleteView
 # from taggit.models import Tag
 from django.db.models import Count
 from django.contrib.auth.models import User
@@ -28,12 +28,12 @@ def tag(request, slug):
 
 
 # NOT WORKING !!!!!
-def comments_counter(request, slug, id):
-    queryset = Post.objects.filter(status='pub')
-    post = get_object_or_404(queryset, slug=slug)
-    comments = post.comments.filter(approved=True)
-    number_comments = len(comments)
-    return render(request, 'list.html', {'number_comments': number_comments})
+# def comments_counter(request, slug, id):
+#     queryset = Post.objects.filter(status='pub')
+#     post = get_object_or_404(queryset, slug=slug)
+#     comments = post.comments.filter(approved=True)
+#     number_comments = len(comments)
+#     return render(request, 'list.html', {'number_comments': number_comments})
 
 
 def author_posts(request, pk):
@@ -124,6 +124,22 @@ class PostDetail(View):
         )
 
 
+# class PostDelete(DeleteView):
+
+#     def delete(self, request, slug, *args, **kwargs):
+#         queryset = Post.objects.filter(status='pub')
+#         post = get_object_or_404(queryset, slug=slug)
+#         post.object.delete()
+#         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+class TestView(DeleteView):
+
+    model = Post
+    success_url = reverse_lazy('home')
+    template_name = "post_create.html"
+
+
 class PostLike(View):
 
     def post(self, request, slug, *args, **kwargs):
@@ -146,25 +162,6 @@ class PostDislike(View):
             post.dislikes.add(request.user)
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
-
-
-class PostDelete(View):
-
-    def delete(self, request, slug, *args, **kwargs):
-        post = get_object_or_404(Post, slug=slug)
-        post.object.delete()
-        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
-
-
-# def delete_view(request, id):
-#     context ={}
-#     obj = get_object_or_404(GeeksModel, id = id)
-#     if request.method =="POST":
-
-#         obj.delete()
-#         return HttpResponseRedirect("/")
-
-#     return render(request, "delete_view.html", context)
 
 
 def post_create(request):

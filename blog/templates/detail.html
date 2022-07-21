@@ -99,11 +99,39 @@
 
             <!-- POST DELETE -->
             {% if user.is_authenticated and user == post.author %}
-            <strong class="col-lg-2 d-flex justify-content-center">
-                <a href="{% url 'post_delete' post.id %}">
-                    <i class="fas fa trash-alt"></i>&nbsp;EDIT
+            <!-- <strong class="col-lg-2 d-flex justify-content-center">
+                <a href="{% url 'post_delete' post.pk %}">
+                    <i class="fas fa-trash"></i>&nbsp;DELETE
                 </a>
-            </strong>
+            </strong> -->
+            <button type="button" class="btn-comment" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                <i class="fas fa-trash"></i>&nbsp;DELETE
+            </button>
+            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Hey {{ user.username }}!</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete your post?
+                        </div>
+                        <div class="modal-footer">
+                            <form action="{% url 'post_detail' post.slug %}">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-negative" value="No, take me back">
+                            </form>
+                            <form method="POST" action="{% url 'post_delete' post.pk %}">
+                                {% csrf_token %}
+                                <input type="submit" class="btn" value="Yes, I'm sure">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             {% endif %}
         </div>
     </div>
