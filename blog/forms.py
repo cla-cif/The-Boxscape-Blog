@@ -5,6 +5,7 @@ from crispy_forms.bootstrap import StrictButton
 from .models import Comment, Post
 
 
+# CREATE NEW COMMENT
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
@@ -16,6 +17,7 @@ class CommentForm(forms.ModelForm):
         }
 
 
+# EDIT COMMENT
 class EditCommentForm(forms.ModelForm):
     class Meta:
         model = Comment
@@ -27,6 +29,7 @@ class EditCommentForm(forms.ModelForm):
         }
 
 
+# CREATE POST
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
@@ -40,6 +43,7 @@ class PostForm(forms.ModelForm):
         }
 
 
+# EDIT POST
 class EditPostForm(forms.ModelForm):
     class Meta:
         model = Post
@@ -52,19 +56,17 @@ class EditPostForm(forms.ModelForm):
         }
 
 
+# CONTACT THE ADMIN
 class ContactForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
         self.helper.form_method = 'post'
-
-        # self.helper.add_input(Submit('submit', 'Submit', THIS WORKS
-        #                              css_class='btn btn-lg')) THIS WORKS
-
         self.helper.form_class = 'form-vertical'
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-12'
+
         self.helper.layout = Layout(
             'first_name',
             'last_name',

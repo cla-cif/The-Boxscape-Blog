@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from cloudinary.models import CloudinaryField
+from ckeditor.fields import RichTextField
 from taggit.managers import TaggableManager
 
 
@@ -20,7 +21,8 @@ class Post(models.Model):
     tags = TaggableManager()
     featured_image = CloudinaryField('image', default='placeholder')
     excerpt = models.TextField(blank=True)
-    body = models.TextField()
+    # body = models.TextField()
+    body = RichTextField(blank=True, null=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     published = models.DateTimeField(default=timezone.now)

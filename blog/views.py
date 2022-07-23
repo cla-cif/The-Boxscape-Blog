@@ -11,10 +11,12 @@ from .models import Post, Comment
 from .forms import CommentForm, PostForm, EditPostForm, EditCommentForm, ContactForm  # noqa
 
 
+# ABOUT THE BLOG
 class AboutView(TemplateView):
     template_name = "./about.html"
 
 
+# LIST VIEW
 class PostList(generic.ListView):
     model = Post
     queryset = Post.objects.filter(status='pub')
@@ -22,17 +24,7 @@ class PostList(generic.ListView):
     paginate_by = 9
 
 
-def tag(request, slug):
-    post = Post.objects.filter(tags__slug=slug)
-    return render(request, 'list.html', {"post_list": post, "tag": slug})
-
-
-def author_posts(request, pk):
-    author = User.objects.get(pk=pk)
-    post = Post.objects.filter(author=author)
-    return render(request, 'list.html', {'post_list': post, "author": author})
-
-
+# DETAIL VIEW
 class PostDetail(View):
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.filter(status='pub')
@@ -113,6 +105,19 @@ class PostDetail(View):
                 "similar_posts": similar_posts
             },
         )
+
+
+# ALL POSTS UNDER THE SAME TAG
+def tag(request, slug):
+    post = Post.objects.filter(tags__slug=slug)
+    return render(request, 'list.html', {"post_list": post, "tag": slug})
+
+
+# ALL POSTS FROM THE SAME AUTHOR
+def author_posts(request, pk):
+    author = User.objects.get(pk=pk)
+    post = Post.objects.filter(author=author)
+    return render(request, 'list.html', {'post_list': post, "author": author})
 
 
 # POST LIKE
@@ -205,6 +210,7 @@ def comment_edit(request, id):
     if request.method == 'POST':
         form = CommentForm(request.POST or None, instance=comment)
         if form.is_valid():
+            comment.approved = False
             form.save()
         context = {'form': form, 'edited': True, 'comment': comment}
     return render(request, "comment_edit.html", context)

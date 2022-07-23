@@ -19,9 +19,9 @@
                 // setTimeout(function () {
                 //     window.location.href = "{% url 'home' %}";
                 // }, 2500);
-                setTimeout(function goBack() {
-                    history.back();
-                }, 3000);
+                // setTimeout(function goBack() {
+                //     history.back();
+                // }, 3000);
             </script>
 
             {% else %}
@@ -30,22 +30,15 @@
             {% if user.is_authenticated %}
 
             <div class="d-flex justify-content-end">
-                <form action="{% url 'home' %}">
+                <form>
                     {% csrf_token %}
-                    <button type="submit" class="btn-negative btn-lg">Discard</button>
+                    <button onclick="goBack()" type="submit" class="btn-negative btn-lg">Discard</button>
                 </form>
-            </div>
-            
-            <div class="d-flex justify-content-end">
-                <!-- <form>
-                    {% csrf_token %}
-                    <button onclick= "goBack()" type="submit" class="btn-negative btn-lg">Discard</button>
-                </form> -->
             </div>
             <h3 class="mt-4 text-center">Edit your comment</h3>
             <div class="form-group">
                 <form method="post" action="{% url 'comment_edit' comment.id %}" class="uniForm"
-                    style="margin-top: 1.3em;"> 
+                    style="margin-top: 1.3em;">
                     {% csrf_token %}
                     <!-- {% crispy form %} -->
                     {{form.as_p}}
@@ -71,11 +64,11 @@
 
     $(".alert-success").delay(5000).slideUp(500, function () {
         $(this).alert('close');
-    });
 
-    function goBack() {
-    history.back;
-}
+        function goBack() {
+            history.back;
+        }
+    });
 </script>
 {% endblock %}
 
