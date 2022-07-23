@@ -4,7 +4,6 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, HttpResponse, BadHeaderError
 from django.core.mail import send_mail
 from django.views.generic import TemplateView, DeleteView
-# from taggit.models import Tag
 from django.db.models import Count
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -26,15 +25,6 @@ class PostList(generic.ListView):
 def tag(request, slug):
     post = Post.objects.filter(tags__slug=slug)
     return render(request, 'list.html', {"post_list": post, "tag": slug})
-
-
-# NOT WORKING !!!!!
-# def comments_counter(request, slug, id):
-#     queryset = Post.objects.filter(status='pub')
-#     post = get_object_or_404(queryset, slug=slug)
-#     comments = post.comments.filter(approved=True)
-#     number_comments = len(comments)
-#     return render(request, 'list.html', {'number_comments': number_comments})
 
 
 def author_posts(request, pk):
@@ -125,22 +115,7 @@ class PostDetail(View):
         )
 
 
-# class PostDelete(DeleteView):
-
-#     def delete(self, request, slug, *args, **kwargs):
-#         queryset = Post.objects.filter(status='pub')
-#         post = get_object_or_404(queryset, slug=slug)
-#         post.object.delete()
-#         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
-
-
-class TestView(DeleteView):
-
-    model = Post
-    success_url = reverse_lazy('home')
-    template_name = "post_create.html"
-
-
+# POST LIKE
 class PostLike(View):
 
     def post(self, request, slug, *args, **kwargs):
@@ -149,10 +124,10 @@ class PostLike(View):
             post.likes.remove(request.user)
         else:
             post.likes.add(request.user)
-
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
+# POST DISLIKE
 class PostDislike(View):
 
     def post(self, request, slug, *args, **kwargs):
@@ -161,10 +136,10 @@ class PostDislike(View):
             post.dislikes.remove(request.user)
         else:
             post.dislikes.add(request.user)
-
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
+# POST CREATE
 def post_create(request):
     form = PostForm()
     context = {'form': form, 'created': False, }
@@ -185,7 +160,6 @@ def post_create(request):
             post.save()
             for t in tags:
                 post.tags.add(t)
-
     return render(request, "post_create.html", {
         'form': form,
         'created': True
@@ -211,6 +185,14 @@ def post_edit(request, id):
     return render(request, "post_edit.html", context)
 
 
+# POST DELETE
+class TestView(DeleteView):
+
+    model = Post
+    success_url = reverse_lazy('home')
+    template_name = "post_create.html"
+
+
 # COMMENT EDIT
 def comment_edit(request, id):
     comment = get_object_or_404(Comment, pk=id)
@@ -223,7 +205,6 @@ def comment_edit(request, id):
     if request.method == 'POST':
         form = CommentForm(request.POST or None, instance=comment)
         if form.is_valid():
-            comment.approved = False
             form.save()
         context = {'form': form, 'edited': True, 'comment': comment}
     return render(request, "comment_edit.html", context)
@@ -259,11 +240,3 @@ def contact_us(request):
         return redirect('home')
     form = ContactForm()
     return render(request, "contact_us.html", {'form': form})
-    #     try:
-    #         send_mail(subject, message, 'the.boxscape.blog@gmail.com',
-    #                   ['the.boxscape.blog@gmail.com'])
-    #     except BadHeaderError:
-    #         return HttpResponse('Invalid header found.')
-    #     return redirect('home')
-    # form = ContactForm()
-    # return render(request, "contact_us.html", {'form': form})

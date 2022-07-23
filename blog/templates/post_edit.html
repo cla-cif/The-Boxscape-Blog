@@ -9,7 +9,7 @@
 
 <!-- ALERT MESSAGE -->
 <div class="container mt-4 mb-4">
-    <div class="row m-0">
+    <div class="row m-0 justify-content-center">
         <div class="col-xl-8">
             {% if edited %}
             <div class="alert alert-success" role="alert">
@@ -34,7 +34,7 @@
             <p>Editing as: {{ user.username }}</p>
             <div class="form-group">
                 <form method="post" action="{% url 'post_edit' post.id %}" class="uniForm" style="margin-top: 1.3em;">
-                    {{ post_form | crispy }}
+                    <!-- {{ post_form | crispy }} -->
                     {% csrf_token %}
                     {{form.as_p}}
                     <div class="d-grid col-6 mx-auto pt-4 pb-4">

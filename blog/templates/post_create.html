@@ -10,7 +10,7 @@
 
 <!-- ALERT MESSAGE -->
 <div class="container mt-4 mb-4">
-    <div class="row m-0">
+    <div class="row m-0 justify-content-center">
         <div class="col-xl-8">
             {% if created %}
             <div class="alert alert-success" role="alert">
@@ -23,7 +23,7 @@
             </div>
             {% else %}
 
-<!-- CREATE POST FORM -->
+            <!-- CREATE POST FORM -->
             {% if user.is_authenticated %}
             <div class="d-flex justify-content-end">
                 <form action="{% url 'home' %}">
