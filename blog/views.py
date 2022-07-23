@@ -7,6 +7,7 @@ from django.views.generic import TemplateView, DeleteView
 # from taggit.models import Tag
 from django.db.models import Count
 from django.contrib.auth.models import User
+from django.contrib import messages
 from .models import Post, Comment
 from .forms import CommentForm, PostForm, EditPostForm, EditCommentForm, ContactForm  # noqa
 
@@ -254,6 +255,15 @@ def contact_us(request):
                       ['the.boxscape.blog@gmail.com'])
         except BadHeaderError:
             return HttpResponse('Invalid header found.')
+        messages.success(request, "Message sent.")
         return redirect('home')
     form = ContactForm()
     return render(request, "contact_us.html", {'form': form})
+    #     try:
+    #         send_mail(subject, message, 'the.boxscape.blog@gmail.com',
+    #                   ['the.boxscape.blog@gmail.com'])
+    #     except BadHeaderError:
+    #         return HttpResponse('Invalid header found.')
+    #     return redirect('home')
+    # form = ContactForm()
+    # return render(request, "contact_us.html", {'form': form})

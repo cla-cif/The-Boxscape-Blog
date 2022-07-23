@@ -8,28 +8,14 @@
 {% block content %}
 
 <!-- ALERT MESSAGE -->
-<div class="container mt-4 mb-4">
-    <div class="row m-0">
-        <div class="col-xl-8">
-            {% if sent %}
-            <div class="alert alert-success" role="alert">
-                We will get back to you asap
-                <script type="text/javascript">
-                    setTimeout(function () {
-                        window.location.href = "{% url 'home' %}";
-                    }, 2500);
-                </script>
-            </div>
-            {% endif %}
-        </div>
-    </div>
-</div>
+
 
 <div class="container">
- 
+
     <div class="row">
         <div class="col-md-8 mt-3 offset-md-2">
 
+            <!-- DISCARD BUTTON -->
             <div class="d-flex justify-content-end">
                 <form action="{% url 'home' %}">
                     {% csrf_token %}
@@ -37,6 +23,7 @@
                 </form>
             </div>
 
+            <!-- FORM -->
             <h1>Contact</h1>
             <h4>Contact us directly if you have any questions</h4>
             <p>

@@ -66,16 +66,29 @@
     </div>
 
     <!-- ALERT MESSAGES -->
-    <div class="container">
+    <!-- <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 {% for message in messages %}
                 <div class="row alert alert-success d-flex {{ message.tags}} fade show" id="msg" role="alert"></div>
-                    <!-- alert-dismissable -->
                     <div class="col-11">{{ message | safe }}</div>
                     <div class="col-1">
                         <button type="button" class="btn-close d-flex align-items-end" data-bs-dismiss="alert"
                             aria-label="close"></button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div> -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                {% for message in messages %}
+                <div class="container-fluid p-0">
+                    <div class="alert alert-success d-flex fade show {{ message.tags }}" role="alert">
+                        {{ message | safe }}
                     </div>
                 </div>
                 {% endfor %}
@@ -87,7 +100,7 @@
         // $(".alert-success").fadeTo(2000, 500).slideUp(500, function(){
         //     $(".alert-success").slideUp(500);
         // });
-        $(".alert-success").delay(2000).slideUp(500, function () {
+        $(".alert-success").delay(2500).slideUp(800, function () {
             $(this).alert('close');
         });
     </script>
