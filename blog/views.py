@@ -7,7 +7,7 @@ from django.views.generic import TemplateView, DeleteView
 from django.db.models import Count
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .models import Post, Comment
+from .models import Post, Comment, Author
 from .forms import CommentForm, PostForm, EditPostForm, EditCommentForm, ContactForm  # noqa
 
 
@@ -163,11 +163,13 @@ def post_create(request):
             post.excerpt = form.cleaned_data.get('excerpt')
             post.body = form.cleaned_data.get('body')
             post.save()
+            post_author = Author(name=request.user.first_name, user=request.user)
+            post_author.save()
             for t in tags:
                 post.tags.add(t)
     return render(request, "post_create.html", {
         'form': form,
-        'created': True
+        'created': True,  
     })
 
 

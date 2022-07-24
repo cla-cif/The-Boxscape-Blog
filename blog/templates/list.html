@@ -42,7 +42,8 @@
                             </span>{{ post.created|naturalday|upper }} &nbsp;&nbsp;|&nbsp;&nbsp; </span>
                             <strong class="text-details"><i class="far fa-comments"></i>
                                 <!-- {{ post.comments.count }} -->
-                                {{ number_comments }}
+                                {{ post.approved_comments }}
+                                <!-- {{ number_comments }} -->
                             </strong>
                         </p>
                     </div>
@@ -107,7 +108,7 @@
                     <ul class="p-4 m-0">
                         <h6 class="pb-4">Total posts: {% total_posts %}</h6>
                         <h6>Total users: {% total_users %}</h6>
-                        <h6>Total contributors: {{ post.number_of_authors }}</h6>
+                        <h6>Total contributors: {% total_authors %}</h6>
                     </ul>
                 </div>
             </div>

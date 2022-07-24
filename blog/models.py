@@ -8,6 +8,14 @@ from ckeditor.fields import RichTextField
 from taggit.managers import TaggableManager
 
 
+class Author(models.Model):
+    name = models.CharField(max_length=80)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user}(author)"
+
+
 class Post(models.Model):
     STATUS = (
         ('dft', 'Draft'),
@@ -35,11 +43,16 @@ class Post(models.Model):
     class Meta:
         ordering = ["-published"]
 
+    def approved_comments(self):
+        comments = Comment.objects.filter(approved=True).filter(post=self.id)
+        return len(comments)
+
     def __str__(self):
         return self.title
 
     def number_of_likes(self):
         return self.likes.count()
+
 
     def number_of_dislikes(self):
         return self.dislikes.count()

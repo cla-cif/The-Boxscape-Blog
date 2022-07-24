@@ -1,7 +1,7 @@
 from django import template
 from django.contrib.auth.models import User
 from django.db.models import Count
-from ..models import Post
+from ..models import Post, Author
 
 register = template.Library()
 
@@ -9,6 +9,11 @@ register = template.Library()
 @register.simple_tag()
 def total_posts():
     return Post.objects.filter(status='pub').count()
+
+
+@register.simple_tag()
+def total_authors():
+    return Author.objects.all().count()
 
 
 @register.simple_tag()
