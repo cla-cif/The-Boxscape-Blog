@@ -22,7 +22,7 @@
             </div>
             {% else %}
 
-<!-- EDIT POST FORM -->
+            <!-- EDIT POST FORM -->
             {% if user.is_authenticated %}
             <div class="d-flex justify-content-end">
                 <form action="{% url 'post_detail' post.slug %}">
@@ -34,7 +34,6 @@
             <p>Editing as: {{ user.username }}</p>
             <div class="form-group">
                 <form method="post" action="{% url 'post_edit' post.id %}" class="uniForm" style="margin-top: 1.3em;">
-                    <!-- {{ post_form | crispy }} -->
                     {% csrf_token %}
                     {{form.media}}
                     {{form.as_p}}
@@ -42,7 +41,6 @@
                         <button type="submit" class="btn btn-lg">Submit</button>
                     </div>
                 </form>
-
             </div>
             {% else %}
             <h3>You must login or register before editing.</h3>

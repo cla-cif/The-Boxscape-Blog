@@ -16,12 +16,9 @@
                 Your comment is awaiting approval
             </div>
             <script>
-                // setTimeout(function () {
-                //     window.location.href = "{% url 'home' %}";
-                // }, 2500);
-                // setTimeout(function goBack() {
-                //     history.back();
-                // }, 3000);
+                setTimeout(function () {
+                    window.location.href = "{% url 'home' %}";
+                }, 2500);
             </script>
 
             {% else %}
@@ -29,18 +26,19 @@
             <!-- EDIT POST FORM -->
             {% if user.is_authenticated %}
 
+            <!-- DISCARD BUTTON -->
             <div class="d-flex justify-content-end">
-                <form>
+                <form action="{% url 'home' %}">
                     {% csrf_token %}
-                    <button onclick="goBack()" type="submit" class="btn-negative btn-lg">Discard</button>
+                    <button type="submit" class="btn-negative btn-lg">Discard</button>
                 </form>
             </div>
+
             <h3 class="mt-4 text-center">Edit your comment</h3>
             <div class="form-group">
                 <form method="post" action="{% url 'comment_edit' comment.id %}" class="uniForm"
                     style="margin-top: 1.3em;">
                     {% csrf_token %}
-                    <!-- {% crispy form %} -->
                     {{form.as_p}}
                     <div class="d-grid col-6 mx-auto pt-4 pb-4">
                         <button type="submit" class="btn btn-lg">Submit</button>
@@ -64,10 +62,6 @@
 
     $(".alert-success").delay(5000).slideUp(500, function () {
         $(this).alert('close');
-
-        function goBack() {
-            history.back;
-        }
     });
 </script>
 {% endblock %}

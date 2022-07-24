@@ -1,7 +1,7 @@
 from django import template
 from django.contrib.auth.models import User
 from django.db.models import Count
-from ..models import Post, Author
+from ..models import Post, Author, Comment
 
 register = template.Library()
 
@@ -19,6 +19,11 @@ def total_authors():
 @register.simple_tag()
 def total_users():
     return User.objects.count()
+
+
+@register.simple_tag()
+def total_comments():
+    return Comment.objects.filter(approved=True).count()
 
 
 @register.inclusion_tag('latest_posts.html')

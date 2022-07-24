@@ -163,13 +163,14 @@ def post_create(request):
             post.excerpt = form.cleaned_data.get('excerpt')
             post.body = form.cleaned_data.get('body')
             post.save()
-            post_author = Author(name=request.user.first_name, user=request.user)
+            post_author = Author(name=request.user.first_name, 
+                                 user=request.user)
             post_author.save()
             for t in tags:
                 post.tags.add(t)
     return render(request, "post_create.html", {
         'form': form,
-        'created': True,  
+        'created': True,
     })
 
 
