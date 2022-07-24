@@ -18,10 +18,9 @@ class Post(models.Model):
                             unique_for_date='published', blank=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="blog_posts")
-    tags = TaggableManager()
+    tags = TaggableManager(help_text="tags must be lower case")
     featured_image = CloudinaryField('image', default='placeholder')
     excerpt = models.TextField(blank=True)
-    # body = models.TextField()
     body = RichTextField(blank=True, null=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -41,9 +40,6 @@ class Post(models.Model):
 
     def number_of_likes(self):
         return self.likes.count()
-
-    # def number_of_contributors(self):
-    #     return self.author.count()
 
     def number_of_dislikes(self):
         return self.dislikes.count()
