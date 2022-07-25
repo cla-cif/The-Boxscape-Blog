@@ -83,13 +83,12 @@ EMAIL_HOST_USER: os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD: os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS: True
 
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' ## for testing
-
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' ## for testing ### noqa
 EMAIL_BACKEND = 'django_ses.SESBackend'
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_SES_REGION_NAME = 'us-east-1'  # (ex: us-east-2)
-AWS_SES_REGION_ENDPOINT = 'email.us-east-1.amazonaws.com'  # (ex: email.us-east-2.amazonaws.com)
+AWS_SES_REGION_NAME = 'us-east-1'
+AWS_SES_REGION_ENDPOINT = 'email.us-east-1.amazonaws.com'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -124,7 +123,7 @@ WSGI_APPLICATION = 'boxscape.wsgi.application'
 # TAGGIT_TAGS_FROM_STRING = 'appname.utils.comma_splitter'
 # TAGGIT_STRING_FROM_TAGS = 'appname.utils.comma_joiner'
 
-TAGGIT_FORCE_LOWERCASE = True
+# TAGGIT_FORCE_LOWERCASE = True NOT WORKING
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -184,8 +183,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 CLOUDINARY_STORAGE = {'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')}
 
 MEDIA_URL = '/media/'
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # CLOUDINARY_STORAGE = {
 #     'CLOUD_NAME': os.environ.get('CLOUD_NAME'),
 #     'API_KEY': os.environ.get('API_KEY'),

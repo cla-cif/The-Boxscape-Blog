@@ -160,6 +160,7 @@ def post_create(request):
             post.slug = '-'.join(form.cleaned_data.get('title').split(' '))
             post.title = form.cleaned_data.get('title')
             tags = form.cleaned_data.get('tags')
+            post.image = form.cleaned_data.get('list_image')  #
             post.excerpt = form.cleaned_data.get('excerpt')
             post.body = form.cleaned_data.get('body')
             post.save()
@@ -180,7 +181,6 @@ def post_edit(request, id):
     form = EditPostForm(request.POST or None, instance=post)
     context = {'form': form, 'edited': False, 'post': post}
     if request.method == 'GET':
-
         return render(
             request,
             "post_edit.html", context)

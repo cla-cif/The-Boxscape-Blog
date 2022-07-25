@@ -16,7 +16,7 @@
             <div class="alert alert-success" role="alert">
                 Your post is awaiting approval
                 <script type="text/javascript">
-                    setTimeout(function() {
+                    setTimeout(function () {
                         window.location.href = "{% url 'home' %}";
                     }, 2500);
                 </script>
@@ -35,8 +35,8 @@
             <h3 class="mt-4 text-center">Have your say:</h3>
             <p>Posting as: {{ user.username }}</p>
             <div class="form-group">
-                <form method="post" action="{% url 'post_create' %}" class="uniForm" style="margin-top: 1.3em;">
-                    <!-- {{ post_form | crispy }} -->
+                <form method="post" action="{% url 'post_create' %}" enctype="multipart/form-data" class="uniForm"
+                    style="margin-top: 1.3em;">
                     {% csrf_token %}
                     {{form.media}}
                     {{form.as_p}}
