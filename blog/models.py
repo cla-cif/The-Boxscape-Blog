@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from cloudinary.models import CloudinaryField
 from ckeditor.fields import RichTextField
 from taggit.managers import TaggableManager
+from .validators import validate_url
 
 
 class Author(models.Model):
@@ -27,8 +28,10 @@ class Post(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="blog_posts")
     tags = TaggableManager(help_text="tags must be lower case")
-    featured_image = CloudinaryField('image', default='placeholder')  # upload from admin site
-    list_image = models.CharField(blank=True, null=True, max_length=200)  # upload from blog
+    featured_image = CloudinaryField(
+        'image', default='placeholder')  # upload from admin site
+    list_image = models.CharField(blank=True, null=True, max_length=200,
+                                  validators=[validate_url])  # upload from blog
     excerpt = models.TextField(blank=True)
     body = RichTextField(blank=True, null=True)
     updated = models.DateTimeField(auto_now=True)
