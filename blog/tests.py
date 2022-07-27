@@ -1,9 +1,16 @@
-from django.test import TestCase, Client
+from django.test import TestCase, Client, SimpleTestCase
+import unittest
+from django.urls import reverse, resolve
 # from users.models import User
 from .models import Post, Comment, Author
+from .views import PostList
 
 
-
+class TestBlogUrls(SimpleTestCase):
+    
+    def test_home_url_is_resolved(self):
+        url = reverse('home')
+        self.assertEquals(resolve(url).func.view_class, PostList)
 
 
 
