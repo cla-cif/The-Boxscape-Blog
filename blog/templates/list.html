@@ -15,20 +15,20 @@
                 <div class="card mb-4">
                     <div class="card-body card-bg">
                         <div class="image-container">
-                            {% if "placeholder" in post.featured_image.url %}
-                            <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
+                            <!-- {% if "placeholder" in post.featured_image.url %} -->
+                            <!-- <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
                                     src="{% static 'placeholder.jpg' %}"></a>
                             {% else %}
                             <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
                                     src=" {{ post.featured_image.url }}"></a>
-                            {% endif %}
-                            <!-- {% if post.list_image.url %}
+                            {% endif %} -->
+                            {% if post.list_image %}
                             <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
-                                    src=" {{ post.list_image.url }}"></a>
+                                    src=" {{ post.list_image }}"></a>
                             {% else %}
                             <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
                                     src="{% static 'placeholder.jpg' %}"></a>
-                            {% endif %} -->
+                            {% endif %}
                         </div>
                         <div class="tags pt-2 pb-2">
                             <p class="card-text">
