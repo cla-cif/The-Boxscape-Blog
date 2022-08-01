@@ -12,20 +12,6 @@
 <div class="container mt-4 mb-4">
     <div class="row m-0 justify-content-center">
         <div class="col-xl-8">
-            {% if form.errors %}
-            {% for field in form %}
-            {% for error in field.errors %}
-            <div class="alert alert-danger">
-                <strong>{{ error|escape }}</strong>
-            </div>
-            {% endfor %}
-            {% endfor %}
-            {% for error in form.non_field_errors %}
-            <div class="alert alert-danger">
-                <strong>{{ error|escape }}</strong>
-            </div>
-            {% endfor %}
-            {% else %}
 
             {% if created %}
             <div class="alert alert-success" role="alert">
@@ -62,7 +48,20 @@
             {% else %}
             <h3>You must login or register before posting.</h3>
 
-            {% endif %}
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
             {% endif %}
             {% endif %}
         </div>

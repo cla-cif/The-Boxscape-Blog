@@ -160,15 +160,21 @@ def post_create(request):
             post.slug = '-'.join(form.cleaned_data.get('title').split(' '))
             post.title = form.cleaned_data.get('title')
             tags = form.cleaned_data.get('tags')
-            post.list_image = form.cleaned_data.get('list_image')  
+            post.list_image = form.cleaned_data.get('list_image')
             post.excerpt = form.cleaned_data.get('excerpt')
             post.body = form.cleaned_data.get('body')
             post.save()
-            post_author = Author(name=request.user.first_name, 
+            post_author = Author(name=request.user.first_name,
                                  user=request.user)
             post_author.save()
             for t in tags:
                 post.tags.add(t)
+        else:
+            form = PostForm(request.POST, request.FILES)
+            return render(request, 'post_create.html', {
+                'form': form, 
+                'created': False,
+            })
     return render(request, "post_create.html", {
         'form': form,
         'created': True,
