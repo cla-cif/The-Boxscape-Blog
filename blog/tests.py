@@ -1,22 +1,68 @@
 from django.test import TestCase, Client, SimpleTestCase
 import unittest
 from django.urls import reverse, resolve
-from .models import Post
-from .views import PostList
+from model_bakery import baker
+from pprint import pprint
+from .models import Post, Comment
+from .views import PostList, PostDetail, post_create, contact_us
 
 
-class TestModels(TestCase):
-    def test_model_str(self):
-        title = Post.objects.create(title="This is the blog title")
-        self.assertEqual(str(title), "This is the blog title")
-
-
-# class TestBlogUrls(SimpleTestCase):
+class TestPostModel(TestCase):
+    def setUp(self):
+        self.post = baker.make('Post')
+        # pprint(self.post.__dict__)
     
-#     def test_home_url_is_resolved(self):
-#         url = reverse('home')
-#         self.assertEquals(resolve(url).func.view_class, PostList)
+    def test_post_delete(self):
+        pk = self.post.pk
+        get_post = Post.objects.get(pk=pk)
+        get_post.delete()
+        self.assertFalse(Post.objects.filter(pk=pk).exists())
 
+    def test_model(self):
+        self.assertIsInstance(self.post, Post)
+
+
+class TestCommentModel(TestCase):
+    def setUp(self):
+        self.comment = baker.make('Comment')
+        # pprint(self.comment.__dict__)
+
+    def test_comment_delete(self):
+        pk = self.comment.pk
+        get_comment = Comment.objects.get(pk=pk)
+        get_comment.delete()
+        self.assertFalse(Comment.objects.filter(pk=pk).exists())
+
+    def test_model(self):
+        self.assertIsInstance(self.comment, Comment)
+
+
+class TestBlogUrls(SimpleTestCase):
+    def test_home_url_is_resolved(self):
+        url = reverse('home')
+        self.assertEquals(resolve(url).func.view_class, PostList)
+
+    def test_postdetail_url_is_resolved(self):
+        url = reverse('post_detail', args=[1])
+        self.assertEquals(resolve(url).func.view_class, PostDetail)
+
+    def test_postcreate_url_is_resolved(self):
+        url = reverse('post_create')
+        self.assertEquals(resolve(url).func, post_create)
+
+    def test_contact_url_is_resolved(self):
+        url = reverse('contact')
+        self.assertEquals(resolve(url).func, contact_us)
+
+
+class TestBlogViews(TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    def test_home_view(self):
+        response = self.client.get(reverse('home'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'list.html')
 
 
 
