@@ -27,11 +27,11 @@ class Post(models.Model):
                             unique_for_date='published', blank=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="blog_posts")
-    tags = TaggableManager(help_text="tags must be lower case")
+    tags = TaggableManager(help_text= "We suggest to use no more than 3 tags to improve results") # noqa
     featured_image = CloudinaryField(
-        'image', default='placeholder')  # upload from admin site
+        'image', default='placeholder')  # upld from admin site
     list_image = models.CharField(blank=True, null=True, max_length=200,
-                                  validators=[validate_url])  # upload from blog
+                                  validators=[validate_url])  # upld from blog
     excerpt = models.TextField(blank=True)
     body = RichTextField(blank=True, null=True)
     updated = models.DateTimeField(auto_now=True)

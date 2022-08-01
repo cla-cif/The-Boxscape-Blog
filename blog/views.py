@@ -168,11 +168,11 @@ def post_create(request):
                                  user=request.user)
             post_author.save()
             for t in tags:
-                post.tags.add(t)
+                post.tags.add(t.lower())
         else:
             form = PostForm(request.POST, request.FILES)
             return render(request, 'post_create.html', {
-                'form': form, 
+                'form': form,
                 'created': False,
             })
     return render(request, "post_create.html", {
@@ -195,6 +195,13 @@ def post_edit(request, id):
         if form.is_valid():
             post.status = 'dft'
             form.save()
+        else:
+            form = EditPostForm(request.POST or None, instance=post)
+            return render(request, 'post_edit.html', {
+                'form': form,
+                'edited': False,
+                'post': post,
+            })
         context = {'form': form, 'edited': True, 'post': post}
     return render(request, "post_edit.html", context)
 

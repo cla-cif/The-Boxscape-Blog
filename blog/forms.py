@@ -2,7 +2,6 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Div, HTML  # noqa
 from crispy_forms.bootstrap import StrictButton
-from .validators import validate_url
 from .models import Comment, Post
 
 

@@ -135,7 +135,7 @@
         <!-- COMMENT COUNTER TITLE -->
         <div class="comment-title mb-4 mt-4">
             {% if number_comments == 0 %}
-            <h3> There are no comments yet</h3>
+            <h4 class="no-comment mt-4 text-center"> No comments yet <br>Be the first to share what you think!</h4>
             {% elif number_comments == 1 %}
             <h3> {{ number_comments }} Comment</h3>
             {% else  %}
@@ -144,9 +144,9 @@
         </div>
 
         <!-- COMMENT LIST -->
-        <div class="col-xl-8 mb-3">
+        <div class="col-xl-8">
             {% for comment in comments %}
-            <div class="comments container-detail p-4 mb-3">
+            <div class="comments container-detail p-4 mb-4">
                 <div class="d-flex justify-content-between align-items-center">
                     <h4>{{ comment.name }}</h4>
                     <div class="text-details card-text">{{ comment.created|naturalday|upper }}</div>

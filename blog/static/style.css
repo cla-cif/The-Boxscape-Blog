@@ -16,7 +16,6 @@
     margin:0;
 }
 
-
 body {
     font-family: var(--font-default), sans-serif;
 }
@@ -194,6 +193,11 @@ ul {
     color: blue;
     background: transparent;
     border: none;
+}
+
+.no-comment {
+    color: grey !important;
+    opacity: .5 !important;
 }
 
 /* footer */
