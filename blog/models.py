@@ -27,11 +27,13 @@ class Post(models.Model):
                             unique_for_date='published', blank=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="blog_posts")
-    tags = TaggableManager(help_text= "We suggest to use no more than 3 tags to improve results") # noqa
+    tags = TaggableManager(help_text= "We suggest to use no more than 3 tags to improve search results") # noqa
     featured_image = CloudinaryField(
         'image', default='placeholder')  # upld from admin site
     list_image = models.CharField(blank=True, null=True, max_length=200,
-                                  validators=[validate_url])  # upld from blog
+                                  validators=[validate_url],
+                                  help_text="Paste here a link ending with .jpg .gif .png",
+                                  verbose_name="Image")  # upld from blog
     excerpt = models.TextField(blank=True)
     body = RichTextField(blank=True, null=True)
     updated = models.DateTimeField(auto_now=True)

@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 {% block title %} Create a new Post {% endblock %}
 {% load static %}
-{% load cloudinary %}
-{% load crispy_forms_tags %}
-{% load humanize %}
 
 
 {% block content %}
@@ -41,7 +38,7 @@
                     {% csrf_token %}
                     {{form.media}}
                     {{form.as_p}}
-                    <div class="d-grid col-6 mx-auto">
+                    <div class="d-grid col-6 mx-auto mb-4 mt-4">
                         <button type="submit" class="btn btn-lg">Submit</button>
                     </div>
             </div>
@@ -49,21 +46,6 @@
             <h3>You must login or register before posting.</h3>
             {% endif %}
             {% endif %}
-
-            <!-- {% if form.errors %}
-            {% for field in form %}
-            {% for error in field.errors %}
-            <div>
-                <p style="color:red">{{ error|escape }}</p>
-            </div>
-            {% endfor %}
-            {% endfor %}
-            {% for error in form.non_field_errors %}
-            <div>
-                <p style="color:red">{{ error|escape }}</p>
-            </div>
-            {% endfor %}
-            {% endif %} -->
         </div>
     </div>
 </div>
