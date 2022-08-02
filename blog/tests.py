@@ -1,6 +1,7 @@
 from django.test import TestCase, Client, SimpleTestCase
-import unittest
 from django.urls import reverse, resolve
+from django.core.exceptions import ValidationError
+import unittest
 from model_bakery import baker
 from pprint import pprint
 from .models import Post, Comment
@@ -11,7 +12,7 @@ class TestPostModel(TestCase):
     def setUp(self):
         self.post = baker.make('Post')
         # pprint(self.post.__dict__)
-    
+
     def test_post_delete(self):
         pk = self.post.pk
         get_post = Post.objects.get(pk=pk)
@@ -64,5 +65,21 @@ class TestBlogViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'list.html')
 
+    def test_createpost_view(self):
+        response = self.client.get(reverse('post_create'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'post_create.html')
+
+    def test_contactus_view(self):
+        response = self.client.get(reverse('contact'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'contact_us.html')
 
 
+class TestUrlValidation(TestCase):
+    def test_image_url_validation_failed(self):
+        # response = self.client.post('/post_create/', data={'list_image': 'https://www.google.com/'})
+        with self.assertRaisesRegex(ValidationError,
+                               'Unsupported file extension.',
+                               response,
+                               'https://www.google.com/')
