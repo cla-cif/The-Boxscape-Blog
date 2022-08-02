@@ -4,6 +4,8 @@
     --yellow-light: #f5eec2;
     --very-peri: #6667ab;
     --green-dark: #416a59;
+    --blue-dark: #006ee6;
+    --red-light:#E84610;
     --white-pure: #fff;
     --text-default: black;
     --font-title: 'IBM Plex Sans';
@@ -18,7 +20,7 @@
 
 strong {
     font-weight: bold;
-    color: var(--orange);
+    color: var(--very-peri);
 }
 
 body {
@@ -190,27 +192,27 @@ ul {
 }
 
 .btn-like {
-    color: #E84610;
+    color: var(--red-light);
     border: none;
     background: transparent;
 }
 
 .btn-like:hover,
 .btn-like:active {
-    color: #E84610;
+    color: var(--red-light);
     background: transparent;
     border: none;
 }
 
 .btn-dislike {
-    color: blue;
+    color: var(--blue-dark);
     border: none;
     background: transparent;
 }
 
 .btn-dislike:hover,
 .btn-dislike:active {
-    color: blue;
+    color: var(--blue-dark);
     background: transparent;
     border: none;
 }

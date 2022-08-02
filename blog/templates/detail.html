@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block title %} Post Detail {% endblock %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% load humanize %}
@@ -6,26 +7,26 @@
 {% block content %}
 
 <!-- POST TITLE -->
-<div class="container container-detail mb-4 p-4">
+<div class="container container-detail mb-4 mt-4 p-4">
     <div class="row m-0 title-detail">
         <div class="col-xl-10 align-self-center">
-            <h1 class="post-title pb-3 m-0">{{ post.title }}</h1>
+            <h1 class="post-title pb-4 m-0">{{ post.title }}</h1>
             <p class="card-text text-details"> BY <a class="author"
-                    href="{% url 'author_posts' post.author.id %}">{{ post.author|upper}}</a><span class="pipe">
-                    |
-                </span>{{ post.created|naturalday|upper }}
+                    href="{% url 'author_posts' post.author.id %}">{{ post.author|upper}}</a>
+                    &nbsp;|&nbsp;
+                {{ post.created|naturalday|upper }}
             </p>
         </div>
         <div class="col-xl-2 align-self-center">
-            <img class="image-detail" src="{% static 'detail.jpg' %}" width="130" alt="">
+            <img class="image-detail" src="{% static 'detail.jpg' %}" width="130" alt="the blog logo an open box laying on its side">
         </div>
     </div>
 </div>
 
 <!-- POST BODY -->
-<div class="container container-detail mb-3">
+<div class="container container-detail mb-4 mt-4">
     <div class="row body-detail m-0">
-        <!-- POST-BODY -->
+        <!-- POST BODY TEXT -->
         <div class="col-xl-12">
             <p class="post-body m-0 p-4"><i class="fa fa-quote-left fa-3x fa-pull-left"></i>
                 {{ post.body | safe | linebreaks }}
@@ -88,6 +89,7 @@
             </strong>
 
             {% if user.is_authenticated and user == post.author %}
+
             <!-- POST EDIT -->
             <strong class="col-lg-2 d-flex justify-content-center">
                 <a href="{% url 'post_edit' post.id %}">
@@ -128,8 +130,8 @@
     </div>
 </div>
 
-<!-- COMMENTS SECTION -->
-<div class="container mb-4">
+<!-- COMMENTS -->
+<div class="container mb-4 mt-4">
     <div class="row m-0">
 
         <!-- COMMENT COUNTER TITLE -->
@@ -154,7 +156,6 @@
                 <div>{{ comment.body | linebreaks }}</div>
 
                 <!-- COMMENT OPTIONAL BUTTONS -->
-
                 {% if user.is_authenticated and user.username == comment.name %}
                 <hr>
                 <div class="d-flex flex-row-reverse">
@@ -204,11 +205,11 @@
     </div>
 </div>
 
-
 <!-- COMMENT BOX -->
-<div class="container mt-4 mb-4">
+<div class="container mb-4 mt-4 pb-4">
     <div class="row m-0">
         <div class="col-xl-8">
+            <!-- COMMENT SUCCESS MESSAGE -->
             {% if commented %}
             <div class="alert alert-success" role="alert">
                 Your comment is awaiting approval
@@ -235,8 +236,8 @@
 </div>
 
 <!-- SUGGESTED POSTS LIST -->
-<div class="container pt-4">
-    <div class="mt-4 mb-4">
+<div class="container mt-4 mb-4">
+    <div class="mb-4 mt-4 pt-4 pb-4">
         <h2 class="d-flex justify-content-center">You may also like...</h2>
     </div>
     <div class="row pt-4 pb-4 m-0">
@@ -245,13 +246,21 @@
             <div class="card mb-4">
                 <div class="card-body card-bg">
                     <div class="image-container">
-                        {% if "placeholder" in post.featured_image.url %}
-                        <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
-                                src="{% static 'placeholder.jpg' %}"></a>
-                        {% else %}
-                        <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
-                                src=" {{ post.featured_image.url }}"></a>
-                        {% endif %}
+                            <!-- TO DISPLAY PICTURES UPLOADED TO CLOUDINARY FROM ADMIN PANEL -->
+                            <!-- {% if "placeholder" in post.featured_image.url %}
+                            <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
+                                    src="{% static 'placeholder.jpg' %}" alt="the blog logo an open box laying on its side"></a>
+                            {% else %}
+                            <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
+                                    src=" {{ post.featured_image.url }}" alt="an image related to the post content"></a>
+                            {% endif %} -->
+                            {% if post.list_image %}
+                            <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
+                                    src=" {{ post.list_image }}" alt="an image related to the post content"></a>
+                            {% else %}
+                            <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
+                                    src="{% static 'placeholder.jpg' %}" alt="the blog logo an open box laying on its side"></a>
+                            {% endif %}
                     </div>
                     <div class="tags pt-2 pb-2">
                         <p class="card-text">
@@ -266,7 +275,7 @@
                     </a>
                     <hr />
                     <p class="card-text text-details h6"> BY <a class="author"
-                            href="{% url 'author_posts' post.author.id %}">{{ post.author|upper}}</a><span class="pipe">
+                            href="{% url 'author_posts' post.author.id %}">{{ post.author|upper}}</a>
                     </p>
                 </div>
             </div>
