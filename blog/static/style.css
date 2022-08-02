@@ -13,7 +13,7 @@
 /* general settings */
 * {
     max-width: 100%;
-    margin:0;
+    margin: 0;
 }
 
 body {
@@ -67,10 +67,11 @@ ul {
 
 .btn-negative {
     background-color: var(--green-dark);
-    color:var(--white-pure);
+    color: var(--white-pure);
     border: none;
 }
-.btn-negative:hover{
+
+.btn-negative:hover {
     opacity: .8;
 }
 
@@ -91,7 +92,7 @@ ul {
     background-color: transparent;
 }
 
-.card-title, 
+.card-title,
 .card-title-small {
     font-family: var(--font-title), sans-serif;
     font-weight: 700;
@@ -102,6 +103,7 @@ ul {
     line-height: 110%;
     color: var(--text-default);
 }
+
 .card-title-small {
     font-size: 1.375rem !important;
 }
@@ -137,6 +139,19 @@ ul {
 .author,
 .header-link {
     text-decoration: underline;
+}
+
+/* about.html */
+.about-body {
+    line-height: 1.875rem;
+    font-family: var(--font-default), sans-serif;
+    padding: 40px 120px;
+    text-align: justify;
+    font-size: 17px;
+    font-weight: 200;
+}
+.about-body>h5 {
+    margin-top: .5rem;
 }
 
 /* detail.html */
