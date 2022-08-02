@@ -32,7 +32,7 @@ class Post(models.Model):
         'image', default='placeholder')  # upld from admin site
     list_image = models.CharField(blank=True, null=True, max_length=200,
                                   validators=[validate_url],
-                                  help_text="Paste here a link ending with .jpg .gif .png",
+                                  help_text="Paste here a link ending with .jpg .gif .png", # noqa
                                   verbose_name="Image")  # upld from blog
     excerpt = models.TextField(blank=True)
     body = RichTextField(blank=True, null=True)

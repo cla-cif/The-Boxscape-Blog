@@ -29,7 +29,8 @@
                                     src=" {{ post.list_image }}" alt="an image related to the post content"></a>
                             {% else %}
                             <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
-                                    src="{% static 'placeholder.jpg' %}" alt="the blog logo an open box laying on its side"></a>
+                                    src="{% static 'placeholder.jpg' %}"
+                                    alt="the blog logo an open box laying on its side"></a>
                             {% endif %}
                         </div>
                         <div class="tags pt-2 pb-2">
@@ -45,10 +46,11 @@
                             <p class="card-text">{{ post.excerpt|truncatechars:160 }}</p>
                         </a>
                         <hr />
-                        <p class="card-text text-details d-flex p-0 justify-content-center"> BY&nbsp; <a class="author"
+                        <p class="card-text text-details d-flex p-0 justify-content-center">
+                            BY&nbsp; <a class="author"
                                 href="{% url 'author_posts' post.author.id %}">{{ post.author|upper}}</a>
-                            &nbsp;&nbsp;|&nbsp&nbsp;
-                            </span>{{ post.created|naturalday|upper }} &nbsp;&nbsp;|&nbsp;&nbsp; </span>
+                            &nbsp;&nbsp;|&nbsp;&nbsp;
+                            <span>{{ post.created|naturalday|upper }} &nbsp;&nbsp;|&nbsp;&nbsp;</span>
                             <strong class="text-details"><i class="far fa-comments"></i>
                                 {{ post.approved_comments }}
                             </strong>
@@ -117,12 +119,12 @@
             <div class="row m-0">
                 <h4 class="pb-4 pt-4">Some numbers:</h4>
                 <div class="sidebar-box p-0 mb-4">
-                    <ul class="p-4 m-0">
-                        <h6 class="pb-1">{% total_posts %} posts</h6>
-                        <h6 class="pb-1">{% total_users %} members</h6>
-                        <h6 class="pb-1">{% total_comments %} comments</h6>
-                        <h6>{% total_authors %} contributors</h6>
-                    </ul>
+                    <div class="p-4 m-0">
+                        <h6 class="pb-1 text-details">{% total_posts %} posts</h6>
+                        <h6 class="pb-1 text-details">{% total_users %} members</h6>
+                        <h6 class="pb-1 text-details">{% total_comments %} comments</h6>
+                        <h6 class="pb-1 text-details">{% total_authors %} contributors</h6>
+                    </div>
                 </div>
             </div>
 
@@ -143,7 +145,5 @@
     </ul>
 </nav>
 {% endif %}
-
-
 
 {%endblock%}
