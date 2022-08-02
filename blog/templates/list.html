@@ -6,7 +6,7 @@
 
 
 {% block content %}
-<div class="wrapper d-flex align-items-stretch">
+<div class="wrapper d-flex">
 
     <!-- MAIN / POSTS LIST -->
     <div class="container-fluid pt-4 pb-4">
@@ -60,33 +60,38 @@
             </div>
             {% if forloop.counter|divisibleby:3 %}
         </div>
-        <div class="row flex-shrink-0">
+        <div class="row flex-shrink-0 m-0">
             {% endif %}
             {% endfor %}
         </div>
     </div>
 
-    <!-- SIDEBAR -->
-    <div class="container sidebar" style="width:25%">
-
-        <!-- total posts counter -->
-        <div class="row m-0">
-            <h4 class="pb-4 pt-4">Welcome {{ user.username }}!</h4>
-            <div class="sidebar-box m-0 p-4">
-                <p class="text-details">You're encouraged to post your ideas and be respectful of others' opinion,
-                    identity, preferences, religion, culture.</p>
-                <a href="{% url 'about' %}">
-                    <p class="text-details text-center text-decoration-underline">Read about our values</p>
-                </a>
-                <div class="col p-0 d-flex justify-content-center"><a href="{% url 'post_create' %}"><button
-                            class="btn btn-lg" type="submit">Create a post</button></a></div>
-            </div>
+<!-- sidebar toggle on mobile screen -->
+    <div class="menu-toggle">
+        <div class="hamburger">
+            <span></span>
         </div>
+    </div>
 
-        <!-- subscribe to RSS feeds -->
-        <div class="col pt-4">
-            <div class="row m-0">
-                <h4 class="pb-4">Subscribe</h4>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <nav class="menu">
+            <!-- create post -->
+            <div>
+                <h4 class="pb-4 pt-4 title-mobile">Welcome {{ user.username }}!</h4>
+                <div class="sidebar-box m-0 p-4">
+                    <p class="text-details">You're encouraged to post your ideas and be respectful of others' opinion,
+                        identity, preferences, religion, culture.</p>
+                    <a href="{% url 'about' %}">
+                        <p class="text-details text-center text-decoration-underline">Read about our values</p>
+                    </a>
+                    <div class="col p-0 d-flex justify-content-center"><a href="{% url 'post_create' %}"><button
+                                class="btn btn-lg" type="submit">Create a post</button></a></div>
+                </div>
+            </div>
+            <!-- subscribe to RSS feeds -->
+            <div class="sidebar-hidden-mobile">
+                <h4 class="pb-4 pt-4">Subscribe</h4>
                 <div class="sidebar-box m-0 p-4">
                     <a href="{% url 'post_feed' %}">
                         <h5 class="text-details mb-0">Feed RSS</h5>
@@ -95,13 +100,13 @@
             </div>
 
             <!-- latest posts list -->
-            <div class="row m-0">
+            <div class="sidebar-hidden-mobile">
                 <h4 class="pb-4 pt-4">Latest:</h4>
                 <div class="sidebar-box m-0 p-0">{% show_latest_posts 3 %}</div>
             </div>
 
             <!-- most commented posts -->
-            <div class="row m-0">
+            <div class="sidebar-hidden-mobile">
                 <h4 class="pb-4 pt-4">Trending posts:</h4>
                 <div class="sidebar-box p-0">
                     {% get_most_commented_posts as most_commented_posts %}
@@ -116,7 +121,7 @@
             </div>
 
             <!-- some numbers  -->
-            <div class="row m-0">
+            <div class="sidebar-hidden-mobile">
                 <h4 class="pb-4 pt-4">Some numbers:</h4>
                 <div class="sidebar-box p-0 mb-4">
                     <div class="p-4 m-0">
@@ -127,9 +132,9 @@
                     </div>
                 </div>
             </div>
+        </nav>
+    </aside>
 
-        </div>
-    </div>
 </div>
 
 <!-- PAGINATION -->
@@ -144,6 +149,18 @@
         {% endif %}
     </ul>
 </nav>
+
+<!-- SCRIPT -->
+<script>
+    const menu_toggle = document.querySelector('.menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    menu_toggle.addEventListener('click', () => {
+        menu_toggle.classList.toggle('is-active');
+        sidebar.classList.toggle('is-active');
+    });
+</script>
+
 {% endif %}
 
 {%endblock%}
