@@ -13,12 +13,13 @@
             <h1 class="post-title pb-4 m-0">{{ post.title }}</h1>
             <p class="card-text text-details"> BY <a class="author"
                     href="{% url 'author_posts' post.author.id %}">{{ post.author|upper}}</a>
-                    &nbsp;|&nbsp;
+                &nbsp;|&nbsp;
                 {{ post.created|naturalday|upper }}
             </p>
         </div>
         <div class="col-xl-2 align-self-center">
-            <img class="image-detail" src="{% static 'detail.jpg' %}" width="130" alt="the blog logo an open box laying on its side">
+            <img class="image-detail" src="{% static 'detail.jpg' %}" width="130"
+                alt="the blog logo an open box laying on its side">
         </div>
     </div>
 </div>
@@ -42,90 +43,95 @@
         </div>
 
         <!-- POST BUTTONS -->
-        <div class="d-flex flex-nowrap pb-4 pt-4">
-            <!-- POST LIKE -->
-            <strong class="col-lg-2 d-flex justify-content-center">
-                {% if user.is_authenticated %}
-                <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
-                    {% csrf_token %}
-                    {% if liked %}
-                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i
-                            class="fas fa-heart"></i></button>
+        <div class="container">
+            <div class="row row-cols-lg-2 row-cols-3 p-4 m-0">
+                <!-- POST LIKE -->
+                <div class="col col-lg-2 d-flex justify-content-center">
+                    {% if user.is_authenticated %}
+                    <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
+                        {% csrf_token %}
+                        {% if liked %}
+                        <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i
+                                class="fas fa-heart"></i></button>
+                        {% else %}
+                        <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i
+                                class="far fa-heart"></i></button>
+                        {% endif %}
+                    </form>
                     {% else %}
-                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i
-                            class="far fa-heart"></i></button>
+                    <span class="text-details"><i class="far fa-heart"></i></span>
                     {% endif %}
-                </form>
-                {% else %}
-                <span class="text-details"><i class="far fa-heart"></i></span>
-                {% endif %}
-                <span class="text-details">&nbsp;{{ post.number_of_likes }}</span>
-            </strong>
-
-            <!-- POST DISLIKE -->
-            <strong class="col-lg-2 d-flex justify-content-center">
-                {% if user.is_authenticated %}
-                <form class="d-inline" action="{% url 'post_dislike' post.slug %}" method="POST">
-                    {% csrf_token %}
-                    {% if disliked %}
-                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-dislike"><i
-                            class="fas fa-heart-broken"></i></button>
-                    {% else %}
-                    <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-dislike"><i
-                            class="fas fa-heart-broken"></i></button>
-                    {% endif %}
-                </form>
-                {% else %}
-                <span class="text-details"><i class="fas fa-heart-broken"></i></span>
-                {% endif %}
-                <span class="text-details">&nbsp;{{ post.number_of_dislikes }}</span>
-            </strong>
-
-            <!-- COMMENT COUNT -->
-            <strong class="col-lg-2 d-flex justify-content-center">
-                <div class="text-details"><i class="far fa-comments"></i>
-                    &nbsp;{{ number_comments }}
+                    <span class="text-details">&nbsp;<strong>{{ post.number_of_likes }}</strong>
                 </div>
-            </strong>
 
-            {% if user.is_authenticated and user == post.author %}
+                <!-- POST DISLIKE -->
+                <div class="col col-lg-2 d-flex justify-content-center">
+                    {% if user.is_authenticated %}
+                    <form class="d-inline" action="{% url 'post_dislike' post.slug %}" method="POST">
+                        {% csrf_token %}
+                        {% if disliked %}
+                        <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-dislike"><i
+                                class="fas fa-heart-broken"></i></button>
+                        {% else %}
+                        <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-dislike"><i
+                                class="fas fa-heart-broken"></i></button>
+                        {% endif %}
+                    </form>
+                    {% else %}
+                    <span class="text-details"><i class="fas fa-heart-broken"></i></span>
+                    {% endif %}
+                    <span class="text-details">&nbsp;<strong>{{ post.number_of_dislikes }}</strong>
+                </div>
 
-            <!-- POST EDIT -->
-            <strong class="col-lg-2 d-flex justify-content-center">
-                <a href="{% url 'post_edit' post.id %}">
-                    <i class="far fa-edit"></i>&nbsp;EDIT
-                </a>
-            </strong>
+                <!-- COMMENT COUNT -->
+                <div class="col col-lg-2 d-flex justify-content-center">
+                    <div class="text-details"><i class="far fa-comments"></i>
+                        &nbsp;<strong>{{ number_comments }}</strong>
+                    </div>
+                </div>
 
-            <!-- POST DELETE -->
-            <button type="button" class="btn-comment" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                <i class="fas fa-trash"></i>&nbsp;<strong>DELETE</strong>
-            </button>
-            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Hey {{ user.username }}!</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Are you sure you want to delete your post?
-                        </div>
-                        <div class="modal-footer">
-                            <form action="{% url 'post_detail' post.slug %}">
-                                {% csrf_token %}
-                                <input type="submit" class="btn btn-negative" value="No, take me back">
-                            </form>
-                            <form method="POST" action="{% url 'post_delete' post.pk %}">
-                                {% csrf_token %}
-                                <input type="submit" class="btn" value="Yes, I'm sure">
-                            </form>
+                {% if user.is_authenticated and user == post.author %}
+
+                <!-- POST EDIT -->
+                <div class="col-6 col-lg-2 gy-2 d-flex justify-content-center">
+                    <a href="{% url 'post_edit' post.id %}">
+                        <i class="far fa-edit"></i>&nbsp;<strong>EDIT</strong>
+                    </a>
+                </div>
+
+                <!-- POST DELETE -->
+                <div class="col-6 col-lg-2 gy-2 d-flex justify-content-center">
+                    <button type="button" class="btn-comment" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                        <i class="fas fa-trash"></i>&nbsp;<strong>DELETE</strong>
+                    </button>
+                </div>
+                <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Hey {{ user.username }}!</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete your post?
+                            </div>
+                            <div class="modal-footer">
+                                <form action="{% url 'post_detail' post.slug %}">
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn btn-negative" value="No, take me back">
+                                </form>
+                                <form method="POST" action="{% url 'post_delete' post.pk %}">
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn" value="Yes, I'm sure">
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
     </div>
 </div>
@@ -246,21 +252,22 @@
             <div class="card mb-4">
                 <div class="card-body card-bg">
                     <div class="image-container">
-                            <!-- TO DISPLAY PICTURES UPLOADED TO CLOUDINARY FROM ADMIN PANEL -->
-                            <!-- {% if "placeholder" in post.featured_image.url %}
+                        <!-- TO DISPLAY PICTURES UPLOADED TO CLOUDINARY FROM ADMIN PANEL -->
+                        <!-- {% if "placeholder" in post.featured_image.url %}
                             <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
                                     src="{% static 'placeholder.jpg' %}" alt="the blog logo an open box laying on its side"></a>
                             {% else %}
                             <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
                                     src=" {{ post.featured_image.url }}" alt="an image related to the post content"></a>
                             {% endif %} -->
-                            {% if post.list_image %}
-                            <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
-                                    src=" {{ post.list_image }}" alt="an image related to the post content"></a>
-                            {% else %}
-                            <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
-                                    src="{% static 'placeholder.jpg' %}" alt="the blog logo an open box laying on its side"></a>
-                            {% endif %}
+                        {% if post.list_image %}
+                        <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
+                                src=" {{ post.list_image }}" alt="an image related to the post content"></a>
+                        {% else %}
+                        <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
+                                src="{% static 'placeholder.jpg' %}"
+                                alt="the blog logo an open box laying on its side"></a>
+                        {% endif %}
                     </div>
                     <div class="tags pt-2 pb-2">
                         <p class="card-text">
