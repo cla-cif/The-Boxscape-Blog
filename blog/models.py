@@ -4,7 +4,6 @@ from django.utils import timezone
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from cloudinary.models import CloudinaryField
-from ckeditor.fields import RichTextField
 from taggit.managers import TaggableManager
 from .validators import validate_url
 
@@ -35,7 +34,7 @@ class Post(models.Model):
                                   help_text="Paste here a link ending with .jpg .gif .png", # noqa
                                   verbose_name="Image")  # upld from blog
     excerpt = models.TextField(blank=True)
-    body = RichTextField(blank=True, null=True)
+    body = models.TextField(blank=True, null=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     published = models.DateTimeField(default=timezone.now)
