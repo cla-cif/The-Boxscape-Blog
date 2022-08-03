@@ -35,8 +35,7 @@
             <div class="form-group">
                 <form method="post" action="{% url 'post_edit' post.id %}" class="uniForm" style="margin-top: 1.3em;">
                     {% csrf_token %}
-                    {{form.media}}
-                    {{form.as_p}}
+                    {{form.as_p | safe}}
                     <div class="d-grid col-6 mx-auto pt-4 pb-4">
                         <button type="submit" class="btn btn-lg">Submit</button>
                     </div>

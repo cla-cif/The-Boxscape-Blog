@@ -36,8 +36,7 @@
                 <form method="post" action="{% url 'post_create' %}" enctype="multipart/form-data" class="uniForm"
                     style="margin-top: 1.3em;">
                     {% csrf_token %}
-                    {{form.media}}
-                    {{form.as_p}}
+                    {{form.as_p | safe}}
                     <div class="d-grid col-6 mx-auto mb-4 mt-4">
                         <button type="submit" class="btn btn-lg">Submit</button>
                     </div>
