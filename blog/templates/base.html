@@ -105,7 +105,7 @@
     <!-- SCRIPT -->
     <script>
         setTimeout(function () {
-            let messages = document.getElementById('msg');
+            let messages = document.getElementByClasses('alert');
             let alert = new bootstrap.Alert(messages);
             alert.close();
         }, 2500);
