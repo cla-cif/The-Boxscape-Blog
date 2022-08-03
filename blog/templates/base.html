@@ -104,11 +104,12 @@
 
     <!-- SCRIPT -->
     <script>
-        setTimeout(function () {
-            let messages = document.getElementByClasses('alert');
-            let alert = new bootstrap.Alert(messages);
-            alert.close();
-        }, 2500);
+        $(document).ready(function () {
+            // show the alert
+            setTimeout(function () {
+                $(".alert").alert('close');
+            }, 2000);
+        });
     </script>
 </body>
 

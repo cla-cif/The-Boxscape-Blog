@@ -25,6 +25,8 @@ strong {
 
 body {
     font-family: var(--font-default), sans-serif;
+    display:flex;
+    min-height: 100vh;
 }
 
 img:hover {
@@ -284,6 +286,10 @@ ul {
 }
 
 /* FOOTER */
+footer {
+    margin-top: auto !important;
+}
+
 .footer-bg {
     background-color: var(--very-peri);
 }
@@ -322,6 +328,7 @@ ul {
     .title-mobile {
         padding-inline: 1rem;
     }
+
     .sidebar-box {
         padding: 1rem;
     }
@@ -340,7 +347,7 @@ ul {
 
     /* about.html */
     .title-detail,
-    .about-body{
+    .about-body {
         padding: 0;
     }
 }
