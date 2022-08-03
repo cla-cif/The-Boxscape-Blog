@@ -18,7 +18,7 @@
             </p>
         </div>
         <div class="col-xl-2 align-self-center">
-            <img class="image-detail" src="{% static 'detail.jpg' %}" width="130"
+            <img class="image-detail" src="{% static 'blog/detail.jpg' %}" width="130"
                 alt="the blog logo an open box laying on its side">
         </div>
     </div>
@@ -255,7 +255,7 @@
                         <!-- TO DISPLAY PICTURES UPLOADED TO CLOUDINARY FROM ADMIN PANEL -->
                         <!-- {% if "placeholder" in post.featured_image.url %}
                             <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
-                                    src="{% static 'placeholder.jpg' %}" alt="the blog logo an open box laying on its side"></a>
+                                    src="{% static 'blog/placeholder.jpg' %}" alt="the blog logo an open box laying on its side"></a>
                             {% else %}
                             <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
                                     src=" {{ post.featured_image.url }}" alt="an image related to the post content"></a>
@@ -265,7 +265,7 @@
                                 src=" {{ post.list_image }}" alt="an image related to the post content"></a>
                         {% else %}
                         <a href="{% url 'post_detail' post.slug %}"><img class="card-img-top"
-                                src="{% static 'placeholder.jpg' %}"
+                                src="{% static 'blog/placeholder.jpg' %}"
                                 alt="the blog logo an open box laying on its side"></a>
                         {% endif %}
                     </div>
