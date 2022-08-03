@@ -57,7 +57,6 @@ INSTALLED_APPS = [
     'taggit',
     'django.contrib.humanize',
     'crispy_bootstrap5',
-    'ckeditor',
     'blog',
 ]
 

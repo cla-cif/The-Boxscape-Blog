@@ -9,7 +9,6 @@ dj3-cloudinary-storage==0.0.6
 Django==3.2.13
 django-allauth==0.51.0
 django-amazon-ses==4.0.1
-django-ckeditor==6.4.2
 django-cloudinary-storage==0.3.0
 django-crispy-forms==1.14.0
 django-js-asset==2.0.0
