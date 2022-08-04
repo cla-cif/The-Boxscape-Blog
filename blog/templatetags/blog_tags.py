@@ -11,14 +11,15 @@ def total_posts():
     return Post.objects.filter(status='pub').count()
 
 
-# @register.simple_tag()
-# def total_authors():
-#     return Author.objects.count()
-
 @register.simple_tag()
 def total_authors():
-    qs = Author.objects.all().distinct('name').order_by('name')
-    return qs.count()
+    result = (Author.objects
+              .values('user')
+              .annotate(count=Count('user'))
+              .order_by()
+              )
+    return len(result)
+
 
 # @register.simple_tag()
 # def total_authors():
