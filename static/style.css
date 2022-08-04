@@ -42,11 +42,6 @@ a {
     color: var(--very-peri)
 }
 
-.rounded-circle {
-    height: 70px;
-    width: 70px;
-}
-
 a:hover {
     color: var(--orange);
 }
