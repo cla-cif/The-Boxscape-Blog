@@ -11,9 +11,18 @@ def total_posts():
     return Post.objects.filter(status='pub').count()
 
 
+# @register.simple_tag()
+# def total_authors():
+#     return Author.objects.count()
+
 @register.simple_tag()
 def total_authors():
-    return Author.objects.all().count()
+    qs = Author.objects.all().distinct('name').order_by('name')
+    return qs.count()
+
+# @register.simple_tag()
+# def total_authors():
+#     return Author.objects.all().count()
 
 
 @register.simple_tag()
@@ -28,7 +37,7 @@ def total_comments():
 
 @register.inclusion_tag('latest_posts.html')
 def show_latest_posts(count=5):
-    latest_posts = Post.objects.filter(status='pub').order_by('-published')[:count] # noqa
+    latest_posts = Post.objects.filter(status='pub').order_by('-published')[:count]  # noqa
     return {'latest_posts': latest_posts}
 
 
