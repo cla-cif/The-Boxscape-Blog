@@ -32,8 +32,8 @@ class PostDetail(View):
         comments = post.comments.filter(approved=True).order_by("created")
         # display number of approved comments
         number_comments = len(comments)
-        # retrieving post by similarity
-        post_tags_ids = post.tags.values_list('id', flat=True)
+        # fetch post by similarity
+        post_tags_ids = post.tags.values_list('id', flat=False)
         similar_posts = Post.objects.filter(tags__in=post_tags_ids)\
             .exclude(id=post.id)
         similar_posts = similar_posts.annotate(same_tags=Count('tags'))\
