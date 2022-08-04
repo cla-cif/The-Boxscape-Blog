@@ -70,6 +70,8 @@ class PostDetail(View):
         number_comments = len(comments)
         # retrieving post by similarity
         post_tags_ids = post.tags.values_list('id', flat=True)
+        if post_tags_ids is None:
+            return post.tags.values_list(id=1)
         similar_posts = Post.objects.filter(tags__in=post_tags_ids)\
             .exclude(id=post.id)
         similar_posts = similar_posts.annotate(same_tags=Count('tags'))\
