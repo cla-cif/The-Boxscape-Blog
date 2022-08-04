@@ -1,7 +1,8 @@
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Div, HTML  # noqa
-from django_summernote.widgets import SummernoteWidget
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+from django_summernote.fields import SummernoteTextFormField
 from crispy_forms.bootstrap import StrictButton
 from .models import Comment, Post
 
@@ -35,14 +36,14 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'tags', 'list_image', 'excerpt', 'body')
+        body = forms.CharField(widget=SummernoteWidget())
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'tags': forms.TextInput(attrs={'class': 'form-control'}),
             'list_image': forms.TextInput(attrs={'class': 'form-control'}),
             'excerpt': forms.Textarea(attrs={'class': 'form-control'}),
-            'body': forms.Textarea(attrs={'class': 'form-control'}),
-            # 'body': forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control'})),
+            'body': SummernoteWidget(),
         }
 
 
@@ -51,13 +52,13 @@ class EditPostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'list_image', 'excerpt', 'body')
+        body = forms.CharField(widget=SummernoteWidget())
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'list_image': forms.TextInput(attrs={'class': 'form-control'}),
             'excerpt': forms.Textarea(attrs={'class': 'form-control'}),
-            'body': forms.Textarea(attrs={'class': 'form-control'}),
-            # 'body': forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control'})),
+            'body': SummernoteWidget(),
         }
 
 
