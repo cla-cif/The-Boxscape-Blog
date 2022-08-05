@@ -25,7 +25,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=200,
                             unique_for_date='published', blank=True)
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="blog_posts")
+        Author, on_delete=models.CASCADE, related_name="blog_posts")
     tags = TaggableManager(
         help_text="We suggest to use no more than 3 tags to improve search results")  # noqa
     featured_image = CloudinaryField(
