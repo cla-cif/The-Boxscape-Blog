@@ -231,6 +231,60 @@ UI refers to the screens, buttons, toggles, icons, and other visual elements tha
 
 ### Improvements
 Always on the lookout for better design, layouts, colour palettes, fonts, smoother interactive elements. 
+
+## Developer Experience
+This project is inspired to the [Agile Principles](https://www.agilealliance.org/), planned according to the [Design Thinking](https://canvas.unl.edu/courses/73802/pages/5-stages-of-design-thinking) process and organized following the [Kanban method](https://kanbanize.com/kanban-resources/getting-started/what-is-kanban#:~:text=The%20Kanban%20method%20is%20designed,due%20to%20fear%20or%20uncertainty.) through the GitHub Project tool. 
+
+### Agile approach
+Here are some of the guiding principles behind the [Agile Manifesto](https://www.agilealliance.org/agile101/12-principles-behind-the-agile-manifesto/) and how they were implemented.
+1. __Our highest priority is to satisfy the customer through early and continuous delivery of valuable software__
+The project is ready in all it's essential features it means that a user can create, read, update and delete Posts and Comments (Read about [CRUD](here)) as long as some other minor features (like and dislike a post). From now on any further stable implementation will be immediately available to the users.
+2. __Welcome changing requirements, even late in development. Agile processes harness change for the customer’s competitive advantage.__
+Despite late changes can be demanding as they might involve quite a long list of alteration that span across several files, adapt to users requests is essential for a project to be appreciated. An example was switching from CKEditor to Summernote, the first app is incompatible with the main requirement to deploy the project on Heroku.
+3. __Deliver working software frequently, from a couple of weeks to a couple of months, with a preference to the shorter timescale.__
+Now that the main architecture is in place, new scalable features can be added _step by step_. Some will require a reasonably short amount of time like "liking comments" others require a longer adaptation (implementing the REST Framework). 
+4. __Business people and developers must work together daily throughout the project.__
+The developers promise to the users is to comunicate often and efficently, primarly through the blog's dedicated email box and to ask for feedback.
+5. __Simplicity–the art of maximizing the amount of work not done–is essential.__
+The blog is now on its initial version, the basic features are in place but many more are just around the corner (See the list of [Features to implement](#Features-to-implement))
+
+### Design Thinking process
+The project's features are planned using Users'stories built around a 'blog reader' _persona_.
+- __Define__
+    > I like reading blogs and engage with the ones I like most. I want to contribute to the blog by writing some articles or forwarding to the admins complaints and suggestions. I want to engage in discussions with other members by commenting posts and replying to comments. I want to express appreciation by upvoting or downvoting a post. I also would like and easy login through my favourite social apps. 
+
+- __Empathise__
+I tried to understand what the potential readers may want from Boxscape by thinking as a blog reader myself. To do this, I researched blogs and conducted interviews that led to the creation of a potential user persona.
+I then implemented a solution keeping this question in mind: _"What solves the problem according to the reader's needs and goals?"_ 
+    __Let us call our reader Nastia.__
+
+- __Ideate__
+The brainstorming phase followed by research, challenges and discussions lead to the integration of the following tools to find a solution to the stated problem. 
+    - [Django](https://en.wikipedia.org/wiki/Django_(web_framework)) and its apps are ideal for creating a simple blog.
+    - The Heroku-based app provides an easy-to-use solution to deploy a project (What is [Heroku](https://en.wikipedia.org/wiki/Heroku))
+    - [GitHub](https://en.wikipedia.org/wiki/GitHub) is the go to solution to host a repository.
+    - [Boostrap](https://getbootstrap.com/docs/5.0/getting-started/introduction/) for the front-end design of the project as it's easy to use, responsive, consistency and browser compatibility.
+- __Prototype__
+And that is how I arrived at the [current version](###). It is a scaled-down version of a fully functioning blog ready to become a thriving comunity with hundreds of daily readers.
+Other important points took into account:
+  - Design consistency across pages.
+  - Constant availability of information and functions.
+  - Creation of a solid architecture for future scalability.
+  - Handling of invalid inputs and the avoidance of unexpected behaviour. 
+ 
+  >My personal challenge was to put myself in the shoes of the user: What is clear, obvious and self-evident to the developer may not be to the user.
+
+- __Test__
+I brought together people who matched the _persona_ aka our blog reader Nastia. 
+I presented the initial release of the blog to them and asked them to comment and raise questions while browsing the blog.
+I listened to their comments, observed their reactions, took notes and showed my appreciation for their feedback. 
+ >I then used their feedback to go to-and-fro the Design Thinking stages.
+
+### Kanban board
+A Kanban-like board based on the User Stories was set using GitHub Project tool and divided in:
+To Do | In progress | Done | Issues | Future features 
+Have a look at my board [here](https://github.com/cla-cif/The-Boxscape-Blog/projects/1)
+
 ## Technologies used
 A list of programming languages, frameworks, SaaS, PaaS, Softwares used to develop Boxscape. 
 
