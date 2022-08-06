@@ -28,12 +28,14 @@ class Post(models.Model):
         Author, on_delete=models.CASCADE, related_name="blog_posts")
     tags = TaggableManager(
         help_text="We suggest to use no more than 3 tags to improve search results")  # noqa
+    # upload images to Cloudinary only from admin site/currently not in use
     featured_image = CloudinaryField(
-        'image', default='placeholder')  # upld from admin site
+        'image', default='placeholder')
+    # upload images from create/edit post form, shown in list template
     list_image = models.CharField(blank=True, null=True, max_length=200,
                                   validators=[validate_url],
                                   help_text="Paste here a link ending with .jpg .gif .png",  # noqa
-                                  verbose_name="Image")  # upld from blog
+                                  verbose_name="Image")
     excerpt = models.TextField(blank=True)
     body = models.TextField(blank=True, null=True)
     updated = models.DateTimeField(auto_now=True)

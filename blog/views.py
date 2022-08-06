@@ -34,8 +34,7 @@ class PostDetail(View):
         number_comments = len(comments)
         # fetch post by similarity
         post_tags_ids = post.tags.values_list('id', flat=False)
-        similar_posts = Post.objects.filter(tags__in=post_tags_ids)\
-            # .exclude(id=post.id)
+        similar_posts = Post.objects.filter(tags__in=post_tags_ids)
         similar_posts = similar_posts.annotate(same_tags=Count('tags'))\
             .order_by('-same_tags')
         # like and dislike functionality
@@ -71,8 +70,7 @@ class PostDetail(View):
         # retrieving post by similarity
         post_tags_ids = post.tags.values_list('id', flat=True)
         print(post_tags_ids)
-        similar_posts = Post.objects.filter(tags__in=post_tags_ids)\
-            .exclude(id=post.id)
+        similar_posts = Post.objects.filter(tags__in=post_tags_ids)
         similar_posts = similar_posts.annotate(same_tags=Count('tags'))\
             .order_by('-same_tags')
         #  like and dislike functionality

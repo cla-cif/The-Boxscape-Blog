@@ -27,6 +27,7 @@
 <!-- POST BODY -->
 <div class="container container-detail mb-4 mt-4">
     <div class="row body-detail m-0">
+
         <!-- POST BODY TEXT -->
         <div class="col-xl-12">
             <p class="post-body m-0 p-4"><i class="fa fa-quote-left fa-3x fa-pull-left"></i>
@@ -45,6 +46,7 @@
         <!-- POST BUTTONS -->
         <div class="container">
             <div class="row row-cols-lg-2 row-cols-3 p-4 m-0">
+
                 <!-- POST LIKE -->
                 <div class="col col-lg-2 d-flex justify-content-center">
                     {% if user.is_authenticated %}
@@ -61,7 +63,7 @@
                     {% else %}
                     <span class="text-details"><i class="far fa-heart"></i></span>
                     {% endif %}
-                    <span class="text-details">&nbsp;<strong>{{ post.number_of_likes }}</strong>
+                    <span class="text-details">&nbsp;<strong>{{ post.number_of_likes }}</strong></span>
                 </div>
 
                 <!-- POST DISLIKE -->
@@ -80,7 +82,7 @@
                     {% else %}
                     <span class="text-details"><i class="fas fa-heart-broken"></i></span>
                     {% endif %}
-                    <span class="text-details">&nbsp;<strong>{{ post.number_of_dislikes }}</strong>
+                    <span class="text-details">&nbsp;<strong>{{ post.number_of_dislikes }}</strong></span>
                 </div>
 
                 <!-- COMMENT COUNT -->

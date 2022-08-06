@@ -23,7 +23,7 @@
 
             {% else %}
 
-            <!-- EDIT POST FORM -->
+            <!-- EDIT POST SECTION -->
             {% if user.is_authenticated %}
 
             <!-- DISCARD BUTTON -->
@@ -33,7 +33,8 @@
                     <button type="submit" class="btn-negative btn-lg">Discard</button>
                 </form>
             </div>
-
+            
+            <!-- EDIT POST FORM -->
             <h3 class="mt-4 text-center">Edit your comment</h3>
             <div class="form-group">
                 <form method="post" action="{% url 'comment_edit' comment.id %}" class="uniForm"

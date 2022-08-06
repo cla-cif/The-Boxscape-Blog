@@ -22,14 +22,18 @@
             </div>
             {% else %}
 
-            <!-- EDIT POST FORM -->
+            <!-- EDIT POST SECTION -->
             {% if user.is_authenticated %}
+
+            <!-- DISCARD BUTTON -->
             <div class="d-flex justify-content-end">
                 <form action="{% url 'post_detail' post.slug %}">
                     {% csrf_token %}
                     <button type="submit" class="btn-negative btn-lg">Discard</button>
                 </form>
             </div>
+
+            <!-- EDIT POST FORM -->
             <h3 class="mt-4 text-center">Edit your post</h3>
             <p>Editing as: {{ user.username }}</p>
             <div class="form-group">

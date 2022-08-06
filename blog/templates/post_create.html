@@ -21,15 +21,18 @@
             </div>
             {% else %}
 
-            <!-- CREATE POST FORM -->
+            <!-- CREATE POST SECTION -->
             {% if user.is_authenticated %}
+
+            <!-- DISCARD BUTTON -->
             <div class="d-flex justify-content-end">
                 <form action="{% url 'home' %}">
                     {% csrf_token %}
                     <button type="submit" class="btn-negative btn-lg">Discard</button>
                 </form>
             </div>
-
+            
+            <!-- CREATE POST FORM -->
             <h3 class="mt-4 text-center">Have your say:</h3>
             <p>Posting as: {{ user.username }}</p>
             <div class="form-group">
