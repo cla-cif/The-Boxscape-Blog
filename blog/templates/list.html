@@ -66,7 +66,7 @@
         </div>
     </div>
 
-<!-- SIDEBAR TOGGLE ON MEDIUM/SMALL SCREENS -->
+    <!-- SIDEBAR TOGGLE ON MEDIUM/SMALL SCREENS -->
     <div class="menu-toggle">
         <div class="hamburger">
             <span></span>
@@ -85,8 +85,12 @@
                     <a href="{% url 'about' %}">
                         <p class="text-details text-center text-decoration-underline">Read about our values</p>
                     </a>
-                    <div class="col p-0 d-flex justify-content-center"><a href="{% url 'post_create' %}"><input 
-                                class="btn btn-lg" type="button" value="Create a post"></button></a></div>
+                    <div class="col p-0 d-flex justify-content-center">
+                        <form action="{% url 'post_create' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-lg">Create a post</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <!-- subscribe to RSS feeds -->
