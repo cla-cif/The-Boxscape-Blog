@@ -37,6 +37,11 @@ body {
     min-height: 100vh;
 }
 
+/* h1 included in footer */
+h1 {
+    font-size: 16px;
+}
+
 img:hover {
     opacity: .8;
 }
@@ -84,6 +89,9 @@ ul {
 }
 
 /* SIDEBAR */
+li:last-child {
+    padding-bottom:0 !important;
+  }
 .menu-toggle {
     display: none;
     position: fixed;
