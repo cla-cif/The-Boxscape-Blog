@@ -18,6 +18,14 @@
     margin: 0;
 }
 
+/* disable all animations and transitions if reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+
 strong {
     font-weight: bold;
     color: var(--very-peri);
