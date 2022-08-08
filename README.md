@@ -17,18 +17,19 @@ In August 2022, the blog appeared in its first version. It offers the essential 
 ![About us page](###)
 
 ## Content
-- [What are all those files in the repo for?](#File-naming)
 - [Features](#Features)
 - [User Experience](#User-Experience-(UX))
+- [User Interface](#User-Interface-(UI))
 - [Developer Experience](#Developer-Experience)
 - [Technologies used](#Technologies-used)
 - [Testing](#Testing)
+- [Bugs and future developments](#Bugs-and-future-developments)
 - [Deployment](#Deployment)
 - [Credits](#Credits)
 - [Extra](#Extra)
 
 ## Features 
-A coincise description of the functionalities featured in each page and a comprehensive list of common features (UI/UX, navigability, PaaS)
+A coincise description of the functionalities featured in each page and a comprehensive list of common features (UI/UX, navigability, services from PaaS)
 
 ### Existing Features - Home page
 
@@ -130,7 +131,7 @@ __Note__: Pending the implementation of a cloud based service where to store the
 
 ### Existing Features - Contact us page
 - The contact us page presents a form, similar in style to all the other forms across the blog, with the following mandatory fields: name, email, message. 
-- Admins will receive the messages on theboxscapeblog@gmail.com
+- Admins will receive the messages on the.boxscape.blog@gmail.com
 
 ### Existing Features - Log in, Log out, Register page
 - These functionalities are provided by [allauth!](https://django-allauth.readthedocs.io/en/latest/) a library containing a set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication. For the purposes of this blog only log in, log out and register functionalities were implemented. 
@@ -162,10 +163,10 @@ __Note__: Pending the implementation of a cloud based service where to store the
     - The site has keywords and a description of appropriate length to give the user a brief impression of the site on the browser results page.
 
 ### Features to implement
-
 - Reply to comments and create chain of comments. 
 - Like or report comments.
 - Edit comments "on the same page". 
+- Subscription to the newsletter.
 - Bookmark pages to access easily the favourite posts. 
 - Share posts via email and social networks.
 - Extend the range of allowed image formats and use a Cloud service for storage. 
@@ -207,7 +208,6 @@ The site is designed with an intuitive layout, it is accessible, easy to browse,
 - Enable Gzip compression for a faster loading and why it's [important](https://blog.hubspot.com/website/gzip-compression)
 - Continuous research to identify the users goals, needs, behaviors, and pain points involved with the Boxcape blog interaction.
 - Perform more tests as the project grows.
-
 
 ## User interface (UI)
 UI refers to the screens, buttons, toggles, icons, and other visual elements that users interact with when using a website, app, or other electronic device.  
@@ -312,10 +312,9 @@ A list of programming languages, frameworks, SaaS, PaaS, Softwares used to devel
 - [GitHub:](https://github.com/) To store the project code after being pushed from Gitpod.
 - [Heroku](https://en.wikipedia.org/wiki/Heroku) To deploy this project
 
-
 ### Services
 - [AWS Simple Email:](https://aws.amazon.com/ses/) To implement the Contact us functionality
-- [Gmail:](https://en.wikipedia.org/wiki/Gmail) To create the Blog's email address theboxscapeblog@gmail.com
+- [Gmail:](https://en.wikipedia.org/wiki/Gmail) To create the Blog's email address the.boxscape.blog@gmail.com
 - [Cloudinary:](https://en.wikipedia.org/wiki/Cloudinary) To store the static files of this project and potentially upload pictures of posts created from Django's admin panel. 
 
 ### Libraries
@@ -339,24 +338,24 @@ The website's features were thoroughly tested using some well-known free web tes
 
 - __Web Responsiveness__
     - The responsive feature has been tested using Chrome DevTools and an online Web Design checker from [Media Genesis](https://responsivedesignchecker.com/). 
-Here is the result of the [Home page](https://responsivedesignchecker.com/checker.php?url=https%3A%2F%2Fcla-cif.github.io%2FRPS-Lizard-Spock%2F&width=1400&height=700) and here is the result of the [Support page](https://cla-cif.github.io/RPS-Lizard-Spock/support.html).
+Here is the [result](https://responsivedesignchecker.com/checker.php?url=https%3A%2F%2F8000-clacif-theboxscapeblog-psrjys8p4b8.ws-eu59.gitpod.io%2F&width=1400&height=700).
 The website's layout has been tested on a range of different screen sizes, from small 320x480 screens (e.g. Apple iPhone 3) to widescreen 24" and their landscape view providing a good user experience. 
-    - The website has passed the [Google mobile-friendly test](https://search.google.com/test/mobile-friendly/result?id=OPXjC51ESN7aQgtAmaf9Uw).
+    - The website has passed the [Google mobile-friendly test](https://search.google.com/test/mobile-friendly/result?id=ZZfvk8iiRDYc3lIXuuDzoA).
 
 - __Accessibility__
 
-  - __Colours:__ All colours checked with [WebAim](https://webaim.org/resources/contrastchecker/) have an optimal contrast ratio(6.32:1 (blue/white), 4.91:1(blue/yellow), 14.97:1 (yellow/black))
+  - __Colours:__ All colours checked with [WebAim](https://wave.webaim.org/report#/https://the-boxscape-blog.herokuapp.com/) orange text on white background especially if small presents low contrast. 
   - __Reduced motion:__ All animations are disabled when "Show animation in Windows" is disabled from settings in Win10. 
-  - __Colour blindness:__ Colour-blind webpage filters have been taken into account with [Toptal](https://www.toptal.com/designers/colorfilter/) e.g. Here is how the website looks like for users affected by [Tritanopia](https://www.toptal.com/designers/colorfilter?orig_uri=https://cla-cif.github.io/RPS-Lizard-Spock/&process_type=tritan)
+  - __Colour blindness:__ Colour-blind webpage filters have been taken into account with [Toptal](https://www.toptal.com/designers/colorfilter/) e.g. Here is how the website looks like for users affected by [Protanopia](https://www.toptal.com/designers/colorfilter?orig_uri=https://the-boxscape-blog.herokuapp.com/&process_type=protan)
   - __Screen Reader:__ Texts, links and images' 'alt text' were read with the Google Chrome extension Screen Reader (version 53.0.2784.13). 
-  - __Presbiopia:__ All fonts are 'sans serif' and have a sufficient size so that the text can be easily read without glasses.
+  - __Presbiopia:__ All fonts are 'sans serif' and the essential elements have a sufficient size so that the text can be easily read without glasses.
   - __General Accessibility:__ has been tested with satisfactory results on:
       1. Google Light House (mobile and desktop version). 
-      2. [Power Mapper - Home page](https://try.powermapper.com/demo/Report/06cd2a9f-7881-4034-ab93-d188bfbe9a91) and [Power Mapper - support page](https://try.powermapper.com/demo/Report/ce53642e-2b2f-45d7-98ee-b6e796513e5d) showing minor issues. 
-      3. [Wave - Home and Support pages](https://wave.webaim.org/report#/https://cla-cif.github.io/RPS-Lizard-Spock/index.html).
+      2. [Power Mapper - Home page](##) showing minor issues. 
+      3. [Wave - Home and Support pages](https://wave.webaim.org/report#/https://the-boxscape-blog.herokuapp.com/).
 
 - __Browser Compatibility__
-    - The website's pages were tested with [Power Mapper](https://try.powermapper.com/demo/Report/06cd2a9f-7881-4034-ab93-d188bfbe9a91) presenting issues with IE11 regarding CSS3 properties. Such choices were deemed necessary for a better user experience and devices compatibility. 
+    - The website's pages were tested with [Power Mapper](https://try.powermapper.com/demo/Report/06cd2a9f-7881-4034-ab93-d188bfbe9a91) no compatibility issues. 
 
 - __SEO__
   - The website's Home page was tested on [Seobility](https://freetools.seobility.net/en/seocheck/check?url=https%3A%2F%2Fcla-cif.github.io%2FRPS-Lizard-Spock%2F&crawltype=1) and similar results were obtained on the Support page..
@@ -389,7 +388,7 @@ A brief description of some fixed and unfixed bugs arose during the developing p
 - ##  
      - __Description__ : A post featuring a unique tag (a new tag that has not been used before by other posts), on request will throw a NoneType error.
      - __Bug__: This is due to a reverse query on tags ids: when querying a reverse foreign key, None appears for tags not having any post. Documentation about django [values_list](https://docs.djangoproject.com/en/4.0/ref/models/querysets/)
-     - __Fix/Workaround__: 
+     - __Fix/Workaround__: The issue was due to a bad query filtering post under the same tag and excluding the post itself.  ``` similar_posts = Post.objects.filter(tags__in=post_tags_ids).exclude(id=post.id) ``` Fix by removed the .exclude function. 
     
 - ##   
      - __Description__: Application preventing successful deployment on Heroku. 

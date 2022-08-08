@@ -10,7 +10,7 @@
 <div class="container container-detail mb-4 mt-4 p-4">
     <div class="row m-0 title-detail">
         <div class="col-xl-10 align-self-center">
-            <h1 class="post-title pb-4 m-0">{{ post.title }}</h1>
+            <h2 class="post-title pb-4 m-0">{{ post.title }}</h2>
             <p class="card-text text-details"> BY <a class="author"
                     href="{% url 'author_posts' post.author.id %}">{{ post.author|upper}}</a>
                 &nbsp;|&nbsp;
@@ -31,7 +31,7 @@
         <!-- POST BODY TEXT -->
         <div class="col-xl-12">
             <element class="post-body m-0 p-4"><p><i class="fa fa-quote-left fa-3x fa-pull-left"></i></p>
-                <p>{{ post.body | safe | linebreaks }}</p>
+                {{ post.body | safe | linebreaks }}
                 <p><i class="fa fa-quote-right fa-3x fa-pull-right"></i></p>
             </element>
         </div>
