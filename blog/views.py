@@ -156,7 +156,8 @@ def post_create(request):
         if form.is_valid():
             post = Post()
             post.author = request.user
-            post.slug = '-'.join(form.cleaned_data.get('title').split(' '))
+            post.slug = '-'.join(form.cleaned_data.get('title')
+                                 .replace("'", '').replace('-', '').split(' '))
             post.title = form.cleaned_data.get('title')
             tags = form.cleaned_data.get('tags')
             post.list_image = form.cleaned_data.get('list_image')
