@@ -31,7 +31,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'blog/templates/')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['the-boxscape-blog.herokuapp.com', 'localhost']
 
@@ -50,8 +50,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth',
     'widget_tweaks',
-    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
     'cloudinary',
     'crispy_forms',
     'django_summernote',
