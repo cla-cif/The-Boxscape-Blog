@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} Post Detail {% endblock %}
+{% block title %} Boxscape: {{ post.title }} {% endblock %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% load humanize %}
@@ -11,11 +11,11 @@
     <div class="row m-0 title-detail">
         <div class="col-xl-10 align-self-center">
             <h2 class="post-title pb-4 m-0">{{ post.title }}</h2>
-            <p class="card-text text-details"> BY <a class="author"
+            <div class="card-text text-details"> BY <a class="author"
                     href="{% url 'author_posts' post.author.id %}">{{ post.author|upper}}</a>
                 &nbsp;|&nbsp;
                 {{ post.created|naturalday|upper }}
-            </p>
+            </div>
         </div>
         <div class="col-xl-2 align-self-center">
             <img class="image-detail" src="{% static 'detail.jpg' %}" width="130"
@@ -30,10 +30,11 @@
 
         <!-- POST BODY TEXT -->
         <div class="col-xl-12">
-            <element class="post-body m-0 p-4"><p><i class="fa fa-quote-left fa-3x fa-pull-left"></i></p>
+            <div class="post-body m-0 p-4">
+                <i class="fa fa-quote-left fa-3x fa-pull-left"></i>
                 {{ post.body | safe | linebreaks }}
-                <p><i class="fa fa-quote-right fa-3x fa-pull-right"></i></p>
-            </element>
+                <i class="fa fa-quote-right fa-3x fa-pull-right"></i>
+            </div>
         </div>
 
         <!-- HORIZONTAL LINE -->
@@ -236,9 +237,9 @@
                 </div>
             </form>
             {% else %}
-            <p>Please log in or register if you want to join the conversation<p>
-                    {% endif %}
-                    {% endif %}
+            <p>Please log in or register if you want to join the conversation</p>
+            {% endif %}
+            {% endif %}
         </div>
     </div>
 </div>
@@ -272,20 +273,20 @@
                         {% endif %}
                     </div>
                     <div class="tags pt-2 pb-2">
-                        <p class="card-text">
+                        <div class="card-text">
                             {% for tag in post.tags.all %}
                             <a class="tags text-details" href="{% url 'tag' tag.slug %}">{{ tag.name|upper }}</a>
                             {% if not forloop.last %}, {% endif %}
                             {% endfor %}
-                        </p>
+                        </div>
                     </div>
                     <a href="{% url 'post_detail' post.slug %}">
                         <h2 class="card-title-small post-title">{{ post.title }}</h2>
                     </a>
                     <hr />
-                    <p class="card-text text-details h6"> BY <a class="author"
+                    <div class="card-text text-details h6"> BY <a class="author"
                             href="{% url 'author_posts' post.author.id %}">{{ post.author|upper}}</a>
-                    </p>
+                    </div>
                 </div>
             </div>
         </div>

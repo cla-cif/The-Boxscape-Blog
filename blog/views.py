@@ -156,8 +156,11 @@ def post_create(request):
         if form.is_valid():
             post = Post()
             post.author = request.user
+            # remove special chars and set to lowercase for better SEO
             post.slug = '-'.join(form.cleaned_data.get('title')
-                                 .replace("'", '').replace('-', '').split(' '))
+                                 .replace("'", '').replace('-', '')
+                                 .split(' '))
+            post.slug = post.slug.lower()
             post.title = form.cleaned_data.get('title')
             tags = form.cleaned_data.get('tags')
             post.list_image = form.cleaned_data.get('list_image')

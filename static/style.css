@@ -179,7 +179,7 @@ li:last-child {
     font-size: 1.875rem;
     margin-top: 5px;
     margin-bottom: 10px;
-    padding: 0 30px;
+    padding: 0 15px;
     line-height: 110%;
     color: var(--text-default);
 }
@@ -190,7 +190,7 @@ li:last-child {
 
 .card-text {
     font-family: 'Roboto', sans-serif;
-    padding: 0 30px;
+    padding: 0 15px;
     line-height: 180%;
     font-size: .8375rem;
     line-height: 1.5rem;
