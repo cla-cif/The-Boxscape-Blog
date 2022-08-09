@@ -351,30 +351,30 @@ The website's layout has been tested on a range of different screen sizes, from 
   - __Presbiopia:__ All fonts are 'sans serif' and the essential elements have a sufficient size so that the text can be easily read without glasses.
   - __General Accessibility:__ has been tested with satisfactory results on:
       1. Google Light House (mobile and desktop version). 
-      2. [Power Mapper - Home page](##) showing minor issues. 
+      2. [Power Mapper - Home page](https://www.powermapper.com/) showing minor issues. 
       3. [Wave - Home and Support pages](https://wave.webaim.org/report#/https://the-boxscape-blog.herokuapp.com/).
 
 - __Browser Compatibility__
-    - The website's pages were tested with [Power Mapper](https://try.powermapper.com/demo/Report/06cd2a9f-7881-4034-ab93-d188bfbe9a91) no compatibility issues. 
+    - The website's pages were tested with [Power Mapper](https://www.powermapper.com/) no compatibility issues were found.[See](https://try.powermapper.com/demo/Report/6fbfbb33-b889-41df-8ead-c60b95ab9f41)
 
 - __SEO__
-  - The website's Home page was tested on [Seobility](https://freetools.seobility.net/en/seocheck/check?url=https%3A%2F%2Fcla-cif.github.io%2FRPS-Lizard-Spock%2F&crawltype=1) and similar results were obtained on the Support page..
+  - The website's Home page was tested on [Seobility](https://www.seobility.net/en/seocheck/) and even better results were achieved on post details pages. [Follow for results](https://freetools.seobility.net/en/seocheck/check?url=https%3A%2F%2Fthe-boxscape-blog.herokuapp.com%2Fthe-inner-life-of-cats%2F&crawltype=1) [and](https://freetools.seobility.net/en/seocheck/check?url=https%3A%2F%2Fthe-boxscape-blog.herokuapp.com%2F&crawltype=1)
   - Tests ran with Google Light House (mobile and desktop version) on both pages obtained a SEO score of 100%.
 
 - __Performances__
-  - The website was tested on [Power Mapper](https://try.powermapper.com/demo/Report/06cd2a9f-7881-4034-ab93-d188bfbe9a91).
-  - The general performance was evaluated by [GTMetrix](https://gtmetrix.com/reports/cla-cif.github.io/KTcDefkf/).
+  - The website was tested on [Power Mapper](https://www.powermapper.com/) see results [here](https://try.powermapper.com/demo/Report/6fbfbb33-b889-41df-8ead-c60b95ab9f41).
+  - The general performance was evaluated by [GTMetrix](https://gtmetrix.com/) see results [here](https://gtmetrix.com/reports/www.powermapper.com/x3lYl49t/).
 
 ### Validator Testing 
 
 - HTML
-  - No errors were returned when running the official [W3C validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fcla-cif.github.io%2FRPS-Lizard-Spock%2F)
+  - No errors were returned when running the official [W3C validator](https://validator.w3.org/). [Results here](https://validator.w3.org/nu/?doc=https%3A%2F%2Fthe-boxscape-blog.herokuapp.com%2F)
   __Note__: Errors were naturally raised by Django Template Tags implemented in the HTML files and filtered out.
 - CSS
-  - No errors were found when running the official [(Jigsaw) validator](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fcla-cif.github.io%2FRPS-Lizard-Spock%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en).
+  - No errors were found when running the official [(Jigsaw) validator](https://jigsaw.w3.org/css-validator/). [Results here](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fthe-boxscape-blog.herokuapp.com%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en).
   __Note__: Many parameters such margins and paddings are set in the HTML files as standard Bootstrap classes. 
 - JavaScript
-  - The code passed through [JSHint](https://jshint.com/) with no significant issues. 
+  - The code passed through [JSHint](https://jshint.com/) with no issues. 
   __Note__: The project needed just few scripts which were embedded in the HTML files.
 - PEP8
     - The code passed through [PEP8](http://pep8online.com/) with no issues.
