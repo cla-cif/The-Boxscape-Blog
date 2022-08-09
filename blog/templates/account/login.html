@@ -4,7 +4,8 @@
 {% load i18n %}
 {% load account socialaccount %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+<!-- {% block head_title %}{% trans "Sign In" %}{% endblock %} -->
+{% block title %} Log in {% endblock %}
 
 {% block content %}
 
@@ -13,7 +14,7 @@
     <div class="col-md-8 mt-3 offset-md-2">
 
 
-      <h1 style="text-align:center">{% trans "Login" %}</h1>
+      <h2 style="text-align:center">{% trans "Login" %}</h2>
 
       {% get_providers as socialaccount_providers %}
 
