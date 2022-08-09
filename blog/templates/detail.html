@@ -228,7 +228,7 @@
             {% if user.is_authenticated %}
 
             <h3 class="mt-4">Contribute to the conversation</h3>
-            <p>Posting as: {{ user.username }}</p>
+            Posting as: {{ user.username }}
             <form method="post" class="uniForm" style="margin-top: 1.3em;">
                 {{ comment_form | crispy }}
                 {% csrf_token %}
@@ -237,7 +237,7 @@
                 </div>
             </form>
             {% else %}
-            <p>Please log in or register if you want to join the conversation</p>
+            Please log in or register if you want to join the conversation
             {% endif %}
             {% endif %}
         </div>

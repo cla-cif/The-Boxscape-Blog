@@ -21,11 +21,6 @@ def total_authors():
     return len(result)
 
 
-# @register.simple_tag()
-# def total_authors():
-#     return Author.objects.all().count()
-
-
 @register.simple_tag()
 def total_users():
     return User.objects.count()
