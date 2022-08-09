@@ -1,2 +1,3 @@
+Sitemap: https://the-boxscape-blog.herokuapp.com/sitemap.xml
 User-Agent: *
 Disallow: /*.xls$

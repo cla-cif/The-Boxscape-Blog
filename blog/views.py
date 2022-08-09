@@ -56,7 +56,7 @@ class PostDetail(View):
                 "liked": liked,
                 "disliked": disliked,
                 "comment_form": CommentForm(),
-                "similar_posts": similar_posts
+                "similar_posts": similar_posts,
             },
         )
 

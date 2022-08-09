@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} Post List - Homepage {% endblock %}
+{% block title %} Boxscape: {{ obj.name }} {% endblock %}
 {% load static %}
 {% load blog_tags %}
 {% load humanize %}
@@ -78,7 +78,7 @@
         <nav class="menu">
             <!-- create post -->
             <div class="is-active">
-                <h3 class="pb-4 pt-4 title-mobile">Welcome {{ user.username }}!</h3>
+                <h2 class="pb-4 pt-4 title-mobile">Welcome {{ user.username }}!</h2>
                 <div class="sidebar-box m-0 p-4">
                     <div class="text-details">You're encouraged to post your ideas and be respectful of others' opinion,
                         identity, preferences, religion, culture.</div>
