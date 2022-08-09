@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} The Boxscape Blog | A blog for independent thinkers {% endblock %}
+{% block title %} The Boxscape Blog | A place for independent thinkers {% endblock %}
 {% load static %}
 {% load blog_tags %}
 {% load humanize %}
@@ -82,7 +82,7 @@
                 <div class="sidebar-box m-0 p-4">
                     <div class="text-details">You're encouraged to post your ideas and be respectful of others' opinion,
                         identity, preferences, religion, culture.</div>
-                    <a href="{% url 'about' %}" aria-describedby="about boxscape">
+                    <a href="{% url 'about' %}" aria-label="about boxscape">
                         <div class="text-details text-center text-decoration-underline">Read about our values</div>
                     </a>
                     <div class="col p-0 d-flex justify-content-center">
@@ -97,7 +97,7 @@
             <div class="sidebar-hidden-mobile">
                 <h4 class="pb-4 pt-4">Subscribe</h4>
                 <div class="sidebar-box m-0 p-4">
-                    <a href="{% url 'post_feed' %}" aria-describedby="link to feed RSS opens in a new window">
+                    <a href="{% url 'post_feed' %}" aria-label="link to feed RSS opens in a new window">
                         <h5 class="text-details mb-0">Feed RSS</h5>
                     </a>
                 </div>
@@ -105,7 +105,7 @@
 
             <!-- latest posts list -->
             <div class="sidebar-hidden-mobile">
-                <h4 class="pb-4 pt-4">Latest:</h4>
+                <h4 class="pb-4 pt-4">Latest posts:</h4>
                 <div class="sidebar-box m-0 p-0">{% show_latest_posts 3 %}</div>
             </div>
 
@@ -126,7 +126,7 @@
 
             <!-- some numbers  -->
             <div class="sidebar-hidden-mobile">
-                <h4 class="pb-4 pt-4">Some numbers:</h4>
+                <h4 class="pb-4 pt-4">About our community:</h4>
                 <div class="sidebar-box p-0 mb-4">
                     <div class="p-4 m-0">
                         <h6 class="pb-1 text-details">{% total_authors %} authors</h6>
