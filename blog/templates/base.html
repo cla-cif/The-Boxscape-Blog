@@ -3,9 +3,11 @@
 {% load blog_tags %}
 {% load static %}
 
+{% block title %}Boxscape - A blog for idependent thinkers{% endblock %}
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Boxscape - A blog for idependent thinkers</title>
+    <title>{% block title %}{% endblock %}</title>
     <meta name="description"
         content="A place to share ideas with independent, unconventional people who think outside the box.">
     <meta name="author" content="A comunity of nice people">
