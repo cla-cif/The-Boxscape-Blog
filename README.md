@@ -57,7 +57,7 @@ A coincise description of the functionalities featured in each page and a compre
 
      The sidebar collapses on medium and small screens and a 'hamburger' animated button is showed instead. The sidebar can be opened and closed from there.
 
-![Sidebar](###)
+![Main](###)
 
 - __The Footer__ 
 
