@@ -57,7 +57,7 @@ A coincise description of the functionalities featured in each page and a compre
 
      The sidebar collapses on medium and small screens and a 'hamburger' animated button is showed instead. The sidebar can be opened and closed from there.
 
-![Main](###)
+![Main](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/main.png)
 
 - __The Footer__ 
 
@@ -99,7 +99,7 @@ A coincise description of the functionalities featured in each page and a compre
 
     All the above elements are presented in a white box against a pale lilac background. Header and footer mantain the same proprtions as in the main page. The elements are consistent with the blog's colours and style. 
 
-![Post Detail](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/post_detail_crop.png)
+![Post Detail](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/detail.png)
 
 ### Existing Features - Create a post and Edit a post pages
 - The two pages have a similar layout, a centered well organized, minimalistic form that allowes authenticated users to create or edit a post they own. At the bottom a large orange Submit button.  
@@ -288,6 +288,7 @@ A list of programming languages, frameworks, SaaS, PaaS, Softwares used to devel
 ### Languages
 
 -   [HTML5](https://en.wikipedia.org/wiki/HTML5)
+-   [Python](https://www.python.org/)
 -   [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
 -   [JavaScript](https://en.wikipedia.org/wiki/JavaScript) and it's library [jQuery](https://en.wikipedia.org/wiki/JQuery)
 
