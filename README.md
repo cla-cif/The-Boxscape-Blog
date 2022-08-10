@@ -13,7 +13,7 @@ The Bosxcape blog hears its members and visitors wich can send an email to the s
  __Our promise__
 In August 2022, the blog appeared in its first version. It offers the essential functions that every blog should have. We decided not to go overboard because we want to grow with our community and tailor the Boxcape to the needs of our members.
 
-![Landing page](###)
+![Landing page](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/landing_page.png)
 
 ## Content
 - [Features](#Features)
@@ -38,7 +38,7 @@ A coincise description of the functionalities featured in each page and a compre
  
   The header sticks to the top and resizes on medium and small screens to accomodate the useful links. 
  
-![Header](###)
+![Header](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/header.png)
 
 - __Main section__
 
@@ -57,7 +57,7 @@ A coincise description of the functionalities featured in each page and a compre
 
      The sidebar collapses on medium and small screens and a 'hamburger' animated button is showed instead. The sidebar can be opened and closed from there.
 
-![Main](###)
+![Sidebar](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/sidebar.png)
 
 - __The Footer__ 
 
@@ -70,7 +70,7 @@ A coincise description of the functionalities featured in each page and a compre
    
     __Note__: Header and Footer are consistent on every page. The sidebar is accessible from the main page only. 
   
-![Footer](###)
+![Footer](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/footer.png)
 
 ### Existing Features - Post Detail page
 
@@ -99,7 +99,7 @@ A coincise description of the functionalities featured in each page and a compre
 
     All the above elements are presented in a white box against a pale lilac background. Header and footer mantain the same proprtions as in the main page. The elements are consistent with the blog's colours and style. 
 
-![Post Detail](###)
+![Post Detail](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/post_detail_crop.png)
 
 ### Existing Features - Create a post and Edit a post pages
 - The two pages have a similar layout, a centered well organized, minimalistic form that allowes authenticated users to create or edit a post they own. At the bottom a large orange Submit button.  
@@ -114,7 +114,7 @@ __Note__: Pending the implementation of a cloud based service where to store the
 - Users can undo their actions before submissions and be redirected to the main page by clicking on the Discard button. 
 - The user is automatically redirected to the main page after 2.5s. 
 - Edited and newly created posts won't appear before admins' approval. 
-![Create a post](###)
+![Create a post](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/create_post.png)
 
 ### Existing Features - Create and edit comments
 - It's possible for authenticated users to comment a post using the box right under every post (Post Detail page). 
@@ -123,18 +123,18 @@ __Note__: Pending the implementation of a cloud based service where to store the
 - Users can undo the comment editing before submissions and be redirected to the main page by clicking on the Discard button. 
 - The user is automatically redirected to the main page after 2.5s after editing a comment. 
 - Edited and newly created comments won't appear before admins' approval. 
-![Create Comment](###)
+![Create Comment](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/create_comment.png)
 
 ### Existing Features - Delete functionalities
 - The logged in users can delete their own posts and comments from the Post Detail page. 
 - A pop up message asks users to confirm (or not - there's a "take me back" button) their choice as the action is not undoable. 
 - Posts and comments are deleted immediately.
-![Delete Post](###)
+![Delete Post](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/delete_post.png)
 
 ### Existing Features - Contact us page
 - The contact us page presents a form, similar in style to all the other forms across the blog, with the following mandatory fields: name, email, message. 
 - Admins will receive the messages on the.boxscape.blog@gmail.com
-![Delete Post](###)
+![Contact us](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/contact_us.png)
 
 ### Existing Features - Log in, Log out, Register page
 - These functionalities are provided by [allauth!](https://django-allauth.readthedocs.io/en/latest/) a library containing a set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication. For the purposes of this blog only log in, log out and register functionalities were implemented. 
@@ -200,9 +200,7 @@ User Experience is how a user interacts with and experiences a product, system o
 ### Wireframes 
 The site is designed with an intuitive layout, it is accessible, easy to browse, and minimalistic.
 - [Balsamiq](https://balsamiq.com/) was used to put "ideas on paper". 
-    - Home page: [Desktop](###) 
-    - Detail Post: [Desktop](###) 
-    - Generic Form: [Desktop](###) 
+    - Home page | Detail Post | Generic Form template: ![Desktop view]https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/all_wireframes.png()
 
 ### Improvements
 - Enable Gzip compression for a faster loading and why it's [important](https://blog.hubspot.com/website/gzip-compression)
@@ -482,7 +480,7 @@ The steps needed to deploy this projects are as follows:
     ```
     - Click [Here](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository#cloning-a-repository-to-github-desktop) for a more detailed explaination. 
 
-__You can find the live link to the site here: [TheBoxscape Blog](###)__
+__You can find the live link to the site here: [TheBoxscape Blog](https://the-boxscape-blog.herokuapp.com/)__
 
 ## Credits 
 
