@@ -57,7 +57,7 @@ A coincise description of the functionalities featured in each page and a compre
 
      The sidebar collapses on medium and small screens and a 'hamburger' animated button is showed instead. The sidebar can be opened and closed from there.
 
-![Sidebar](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/sidebar.png)
+![Sidebar](###)
 
 - __The Footer__ 
 
@@ -150,7 +150,7 @@ __Note__: Pending the implementation of a cloud based service where to store the
     -   All user actions will receive a feedback (successfully submtted posts and comments waiting for approval, successful login, email sent)
     -   All delete actions require a double confirmation. 
 
-![Home page screenshot from createmockup.com](###)
+![Home page screenshot from createmockup.com](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/responsive_mockup.png)
 
 - __Other features__ 
     - The website is deployed on Heroku [here](https://the-boxscape-blog.herokuapp.com/)
