@@ -143,8 +143,7 @@ __Note__: Pending the implementation of a cloud based service where to store the
 
 - __UI/UX Features__ 
 
-    -   Responsive on all device sizes. How it looks like on iPhone 12: [Home page](https://github.com/cla-cif/RPS-Lizard-Spock/blob/main/assets/screenshots/Homepage%20layout%20on%20iPhone%2012.jpg) / [Post Detail page](https://github.com/cla-cif/RPS-Lizard-Spock/blob/main/assets/screenshots/Support%20page%20layout%20on%20iPhone%2012.png)
-
+    -   Responsive design. 
     -   Accessible for users with hearing and visual impairments.
     -   Interactive elements and animated buttons.
     -   All user actions will receive a feedback (successfully submtted posts and comments waiting for approval, successful login, email sent)
@@ -156,10 +155,10 @@ __Note__: Pending the implementation of a cloud based service where to store the
     - The website is deployed on Heroku [here](https://the-boxscape-blog.herokuapp.com/)
     - The website's static files are hosted on [Cloudinary](https://cloudinary.com/)
     - The emails are sent via [AWS SimpleMail](https://aws.amazon.com/ses/)
-    - The website has a "Google site verification" to verify the website's ownership as shown [here](####).
+    - The website has a "Google site verification" to verify the website's ownership as shown [here](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/ownership_verification_google.png).
     - Browsers can crawl the website thanks to a robots.txt file and a sitemap.xml. 
-    - The website has an [apple-touch-icon](###) with the blog main logo (an open box laying on its side) to make the page stand out from other bookmarks
-    - The same [symbol](###) was chosen to create a 'favicon' and make the home page easy to find among the many open tabs. 
+    - The website has an [apple-touch-icon](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/static/apple-touch-icon.jpg) with the blog main logo (an open box laying on its side) to make the page stand out from other bookmarks
+    - The same [symbol](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/static/favicon.ico) was chosen to create a 'favicon' and make the home page easy to find among the many open tabs. 
     - The site has keywords and a description of appropriate length to give the user a brief impression of the site on the browser results page.
 
 ### Features to implement
@@ -200,7 +199,7 @@ User Experience is how a user interacts with and experiences a product, system o
 ### Wireframes 
 The site is designed with an intuitive layout, it is accessible, easy to browse, and minimalistic.
 - [Balsamiq](https://balsamiq.com/) was used to put "ideas on paper". 
-    - Home page | Detail Post | Generic Form template: ![Desktop view]https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/all_wireframes.png()
+    - Home page | Detail Post | Generic Form template: ![Desktop view](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/all_wireframes.png)
 
 ### Improvements
 - Enable Gzip compression for a faster loading and why it's [important](https://blog.hubspot.com/website/gzip-compression)
@@ -427,9 +426,8 @@ The steps needed to deploy this projects are as follows:
 12. Wait for the logs to run while the dependencies are installed and the app is being built.
 11. The mock terminal is then ready and accessible from a link similar to `https://your-projects-name.herokuapp.com/`
 
-### GitHub Pages
-- A video showing how a similar repository was deployed is available [here](https://github.com/cla-cif/RPS-Lizard-Spock/blob/main/assets/screenshots/create-publish-repository.mp4). 
-- The site has been deployed on GitHub pages. The steps to deploy and publish the repository are as follows: 
+### GitHub Pages 
+- The site can be deployed on GitHub pages as well. The steps to deploy and publish the repository are as follows: 
     - Create a new repository:
         - Click on "New" button (top-right of the page). 
         - Select the "Owner" (your account for instance). 
