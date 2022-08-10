@@ -1,6 +1,6 @@
 <h1 align="center" id="top">THE BOXSCAPE BLOG</h1>
 
-__You can find the live link here: [BOXSCAPE](###)__
+__You can find the live link here: [BOXSCAPE](https://the-boxscape-blog.herokuapp.com/)__
 
 The Boxscape is a blog for people whose ideas break out of the box (escape), it's a place for independent thinkers who analyses situations, rather than conforming to public opinion. At Boxscape, we believe in freedom of expression and in respecting the opinions, identities, preferences, religions and cultures of others. We like people who contribute to making this a safe space.
 
@@ -14,7 +14,6 @@ The Bosxcape blog hears its members and visitors wich can send an email to the s
 In August 2022, the blog appeared in its first version. It offers the essential functions that every blog should have. We decided not to go overboard because we want to grow with our community and tailor the Boxcape to the needs of our members.
 
 ![Landing page](###)
-![About us page](###)
 
 ## Content
 - [Features](#Features)
@@ -115,6 +114,7 @@ __Note__: Pending the implementation of a cloud based service where to store the
 - Users can undo their actions before submissions and be redirected to the main page by clicking on the Discard button. 
 - The user is automatically redirected to the main page after 2.5s. 
 - Edited and newly created posts won't appear before admins' approval. 
+![Create a post](###)
 
 ### Existing Features - Create and edit comments
 - It's possible for authenticated users to comment a post using the box right under every post (Post Detail page). 
@@ -123,15 +123,18 @@ __Note__: Pending the implementation of a cloud based service where to store the
 - Users can undo the comment editing before submissions and be redirected to the main page by clicking on the Discard button. 
 - The user is automatically redirected to the main page after 2.5s after editing a comment. 
 - Edited and newly created comments won't appear before admins' approval. 
+![Create Comment](###)
 
 ### Existing Features - Delete functionalities
 - The logged in users can delete their own posts and comments from the Post Detail page. 
 - A pop up message asks users to confirm (or not - there's a "take me back" button) their choice as the action is not undoable. 
 - Posts and comments are deleted immediately.
+![Delete Post](###)
 
 ### Existing Features - Contact us page
 - The contact us page presents a form, similar in style to all the other forms across the blog, with the following mandatory fields: name, email, message. 
 - Admins will receive the messages on the.boxscape.blog@gmail.com
+![Delete Post](###)
 
 ### Existing Features - Log in, Log out, Register page
 - These functionalities are provided by [allauth!](https://django-allauth.readthedocs.io/en/latest/) a library containing a set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication. For the purposes of this blog only log in, log out and register functionalities were implemented. 
@@ -147,15 +150,12 @@ __Note__: Pending the implementation of a cloud based service where to store the
     -   All user actions will receive a feedback (successfully submtted posts and comments waiting for approval, successful login, email sent)
     -   All delete actions require a double confirmation. 
 
-![Home page screenshot from Am I Responsive webpage](###)
-![Detail page screenshot from Am I Responsive webpage](###)
-![Create a new post page screenshot from Am I Responsive webpage](###)
-![Contact us page screenshot from Am I Responsive webpage](###)
+![Home page screenshot from createmockup.com](###)
 
 - __Other features__ 
-    - The website is deployed on Heroku [here](###)
-    - The website's static files are hosted on [Cloudinary](###)
-    - The emails are sent via [AWS SimpleMail](###)
+    - The website is deployed on Heroku [here](https://the-boxscape-blog.herokuapp.com/)
+    - The website's static files are hosted on [Cloudinary](https://cloudinary.com/)
+    - The emails are sent via [AWS SimpleMail](https://aws.amazon.com/ses/)
     - The website has a "Google site verification" to verify the website's ownership as shown [here](####).
     - Browsers can crawl the website thanks to a robots.txt file and a sitemap.xml. 
     - The website has an [apple-touch-icon](###) with the blog main logo (an open box laying on its side) to make the page stand out from other bookmarks
@@ -200,9 +200,9 @@ User Experience is how a user interacts with and experiences a product, system o
 ### Wireframes 
 The site is designed with an intuitive layout, it is accessible, easy to browse, and minimalistic.
 - [Balsamiq](https://balsamiq.com/) was used to put "ideas on paper". 
-    - Home page: [Desktop]() / [Mobile]() 
-    - Detail Post: [Desktop]() / [Mobile]() 
-    - Generic Form: [Desktop]() / 
+    - Home page: [Desktop](###) 
+    - Detail Post: [Desktop](###) 
+    - Generic Form: [Desktop](###) 
 
 ### Improvements
 - Enable Gzip compression for a faster loading and why it's [important](https://blog.hubspot.com/website/gzip-compression)
