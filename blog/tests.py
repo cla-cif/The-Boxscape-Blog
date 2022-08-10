@@ -75,11 +75,3 @@ class TestBlogViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'contact_us.html')
 
-
-class TestUrlValidation(TestCase):
-    def test_image_url_validation_failed(self):
-        # response = self.client.post('/post_create/', data={'list_image': 'https://www.google.com/'})
-        with self.assertRaisesRegex(ValidationError,
-                               'Unsupported file extension.',
-                               response,
-                               'https://www.google.com/')

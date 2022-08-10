@@ -10,7 +10,7 @@
 <div class="container container-detail mb-4 mt-4 p-4">
     <div class="row m-0 title-detail">
         <div class="col-xl-10 align-self-center">
-            <h2 class="post-title pb-4 m-0">{{ post.title }}</h2>
+            <h2 class="post-title pb-4 m-0">{{ post.title | safe }}</h2>
             <div class="card-text text-details"> BY <a class="author"
                     href="{% url 'author_posts' post.author.id %}">{{ post.author|upper}}</a>
                 &nbsp;|&nbsp;
@@ -162,7 +162,7 @@
                     <h4>{{ comment.name }}</h4>
                     <div class="text-details card-text">{{ comment.created|naturalday|upper }}</div>
                 </div>
-                <div>{{ comment.body | linebreaks }}</div>
+                <div>{{ comment.body | safe | linebreaks }}</div>
 
                 <!-- COMMENT OPTIONAL BUTTONS -->
                 {% if user.is_authenticated and user.username == comment.name %}
@@ -281,7 +281,7 @@
                         </div>
                     </div>
                     <a href="{% url 'post_detail' post.slug %}">
-                        <h2 class="card-title-small post-title">{{ post.title }}</h2>
+                        <h2 class="card-title-small post-title">{{ post.title | safe }}</h2>
                     </a>
                     <hr />
                     <div class="card-text text-details h6"> BY <a class="author"
