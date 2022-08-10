@@ -1,9 +1,7 @@
 from django.test import TestCase, Client, SimpleTestCase
 from django.urls import reverse, resolve
-from django.core.exceptions import ValidationError
-import unittest
 from model_bakery import baker
-from pprint import pprint
+# from pprint import pprint
 from .models import Post, Comment
 from .views import PostList, PostDetail, post_create, contact_us
 
@@ -74,4 +72,3 @@ class TestBlogViews(TestCase):
         response = self.client.get(reverse('contact'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'contact_us.html')
-

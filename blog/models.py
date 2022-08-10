@@ -34,7 +34,7 @@ class Post(models.Model):
     # upload images from create/edit post form, shown in list template
     list_image = models.CharField(blank=True, null=True, max_length=200,
                                   validators=[validate_url],
-                                  help_text="Paste here a link ending with .jpg .gif .png",  # noqa
+                                  help_text="Paste here a link ending with .jpg .gif .png .jpeg .webp",  # noqa
                                   verbose_name="Image")
     excerpt = models.TextField(blank=True)
     body = models.TextField(blank=True, null=True)
