@@ -137,6 +137,7 @@ SUMMERNOTE_CONFIG = {
         'styleTags': ['p'],
         'fontNames': ['Arial'],
         'addDefaultFonts': False,
+        'lineHeights': ['1.5','3.0'],
     }
 }
 
