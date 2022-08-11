@@ -31,7 +31,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'blog/templates/')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['the-boxscape-blog.herokuapp.com', 'localhost']
 
@@ -129,15 +129,16 @@ SUMMERNOTE_CONFIG = {
             ['style', ['style']],
             ['font', ['bold', 'underline', 'italic', 'clear']],
             ['fontname', ['fontname']],
-            ['color', ['color']],
+            ['height', ['height']],
             ['para', ['ul', 'ol', 'paragraph']],
             ['view', ['fullscreen', 'codeview', 'help']],
         ],
         'disable_attachment': True,
-        'styleTags': ['p'],
+        'styleTags': ['h1', 'h4', 'p'],
         'fontNames': ['Arial'],
         'addDefaultFonts': False,
-        'lineHeights': ['1.5', '3.0'],
+        'foreColor': ['black'],
+        'lineHeights': ['1.4'],
     }
 }
 
