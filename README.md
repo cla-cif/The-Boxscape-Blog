@@ -398,8 +398,10 @@ A brief description of some fixed and unfixed bugs arose during the developing p
      - __Description__: Can't update or upload pictures to cloudinary when editing or creating post but if I upload the picture when creating a post from the admin panel, it will show correctly.
      - __Bug__: Bad compatibility or wrong settings. The attempts to fix the bug became more time consuming than working on a fix.  
      - __Fix/Workaround__: While still researching for a better cloud service to fulfill the functionality, the image will be rendered and edited from a CharField after being validated by a suitable RegEx allowing urls ending with .gif .jpg .png and/or a querystring. 
-     __Note__: the above workaround is intended a temporary workaround as url links are subjected to changes and won't be as reliable as a cloud storage service. 
-
+     __Note__: 
+     - the above workaround is intended a temporary workaround as url links are subjected to changes and won't be as reliable as a cloud storage service.
+     - since uploading pictures to Cloudinary from the admin panel is still possible, the relative code in list.html and detail.html templates that render pictures        from cloudinary has been commented out but not deleted.
+     
 ### Unfixed Bugs
 - For now the user can't edit the tags from their own posts in the edit form due to a non-user-friendly display of the tag list presented as a Django queryset: tags are wrapped in square and rounded parenthesis as a _values_list_. 
 
