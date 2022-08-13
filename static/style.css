@@ -68,10 +68,6 @@ img:hover {
     opacity: .8;
 }
 
-/* body::-webkit-scrollbar {
-    display: none;
-} */
-
 a {
     text-decoration: none;
     color: var(--very-peri)
