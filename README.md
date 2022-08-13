@@ -57,7 +57,7 @@ A coincise description of the functionalities featured in each page and a compre
 
      The sidebar collapses on medium and small screens and a 'hamburger' animated button is showed instead. The sidebar can be opened and closed from there.
 
-![Main](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/main.png)
+![Main](https://github.com/cla-cif/The-Boxscape-Blog/blob/main/screenshots/small_screen.png)
 
 - __The Footer__ 
 
@@ -167,6 +167,7 @@ __Note__: Pending the implementation of a cloud based service where to store the
 - Edit comments "on the same page". 
 - Subscription to the newsletter.
 - Bookmark pages to access easily the favourite posts. 
+- Create a profile page for each author (expand the author model). 
 - Share posts via email and social networks.
 - Extend the range of allowed image formats and use a Cloud service for storage. 
 - Add privacy policy and copyright information. 
